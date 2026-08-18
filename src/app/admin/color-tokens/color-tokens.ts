@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { DesignTokensService } from '../../core/design-tokens.service';
 import { ThemeMode, ThemeModeService } from '../../core/theme-mode.service';
 
@@ -29,6 +29,17 @@ export class ColorTokens {
   saving = false;
   savedMsg = '';
   readonly weightOptions = [400, 500, 600, 700, 800, 900];
+  activeGroupId = signal<string>('');
+
+  readonly activeGroup = computed(() => {
+    const groups = this.tokensService.groups();
+    const id = this.activeGroupId();
+    return groups.find(g => g.id === id) ?? groups[0] ?? null;
+  });
+
+  selectGroup(id: string) {
+    this.activeGroupId.set(id);
+  }
 
   /** لوحة ألوان جاهزة (Preset Palette) مبنية حيًا من الألوان الأساسية بالمشروع (تيل/أزرق/AI/أخضر/كهرماني/أحمر)
    *  + محايدان (أبيض/أسود) — تُعرَض كمربعات قابلة للنقر فوق كل حقل لون، بجانب إدخال hex اليدوي الموجود أصلاً. */
