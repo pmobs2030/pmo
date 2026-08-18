@@ -1,0 +1,26 @@
+<div class="rules-wrap">
+  <header class="panel-header">
+    <h1>لوحة تحكم الهوية — القواعد والمصطلحات</h1>
+    <p class="sub">نصوص القواعد المعتمدة وقاموس المصطلحات — قابلة للتحرير من هنا، مشتركة بين الوضعين</p>
+  </header>
+
+  <section class="rules-section">
+    <h2>القواعد المعتمدة</h2>
+    @for (rule of rulesService.approvedRules(); track $index) {
+      <div class="rule-row">
+        <span class="rule-num">{{ $index + 1 }}</span>
+        <textarea class="rule-text" rows="2" (change)="onRuleChange($index, $event)">{{ rule }}</textarea>
+      </div>
+    }
+  </section>
+
+  <section class="rules-section">
+    <h2>قاموس المصطلحات وقواعد الكتابة</h2>
+    @for (term of rulesService.glossaryTerms(); track $index) {
+      <div class="glossary-row">
+        <span class="glossary-rule">{{ term.rule }}</span>
+        <input type="text" class="glossary-value" [value]="term.value" (change)="onGlossaryChange($index, $event)" />
+      </div>
+    }
+  </section>
+</div>
