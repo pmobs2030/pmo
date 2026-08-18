@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { DesignTokensService } from '../../core/design-tokens.service';
 import { ThemeMode, ThemeModeService } from '../../core/theme-mode.service';
+import { contrastRatio, wcagLevel, WcagLevel } from '../../core/contrast';
 
 interface PaletteSwatch {
   label: string;
@@ -67,7 +68,62 @@ export class ColorTokens {
 
   onValueChange(varName: string, event: Event) {
     const value = (event.target as HTMLInputElement).value;
-    this.tokensService.updateTokenLive(varName, value);
+    const ok = this.tokensService.updateTokenLive(varName, value);
+    if (!ok) {
+      // القيمة رُفضت (رموز CSS خطرة) — نُعيد ضبط الحقل بصريًا للقيمة الصحيحة الأخيرة المخزّنة
+      // بدل تركه معلّقًا بقيمة غير مطبَّقة بصمت (كان هذا البق قبل 2026-08-18).
+      (event.target as HTMLInputElement).value =
+        this.activeGroup()?.tokens.find(t => t.var === varName)?.value ?? '';
+    }
+  }
+
+  /** خطأ التحقق الأخير من الخدمة — تُعرض رسالته بجانب الحقل المسبِّب فقط */
+  errorFor(varName: string): string | null {
+    const err = this.tokensService.lastTokenError();
+    return err && err.varName === varName ? err.message : null;
+  }
+
+  /** قناة الشفافية الحالية لتوكن لون (1 = معتم كليًا) — مستقلة عن منتقي input[type=color] */
+  alphaOf(value: string): number {
+    const m = value.match(/rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*([\d.]+)\s*\)/);
+    return m ? parseFloat(m[1]) : 1;
+  }
+
+  hasAlphaChannel(value: string): boolean {
+    return value.trim().startsWith('rgba') && this.alphaOf(value) < 1;
+  }
+
+  /** يُستدعى من input[type=color] — يحافظ على قناة alpha الحالية بدل تدميرها (إصلاح البق الأمني/البصري) */
+  onColorPick(varName: string, event: Event) {
+    const hex = (event.target as HTMLInputElement).value;
+    const currentValue = this.activeGroup()?.tokens.find(t => t.var === varName)?.value ?? '';
+    const alpha = this.alphaOf(currentValue);
+    if (alpha < 1) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      this.tokensService.updateTokenLive(varName, `rgba(${r},${g},${b},${alpha})`);
+    } else {
+      this.tokensService.updateTokenLive(varName, hex);
+    }
+  }
+
+  /** شريط الشفافية المنفصل — يعدّل alpha فقط بدون المساس بـ RGB */
+  onAlphaChange(varName: string, event: Event) {
+    const alpha = parseFloat((event.target as HTMLInputElement).value);
+    const currentValue = this.activeGroup()?.tokens.find(t => t.var === varName)?.value ?? '';
+    const hex = this.toHex(currentValue);
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    this.tokensService.updateTokenLive(varName, `rgba(${r},${g},${b},${alpha})`);
+  }
+
+  /** نسبة تباين هذا التوكن مقابل خلفية اللوحة الرئيسية (--pg) — كشف سريع لمشاكل وضوح النص */
+  contrastAgainstBg(value: string): { ratio: number | null; level: WcagLevel } {
+    const bg = this.tokensService.groups().flatMap(g => g.tokens).find(t => t.var === '--pg')?.value ?? '#FFFFFF';
+    const ratio = contrastRatio(value, bg);
+    return { ratio, level: wcagLevel(ratio) };
   }
 
   /** يُستدعى عند النقر على مربع من لوحة الألوان الجاهزة أو أحد "البدائل الموثّقة" */
@@ -109,7 +165,28 @@ export class ColorTokens {
     this.saving = true;
     const res = await this.tokensService.saveAll();
     this.saving = false;
-    this.savedMsg = res.ok ? `تم حفظ ${res.tokensCount} توكن (الوضعين معًا — محاكاة محلية، بانتظار ربط الـAPI الحقيقي)` : 'خطأ بالحفظ';
-    setTimeout(() => (this.savedMsg = ''), 4000);
+    this.savedMsg = res.ok
+      ? `تم حفظ ${res.tokensCount} توكن محليًا (الوضعين معًا) — يبقى محفوظًا بهذا المتصفح حتى تصدّره أو تربط API حقيقي`
+      : 'تعذّر الحفظ محليًا (قد يكون التخزين ممتلئًا أو معطّلًا بالمتصفح)';
+    setTimeout(() => (this.savedMsg = ''), 5000);
+  }
+
+  async resetToSource() {
+    if (!confirm('هذا سيمسح كل تعديلاتك المحفوظة محليًا ويرجّع القيم الأصلية من الملف — متأكد؟')) return;
+    await this.tokensService.resetToSource();
+  }
+
+  exportJson() {
+    this.tokensService.exportJson();
+  }
+
+  async onImportFile(mode: 'dark' | 'light', event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file) return;
+    const res = await this.tokensService.importJson(file, mode);
+    this.savedMsg = res.ok ? 'تم الاستيراد وتطبيقه فورًا' : (res.error ?? 'فشل الاستيراد');
+    setTimeout(() => (this.savedMsg = ''), 5000);
   }
 }
