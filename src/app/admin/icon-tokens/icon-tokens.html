@@ -1,12 +1,24 @@
 <div class="icons-wrap">
   <header class="panel-header">
     <h1>لوحة تحكم الهوية — الأيقونات</h1>
-    <p class="sub">كل أيقونة تُستبدل فقط بأيقونة ثانية من نفس المكتبة — الفصل بين العامة وAI بنيوي</p>
+    <p class="sub">كل أيقونة تُستبدل باختيار من نفس المكتبة، أو برفع SVG من الجهاز — الفصل بين العامة وAI بنيوي</p>
   </header>
 
-  @for (lib of iconsService.libraries(); track lib.id) {
+  @if (iconsService.loadError()) {
+    <div class="err-box">{{ iconsService.loadError() }}</div>
+  }
+
+  <div class="lib-tabs">
+    @for (lib of iconsService.libraries(); track lib.id) {
+      <button type="button" class="lib-tab" [class.active]="activeLib()?.id === lib.id" (click)="selectLib(lib.id)">
+        {{ lib.label }}
+        @if (lib.id === 'ai-proposed') {<span class="proposed-badge">مقترح</span>}
+      </button>
+    }
+  </div>
+
+  @if (activeLib(); as lib) {
     <section class="lib-section" [class.ai-section]="lib.id === 'ai'" [class.proposed-section]="lib.id === 'ai-proposed'">
-      <h2>{{ lib.label }} @if (lib.id === 'ai-proposed') {<span class="proposed-badge">مقترح</span>}</h2>
       <div class="icon-grid">
         @for (icon of lib.icons; track icon.slot) {
           <div class="icon-card">
@@ -20,6 +32,13 @@
                 <option [value]="opt.slot">{{ opt.label }}</option>
               }
             </select>
+            <label class="upload-mini-btn">
+              رفع من الجهاز
+              <input type="file" accept=".svg,image/svg+xml" (change)="onUploadIcon(lib.id, icon.slot, $event)" hidden />
+            </label>
+            @if (uploadError()[lib.id + ':' + icon.slot]; as err) {
+              <span class="upload-err">{{ err }}</span>
+            }
           </div>
         }
       </div>
