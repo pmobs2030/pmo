@@ -1,0 +1,73 @@
+<div class="sg-wrap">
+  <header class="panel-header">
+    <h1>دليل الأنماط الموحّد — هوية وسيط AI</h1>
+    <p class="sub">كل نظام التصميم بصفحة واحدة — مبني حيًا من نفس بيانات اللوحة، بلا إدخال يدوي إضافي</p>
+    <div class="theme-toggle">
+      <button type="button" class="toggle-seg" [class.active]="themeMode.mode() === 'dark'" (click)="setMode('dark')">داكن</button>
+      <button type="button" class="toggle-seg" [class.active]="themeMode.mode() === 'light'" (click)="setMode('light')">فاتح</button>
+    </div>
+  </header>
+
+  <section class="sg-section">
+    <h2>الألوان</h2>
+    @for (group of colorGroups(); track group.id) {
+      <div class="color-group">
+        <h3>{{ group.label }}</h3>
+        <div class="swatch-grid">
+          @for (token of group.tokens; track token.var) {
+            @if (token.type === 'color' || token.type === 'gradient') {
+              <div class="swatch-item">
+                <span class="swatch-box" [style.background]="token.value"></span>
+                <span class="swatch-label">{{ token.label }}</span>
+                <code class="swatch-var">{{ token.var }}</code>
+              </div>
+            }
+          }
+        </div>
+      </div>
+    }
+  </section>
+
+  <section class="sg-section">
+    <h2>الخطوط</h2>
+    <div class="type-samples">
+      @for (role of typographyService.roles(); track role.id) {
+        <div class="type-sample-row">
+          <span class="type-meta">{{ role.label }} · {{ role.fontSize }} / {{ role.fontWeight }}</span>
+          <p class="type-sample" [style.fontSize]="role.fontSize" [style.fontWeight]="role.fontWeight"
+             [style.lineHeight]="role.lineHeight" [style.letterSpacing]="role.letterSpacing">
+            وسيط AI — سوق خدمات موثوق
+          </p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="sg-section">
+    <h2>الأيقونات</h2>
+    @for (lib of iconsService.libraries(); track lib.id) {
+      <div class="icon-group">
+        <h3>{{ lib.label }}</h3>
+        <div class="icon-grid">
+          @for (icon of lib.icons; track icon.slot) {
+            <span class="icon-box" [style.color]="'var(' + lib.colorVar + ')'" [title]="icon.label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="safeSvg(icon.svg)"></svg>
+            </span>
+          }
+        </div>
+      </div>
+    }
+  </section>
+
+  <section class="sg-section">
+    <h2>المقاسات</h2>
+    <div class="size-grid">
+      @for (token of sizeTokens(); track token.var) {
+        <div class="size-item">
+          <span class="size-box" [style.width.px]="token.value" [style.height.px]="token.value"></span>
+          <span class="size-label">{{ token.label }} — {{ token.value }}</span>
+        </div>
+      }
+    </div>
+  </section>
+</div>
