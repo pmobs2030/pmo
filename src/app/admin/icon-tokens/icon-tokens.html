@@ -2,6 +2,17 @@
   <header class="panel-header">
     <h1>لوحة تحكم الهوية — الأيقونات</h1>
     <p class="sub">كل أيقونة تُستبدل باختيار من نفس المكتبة، أو برفع SVG من الجهاز — الفصل بين العامة وAI بنيوي</p>
+    <div class="actions">
+      <button type="button" class="btn-save" (click)="save()">حفظ التغييرات</button>
+      <button type="button" class="btn-secondary" (click)="exportJson()">تصدير JSON</button>
+      <label class="btn-secondary import-label">
+        استيراد JSON
+        <input type="file" accept="application/json" hidden (change)="onImportFile($event)" />
+      </label>
+      @if (savedMsg()) {
+        <span class="saved-msg">{{ savedMsg() }}</span>
+      }
+    </div>
   </header>
 
   @if (iconsService.loadError()) {
