@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { AccountLevelsService } from '../../core/account-levels.service';
-import { sanitizeUploadedSvg } from '../../core/svg-sanitize';
+import { readAndSanitizeSvgFile } from '../../core/svg-sanitize';
 import { IconsService } from '../../core/icons.service';
 import { ThemeModeService } from '../../core/theme-mode.service';
 
@@ -20,9 +20,10 @@ export class Accounts implements OnInit {
   sanitizer = inject(DomSanitizer);
   themeMode = inject(ThemeModeService);
 
-  activeAccountId = signal<string>('provider');
+  activeAccountId = signal<string>('provider-individual');
   activeSection = signal<Section>('levels');
   uploadError = signal<string>('');
+  savedMsg = signal<string>('');
 
   readonly sections: { id: Section; label: string }[] = [
     { id: 'levels', label: 'المستويات الأساسية' },
@@ -128,20 +129,13 @@ export class Accounts implements OnInit {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     if (!file) return;
-    if (!file.name.toLowerCase().endsWith('.svg') && file.type !== 'image/svg+xml') {
-      this.uploadError.set('الملف لازم يكون SVG.');
-      input.value = '';
-      return;
-    }
-    const text = await file.text();
-    const clean = sanitizeUploadedSvg(text);
-    if (!clean) {
-      this.uploadError.set('تعذّر قراءة الأيقونة — تأكد أنها ملف SVG صالح.');
-      input.value = '';
-      return;
-    }
-    onOk(clean);
+    const result = await readAndSanitizeSvgFile(file);
     input.value = '';
+    if (!result.ok) {
+      this.uploadError.set(result.error);
+      return;
+    }
+    onOk(result.svg);
   }
 
   resetLevelIcon(accountId: string, levelN: number) {
@@ -150,5 +144,30 @@ export class Accounts implements OnInit {
 
   resetGroupIcon(accountId: string) {
     this.service.clearGroupIcon(accountId);
+  }
+
+  save() {
+    const ok = this.service.save();
+    this.savedMsg.set(ok ? 'تم الحفظ محليًا' : 'تعذّر الحفظ');
+    setTimeout(() => this.savedMsg.set(''), 4000);
+  }
+
+  exportJson() {
+    this.service.exportJson();
+  }
+
+  async onImportFile(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file) return;
+    const res = await this.service.importJson(file);
+    this.savedMsg.set(res.ok ? 'تم الاستيراد' : (res.error ?? 'فشل الاستيراد'));
+    setTimeout(() => this.savedMsg.set(''), 4000);
+  }
+
+  async resetToSource() {
+    if (!confirm('هذا سيمسح كل تعديلاتك المحفوظة محليًا لبيانات الحسابات ويرجّع القيم الأصلية — متأكد؟')) return;
+    await this.service.resetToSource();
   }
 }
