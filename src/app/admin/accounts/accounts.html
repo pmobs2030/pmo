@@ -2,6 +2,18 @@
   <header class="panel-header">
     <h1>لوحة تحكم الهوية — الحسابات (المستويات، النقاط، الأرباح، الولاء)</h1>
     <p class="sub">كل نوع حساب بتبويبه الخاص — كل الأرقام والأيقونات قابلة للتعديل، مصدرها ملف نظام النقاط والولاء</p>
+    <div class="actions">
+      <button type="button" class="btn-save" (click)="save()">حفظ التغييرات</button>
+      <button type="button" class="btn-secondary" (click)="exportJson()">تصدير JSON</button>
+      <label class="btn-secondary import-label">
+        استيراد JSON
+        <input type="file" accept="application/json" hidden (change)="onImportFile($event)" />
+      </label>
+      <button type="button" class="btn-secondary" (click)="resetToSource()">استعادة القيم المصدرية</button>
+      @if (savedMsg()) {
+        <span class="saved-msg">{{ savedMsg() }}</span>
+      }
+    </div>
   </header>
 
   @if (service.loadError()) {
@@ -18,8 +30,15 @@
     </div>
 
     @if (currentAccount(); as account) {
+      @if (account.needsReview) {
+        <div class="review-banner">
+          ⚠ {{ account.reviewNote || 'بيانات هذا الفرع بحاجة مراجعة — نسخة مبدئية غير معتمدة للإنتاج.' }}
+        </div>
+      }
       <div class="group-icon-row">
-        <div class="group-icon-preview" [innerHTML]="iconSvg(account.id, -1)"></div>
+        <div class="group-icon-preview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="iconSvg(account.id, -1)"></svg>
+        </div>
         <div class="group-icon-actions">
           <label class="upload-btn">
             رفع أيقونة المجموعة
@@ -45,7 +64,9 @@
           @for (level of account.levels; track level.level) {
             <div class="level-card" [style.borderColor]="currentHex(level)">
               <div class="level-icon-row">
-                <div class="level-icon" [style.color]="currentHex(level)" [innerHTML]="iconSvg(account.id, level.level)"></div>
+                <div class="level-icon" [style.color]="currentHex(level)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="iconSvg(account.id, level.level)"></svg>
+                </div>
                 <label class="upload-mini">
                   رفع
                   <input type="file" accept=".svg,image/svg+xml" (change)="onUploadLevelIcon(account.id, level.level, $event)" hidden />
