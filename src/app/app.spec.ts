@@ -17,11 +17,14 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render نافذة التنقل الرئيسية (nav) بكل الأقسام الأربعة', async () => {
+  it('should render نافذة التنقل الرئيسية (nav) بكل الأقسام التسعة', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     const links = compiled.querySelectorAll('.admin-nav a');
-    expect(links.length).toBe(4);
+    // إصلاح 2026-08-18: كان يتوقع 4 روابط (قيمة قديمة من قبل إعادة الهيكلة لـ3 تبويبات
+    // ثم توسعة لاحقة)، بينما app.routes.ts الفعلي فيه 9 مسارات الآن (صحة النظام، القيم،
+    // الأيقونات، الحسابات، القوالب، الخطوط، دليل الأنماط، معاينة شاملة، تصدير CSS).
+    expect(links.length).toBe(9);
   });
 });
