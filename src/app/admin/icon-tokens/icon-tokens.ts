@@ -1,6 +1,7 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { IconsService } from '../../core/icons.service';
+import { readAndSanitizeSvgFile } from '../../core/svg-sanitize';
 
 @Component({
   selector: 'app-icon-tokens',
@@ -15,6 +16,7 @@ export class IconTokens implements OnInit {
 
   activeLibId = signal<string>('');
   uploadError = signal<Record<string, string>>({});
+  savedMsg = signal<string>('');
 
   readonly activeLib = computed(() => {
     const libs = this.iconsService.libraries();
@@ -48,21 +50,38 @@ export class IconTokens implements OnInit {
     }
   }
 
+  save() {
+    const ok = this.iconsService.save();
+    this.savedMsg.set(ok ? 'تم الحفظ محليًا' : 'تعذّر الحفظ');
+    setTimeout(() => this.savedMsg.set(''), 4000);
+  }
+
+  exportJson() {
+    this.iconsService.exportJson();
+  }
+
+  async onImportFile(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file) return;
+    const res = await this.iconsService.importJson(file);
+    this.savedMsg.set(res.ok ? 'تم الاستيراد' : (res.error ?? 'فشل الاستيراد'));
+    setTimeout(() => this.savedMsg.set(''), 4000);
+  }
+
   async onUploadIcon(libraryId: string, slot: string, event: Event) {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     input.value = '';
     if (!file) return;
     const key = `${libraryId}:${slot}`;
-    if (!file.name.toLowerCase().endsWith('.svg') && file.type !== 'image/svg+xml') {
-      this.uploadError.update(m => ({ ...m, [key]: 'الملف يجب أن يكون SVG فقط.' }));
-      return;
-    }
-    const text = await file.text();
-    const ok = this.iconsService.uploadSlotSvg(libraryId, slot, text);
+    const result = await readAndSanitizeSvgFile(file);
     this.uploadError.update(m => {
       const { [key]: _, ...rest } = m;
-      return ok ? rest : { ...rest, [key]: 'تعذّر قبول الملف (فشل التعقيم الأمني للـSVG).' };
+      if (!result.ok) return { ...rest, [key]: result.error };
+      this.iconsService.reassignSlot(libraryId, slot, result.svg);
+      return rest;
     });
   }
 }
