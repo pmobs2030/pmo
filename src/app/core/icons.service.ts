@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, catchError, of } from 'rxjs';
+import { sanitizeUploadedSvg } from './svg-sanitize';
 
 export interface IconItem {
   slot: string;
@@ -58,5 +59,17 @@ export class IconsService {
       };
     });
     this.libraries.set(libs);
+  }
+
+  /**
+   * رفع أيقونة SVG من جهاز المستخدم لمكان (slot) معيّن — مصدر ديناميكي فعلي،
+   * لذلك يمر إلزاميًا عبر sanitizeUploadedSvg قبل أي استبدال (راجع التعليق الأمني
+   * أعلى reassignSlot). يعيد true عند النجاح، false إذا رُفض الملف (تعقيم فاشل).
+   */
+  uploadSlotSvg(libraryId: string, slot: string, rawSvg: string): boolean {
+    const clean = sanitizeUploadedSvg(rawSvg);
+    if (!clean) return false;
+    this.reassignSlot(libraryId, slot, clean);
+    return true;
   }
 }
