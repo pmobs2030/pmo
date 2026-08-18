@@ -1,0 +1,88 @@
+<div class="lp-wrap">
+  <header class="lp-toolbar">
+    <h1>معاينة حية شاملة</h1>
+    <div class="theme-toggle">
+      <button type="button" class="toggle-seg" [class.active]="themeMode.mode() === 'dark'" (click)="setMode('dark')">داكن</button>
+      <button type="button" class="toggle-seg" [class.active]="themeMode.mode() === 'light'" (click)="setMode('light')">فاتح</button>
+    </div>
+  </header>
+
+  <div class="mock-dashboard">
+    <aside class="mock-sidebar">
+      <div class="mock-logo">وسيط AI</div>
+      <a class="mock-nav-link active">لوحة التحكم</a>
+      <a class="mock-nav-link">الطلبات</a>
+      <a class="mock-nav-link">المحفظة</a>
+      <a class="mock-nav-link">الإعدادات</a>
+    </aside>
+
+    <main class="mock-main">
+      <h2 class="page-title-sample">نظرة عامة على الحساب</h2>
+
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <span class="kpi-number-sample">128</span>
+          <span class="kpi-label">طلب مكتمل</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-number-sample">4.8</span>
+          <span class="kpi-label">التقييم</span>
+        </div>
+        <div class="kpi-card ai-card">
+          <span class="kpi-number-sample">92%</span>
+          <span class="kpi-label">دقة التوصية (AI)</span>
+        </div>
+      </div>
+
+      <section class="mock-section">
+        <h3 class="section-title-sample">آخر الطلبات</h3>
+        <table class="mock-table">
+          <thead>
+            <tr><th>الطلب</th><th>الحالة</th><th>القيمة</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>تصميم واجهة تطبيق</td>
+              <td><span class="badge badge-active">نشط</span></td>
+              <td>3,200 ر.س</td>
+            </tr>
+            <tr>
+              <td>استشارة عقارية</td>
+              <td><span class="badge badge-done">مكتمل</span></td>
+              <td>850 ر.س</td>
+            </tr>
+            <tr>
+              <td>نزاع على التسليم</td>
+              <td><span class="badge badge-dispute">نزاع</span></td>
+              <td>1,400 ر.س</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="mock-section form-section">
+        <h3 class="section-title-sample">نموذج سريع</h3>
+        <div class="mock-form-row">
+          <label>اسم الخدمة</label>
+          <input type="text" class="mock-input" placeholder="مثال: تصميم شعار" />
+        </div>
+        <div class="mock-form-row">
+          <label>الفئة</label>
+          <select class="mock-input">
+            <option>تصميم</option>
+            <option>برمجة</option>
+            <option>استشارات</option>
+          </select>
+        </div>
+        <div class="mock-actions">
+          <button type="button" class="mock-btn-primary">إرسال الطلب</button>
+          <button type="button" class="mock-btn-secondary">حفظ كمسودة</button>
+        </div>
+      </section>
+
+      <div class="ai-chip-sample">
+        ✨ ميزة مدعومة بالذكاء الاصطناعي — اقتراح أفضل مقدّم خدمة تلقائيًا
+      </div>
+    </main>
+  </div>
+</div>
