@@ -1,0 +1,125 @@
+<div class="tpl-wrap">
+  <header class="panel-header">
+    <h1>لوحة تحكم الهوية — القوالب</h1>
+    <p class="sub">تحكّم بقواعد الحجم والزوايا والهالات والمسافات من ملف الهوية، مع عيّنة حية لكل قالب تعكس الإخراج النهائي فورًا</p>
+  </header>
+
+  <div class="cat-tabs">
+    @for (cat of categories; track cat.id) {
+      <button type="button" class="cat-tab" [class.active]="activeCategory().id === cat.id" (click)="selectCategory(cat.id)">
+        {{ cat.label }}
+      </button>
+    }
+  </div>
+
+  <div class="tpl-body">
+    <div class="controls-col">
+      <h2>القيم القابلة للتعديل</h2>
+      @for (token of activeTokens(); track token.var) {
+        <div class="ctrl-row">
+          <label>{{ token.label }}</label>
+          <span class="var-name">{{ token.var }}</span>
+          @if (token.type === 'size') {
+            <input type="number" class="ctrl-num" step="0.5" [value]="sizeAsNumber(token.value)" (change)="onSizeChange(token.var, $event)" />
+            <span class="unit">px</span>
+          }
+          @if (token.type === 'opacity') {
+            <input type="range" min="0" max="1" step="0.01" class="ctrl-range" [value]="token.value" (input)="onOpacityChange(token.var, $event)" />
+            <span class="unit">{{ token.value }}</span>
+          }
+          @if (token.type === 'shadow' || token.type === 'color') {
+            <input type="text" class="ctrl-text" [value]="token.value" (change)="onTextChange(token.var, $event)" />
+          }
+        </div>
+      }
+    </div>
+
+    <div class="preview-col">
+      <h2>عيّنة حية — الإخراج النهائي</h2>
+
+      @if (activeCategory().id === 'buttons') {
+        <div class="sample-row">
+          <button class="btn-sample" style="border-radius:var(--radius-md); box-shadow:var(--shadow-2)">زر عادي</button>
+          <button class="btn-sample" style="border-radius:var(--radius-md); box-shadow:var(--shadow-3); opacity:var(--btn-hover-opacity)">حالة تحويم</button>
+          <button class="btn-sample" style="border-radius:var(--radius-md); box-shadow:var(--shadow-2); opacity:var(--btn-active-opacity)">حالة ضغط</button>
+          <button class="btn-sample" style="border-radius:var(--radius-md); opacity:var(--btn-disabled-opacity)" disabled>معطّل</button>
+        </div>
+      }
+
+      @if (activeCategory().id === 'cards') {
+        <div class="sample-row wrap">
+          <div class="card-sample" style="border-radius:var(--radius-lg); box-shadow:var(--shadow-1)">
+            <h3>بطاقة تجريبية</h3>
+            <p>نص وصفي لمعاينة الزاوية والهالة سويًا.</p>
+          </div>
+          <div class="card-sample hover-demo" style="border-radius:var(--radius-lg); box-shadow:var(--shadow-1)">
+            <h3>حالة تحويم (محاكاة)</h3>
+            <p>الحدود بشفافية var(--card-hover-border-opacity).</p>
+          </div>
+        </div>
+        <div class="gap-demo-label">الفجوة بين البطاقات: <code>var(--card-gap)</code></div>
+        <div class="sample-row" [style.gap]="'var(--card-gap)'">
+          <div class="mini-card" style="border-radius:var(--radius-lg)"></div>
+          <div class="mini-card" style="border-radius:var(--radius-lg)"></div>
+          <div class="mini-card" style="border-radius:var(--radius-lg)"></div>
+        </div>
+      }
+
+      @if (activeCategory().id === 'badges') {
+        <div class="sample-row">
+          <span class="badge-sample pill" style="border-radius:var(--radius-pill)">شارة Pill</span>
+          <span class="badge-sample full" style="border-radius:var(--radius-full)">●</span>
+        </div>
+      }
+
+      @if (activeCategory().id === 'fields') {
+        <div class="sample-col">
+          <input type="text" class="field-sample" style="border-radius:var(--radius-sm)" placeholder="حقل عادي" />
+          <select class="field-sample" style="border-radius:var(--radius-sm); background:var(--select-bg); border-color:var(--select-border)">
+            <option>قائمة منسدلة</option>
+          </select>
+          <input type="text" class="field-sample" style="border-radius:var(--radius-sm); opacity:var(--field-disabled-opacity)" placeholder="حقل معطّل" disabled />
+          <input type="text" class="field-sample focus-demo" style="border-radius:var(--radius-sm)" placeholder="حالة تركيز (محاكاة)" />
+        </div>
+      }
+
+      @if (activeCategory().id === 'icons') {
+        <div class="sample-row icons-row">
+          <div class="icon-demo" style="width:var(--icon-sm); height:var(--icon-sm)"><span>sm</span></div>
+          <div class="icon-demo" style="width:var(--icon-md); height:var(--icon-md)"><span>md</span></div>
+          <div class="icon-demo" style="width:var(--icon-lg); height:var(--icon-lg)"><span>lg</span></div>
+          <div class="icon-demo" style="width:var(--icon-xl); height:var(--icon-xl)"><span>xl</span></div>
+        </div>
+      }
+
+      @if (activeCategory().id === 'spacing') {
+        <div class="sample-col spacing-col">
+          @for (n of [1,2,3,4,5,6,7,8]; track n) {
+            <div class="space-row">
+              <code>--space-{{ n }}</code>
+              <div class="space-bar" [style.width]="'var(--space-' + n + ')'"></div>
+            </div>
+          }
+        </div>
+      }
+
+      @if (activeCategory().id === 'shadows') {
+        <div class="sample-row wrap">
+          @for (n of [1,2,3,4,5]; track n) {
+            <div class="shadow-demo" [style.boxShadow]="'var(--shadow-' + n + ')'">shadow-{{ n }}</div>
+          }
+        </div>
+      }
+
+      @if (activeCategory().id === 'layout') {
+        <div class="sample-col layout-col">
+          <div class="layout-row"><code>--container-w</code><div class="layout-bar" style="width:min(100%, calc(var(--container-w) / 4))"></div></div>
+          <div class="layout-row"><code>--sidebar-w</code><div class="layout-bar" style="width:min(100%, var(--sidebar-w))"></div></div>
+          <div class="layout-row"><code>--topbar-h</code><div class="layout-bar" style="height:var(--topbar-h); width:100%"></div></div>
+          <div class="layout-row"><code>--breakpoint-mobile</code><span class="layout-val">{{ tokenValue('--breakpoint-mobile') }}</span></div>
+          <div class="layout-row"><code>--radius-dashboard</code><div class="layout-bar dash" style="border-radius:var(--radius-dashboard); width:80px; height:32px"></div></div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
