@@ -1,6 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, catchError, of } from 'rxjs';
+import { PersistenceService } from './persistence.service';
 
 export interface AccountLevel {
   level: number;
@@ -37,6 +38,12 @@ export interface AccountType {
   id: string;
   label: string;
   icon: string;
+  /** نوع الفرع — أُضيف 2026-08-18 مع إعادة الهيكلة لـ5 أطراف: كل من مقدم/طالب الخدمة
+   *  له فرعان مستقلان (فرد/شركة) بسلّم مستويات خاص بكل فرع، والوسيط فرع واحد فقط. */
+  partyKind?: 'individual' | 'company' | 'single';
+  /** true لفروع الشركة الجديدة التي نُسخت مبدئيًا من بيانات الفرد بانتظار أرقام فعلية */
+  needsReview?: boolean;
+  reviewNote?: string;
   levels: AccountLevel[];
   pointsEarn: PointsRule[];
   pointsLose: PointsRule[];
@@ -62,6 +69,8 @@ export class AccountLevelsService {
   readonly groupIcons = signal<Record<string, string>>({});
   readonly levelIcons = signal<Record<string, string>>({});
 
+  private readonly persistence = inject(PersistenceService);
+
   constructor(private http: HttpClient) {}
 
   async load(): Promise<void> {
@@ -72,7 +81,36 @@ export class AccountLevelsService {
       this.loadError.set('تعذّر تحميل ملف بيانات الحسابات (account-levels.json).');
       return;
     }
-    this.data.set(res);
+    // إصلاح 2026-08-18: استخدم نسخة محفوظة محليًا إن وُجدت (كان هذا التبويب بلا أي حفظ إطلاقًا)
+    const saved = this.persistence.load<AccountLevelsFile>('account-levels');
+    this.data.set(saved?.data ?? res);
+  }
+
+  /** حفظ حقيقي محليًا — كان التبويب الوحيد بلا أي مسار حفظ حتى المحاكاة */
+  save(): boolean {
+    const d = this.data();
+    return d ? this.persistence.save('account-levels', d) : false;
+  }
+
+  exportJson(): void {
+    const d = this.data();
+    if (d) this.persistence.downloadJson('waseetai-account-levels.json', d);
+  }
+
+  async importJson(file: File): Promise<{ ok: boolean; error?: string }> {
+    const result = await this.persistence.readJsonFile<AccountLevelsFile>(file);
+    if (!result.ok) return { ok: false, error: result.error };
+    if (!Array.isArray(result.data.accounts)) {
+      return { ok: false, error: 'بنية الملف غير صالحة — يجب أن يحتوي مصفوفة accounts.' };
+    }
+    this.data.set(result.data);
+    this.persistence.save('account-levels', result.data);
+    return { ok: true };
+  }
+
+  async resetToSource(): Promise<void> {
+    this.persistence.clear('account-levels');
+    await this.load();
   }
 
   accountsList(): AccountType[] {
