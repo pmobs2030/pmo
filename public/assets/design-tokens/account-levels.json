@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "note": "بيانات كاملة لكل نوع حساب — مصدر: نظام النقاط و الولاء.xlsx (أوراق: المستويات، النقاط، الأرباح، الولاء). لا تشمل الأوراق المالية على مستوى المنصة (توزيع الأرباح، التوازن) — خارج نطاق هذا الملف.",
+  "version": 2,
+  "note": "بيانات كاملة لكل نوع حساب — مصدر: نظام النقاط و الولاء.xlsx (أوراق: المستويات، النقاط، الأرباح، الولاء). لا تشمل الأوراق المالية على مستوى المنصة (توزيع الأرباح، التوازن) — خارج نطاق هذا الملف. | 2026-08-18: أُعيدت هيكلة الحسابات من 3 إلى 5 أطراف (مقدم/طالب خدمة، كل منهما فرد+شركة بسلّم مستويات مستقل، + وسيط بدون تفريع). فروع الشركة الجديدة (provider-company, requester-company) بيانات مبدئية منسوخة من الفرد بانتظار مراجعة المالك — انظر needsReview/reviewNote لكل حساب.",
   "generalViolations": [
     {
       "violation": "إلغاء مشروع بعد القبول",
@@ -40,8 +40,8 @@
   },
   "accounts": [
     {
-      "id": "provider",
-      "label": "مقدم الخدمة",
+      "id": "provider-individual",
+      "label": "مقدم خدمة — فرد",
       "icon": "ws-provider",
       "levels": [
         {
@@ -375,11 +375,353 @@
       },
       "annualAward": {
         "condition": "100+ مشروع وتقييم 4.8+"
-      }
+      },
+      "partyKind": "individual"
     },
     {
-      "id": "requester",
-      "label": "طالب الخدمة",
+      "id": "provider-company",
+      "label": "مقدم خدمة — شركة",
+      "icon": "ws-provider",
+      "levels": [
+        {
+          "level": 1,
+          "name": "مبتدئ",
+          "requirements": {
+            "pointsMoreThan": 0,
+            "projectsMoreThan": 0,
+            "ratingAbove": 0
+          },
+          "commission": 0.05,
+          "netIncomeShare": 0.95,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 10,
+          "hexDark": "#94DEF9",
+          "hexLight": "#2ABEF4"
+        },
+        {
+          "level": 2,
+          "name": "منجز",
+          "requirements": {
+            "pointsMoreThan": 101,
+            "projectsMoreThan": 3,
+            "ratingAbove": 3.5
+          },
+          "commission": 0.048,
+          "netIncomeShare": 0.952,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 15,
+          "hexDark": "#94DEF9",
+          "hexLight": "#2ABEF4"
+        },
+        {
+          "level": 3,
+          "name": "منفذ",
+          "requirements": {
+            "pointsMoreThan": 251,
+            "projectsMoreThan": 6,
+            "ratingAbove": 3.8
+          },
+          "commission": 0.046,
+          "netIncomeShare": 0.954,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 25,
+          "hexDark": "#94DEF9",
+          "hexLight": "#2ABEF4"
+        },
+        {
+          "level": 4,
+          "name": "بارع",
+          "requirements": {
+            "pointsMoreThan": 451,
+            "projectsMoreThan": 11,
+            "ratingAbove": 4
+          },
+          "commission": 0.044,
+          "netIncomeShare": 0.956,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 35,
+          "hexDark": "#51AEF6",
+          "hexLight": "#0C89E9"
+        },
+        {
+          "level": 5,
+          "name": "متقن",
+          "requirements": {
+            "pointsMoreThan": 701,
+            "projectsMoreThan": 16,
+            "ratingAbove": 4.1
+          },
+          "commission": 0.042,
+          "netIncomeShare": 0.958,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 50,
+          "hexDark": "#51AEF6",
+          "hexLight": "#0C89E9"
+        },
+        {
+          "level": 6,
+          "name": "متمكن",
+          "requirements": {
+            "pointsMoreThan": 1001,
+            "projectsMoreThan": 21,
+            "ratingAbove": 4.2
+          },
+          "commission": 0.04,
+          "netIncomeShare": 0.96,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 70,
+          "hexDark": "#51AEF6",
+          "hexLight": "#0C89E9"
+        },
+        {
+          "level": 7,
+          "name": "أخصائي",
+          "requirements": {
+            "pointsMoreThan": 1501,
+            "projectsMoreThan": 30,
+            "ratingAbove": 4.3
+          },
+          "commission": 0.0375,
+          "netIncomeShare": 0.9625,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 100,
+          "hexDark": "#166FF3",
+          "hexLight": "#0A54C2"
+        },
+        {
+          "level": 8,
+          "name": "محترف",
+          "requirements": {
+            "pointsMoreThan": 2201,
+            "projectsMoreThan": 46,
+            "ratingAbove": 4.4
+          },
+          "commission": 0.035,
+          "netIncomeShare": 0.965,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 125,
+          "hexDark": "#166FF3",
+          "hexLight": "#0A54C2"
+        },
+        {
+          "level": 9,
+          "name": "خبير",
+          "requirements": {
+            "pointsMoreThan": 3001,
+            "projectsMoreThan": 61,
+            "ratingAbove": 4.5
+          },
+          "commission": 0.0325,
+          "netIncomeShare": 0.9675,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 150,
+          "hexDark": "#166FF3",
+          "hexLight": "#0A54C2"
+        },
+        {
+          "level": 10,
+          "name": "رصين",
+          "requirements": {
+            "pointsMoreThan": 4001,
+            "projectsMoreThan": 81,
+            "ratingAbove": 4.5
+          },
+          "commission": 0.03,
+          "netIncomeShare": 0.97,
+          "monthlySalary": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 175,
+          "hexDark": "#0B38CB",
+          "hexLight": "#092DA5"
+        },
+        {
+          "level": 11,
+          "name": "مستشار",
+          "requirements": {
+            "pointsMoreThan": 5001,
+            "projectsMoreThan": 101,
+            "ratingAbove": 4.5
+          },
+          "commission": 0.0275,
+          "netIncomeShare": 0.9725,
+          "monthlySalary": 50,
+          "profitShare": 0.0005,
+          "loyaltyMonthlyValue": 200,
+          "hexDark": "#0B38CB",
+          "hexLight": "#092DA5"
+        },
+        {
+          "level": 12,
+          "name": "رائد",
+          "requirements": {
+            "pointsMoreThan": 6501,
+            "projectsMoreThan": 126,
+            "ratingAbove": 4.6
+          },
+          "commission": 0.025,
+          "netIncomeShare": 0.975,
+          "monthlySalary": 75,
+          "profitShare": 0.0008,
+          "loyaltyMonthlyValue": 250,
+          "hexDark": "#0B38CB",
+          "hexLight": "#092DA5"
+        },
+        {
+          "level": 13,
+          "name": "مراجع",
+          "requirements": {
+            "pointsMoreThan": 8001,
+            "projectsMoreThan": 151,
+            "ratingAbove": 4.7
+          },
+          "commission": 0.02,
+          "netIncomeShare": 0.98,
+          "monthlySalary": 100,
+          "profitShare": 0.0012,
+          "loyaltyMonthlyValue": 300,
+          "hexDark": "#0913A5",
+          "hexLight": "#07108D"
+        },
+        {
+          "level": 14,
+          "name": "مبتكر",
+          "requirements": {
+            "pointsMoreThan": 10001,
+            "projectsMoreThan": 181,
+            "ratingAbove": 4.8
+          },
+          "commission": 0.015,
+          "netIncomeShare": 0.985,
+          "monthlySalary": 150,
+          "profitShare": 0.0015,
+          "loyaltyMonthlyValue": 350,
+          "hexDark": "#0913A5",
+          "hexLight": "#07108D"
+        },
+        {
+          "level": 15,
+          "name": "مرجع",
+          "requirements": {
+            "pointsMoreThan": 12001,
+            "projectsMoreThan": 211,
+            "ratingAbove": 4.9
+          },
+          "commission": 0.01,
+          "netIncomeShare": 0.99,
+          "monthlySalary": 200,
+          "profitShare": 0.002,
+          "loyaltyMonthlyValue": 400,
+          "hexDark": "#0913A5",
+          "hexLight": "#07108D"
+        }
+      ],
+      "pointsEarn": [
+        {
+          "activity": "إكمال مشروع",
+          "points": 50,
+          "condition": "تقييم +3 نجوم",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "تقييم 5 نجوم",
+          "points": 25,
+          "condition": "من العميل",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "تسليم قبل الموعد",
+          "points": 10,
+          "condition": "لكل يوم توفير",
+          "frequency": "حد 30 نقطة"
+        },
+        {
+          "activity": "مشروع عالي القيمة",
+          "points": 1,
+          "condition": "كل 10 بعد 100",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "عرض مقبول مباشرة",
+          "points": 15,
+          "condition": "من الذكاء الاصطناعي",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "توصية من الذكاء الاصطناعي",
+          "points": 20,
+          "condition": "جودة استثنائية",
+          "frequency": "شهري"
+        },
+        {
+          "activity": "عميل متكرر",
+          "points": 15,
+          "condition": "+3 مشاريع",
+          "frequency": "لكل عميل"
+        }
+      ],
+      "pointsLose": [
+        {
+          "violation": "رفض عروض متتالية",
+          "points": 10,
+          "condition": "3 مرات/أسبوع",
+          "frequency": "أسبوعي"
+        },
+        {
+          "violation": "تعديل سعر بعد الاتفاق",
+          "points": 40,
+          "condition": "-",
+          "frequency": "غير محدود"
+        },
+        {
+          "violation": "تسليم عمل منخفض الجودة",
+          "points": 35,
+          "condition": "-",
+          "frequency": "غير محدود"
+        }
+      ],
+      "commissionAdjustmentFactors": [
+        {
+          "factor": "جودة التقييم (4.8+ نجوم)",
+          "effect": -0.005
+        },
+        {
+          "factor": "سرعة التسليم (قبل الموعد)",
+          "effect": -0.003
+        },
+        {
+          "factor": "حجم التعامل (10+ مشاريع)",
+          "effect": -0.002
+        },
+        {
+          "factor": "مشاريع معقدة (قيمة عالية)",
+          "effect": 0.01
+        }
+      ],
+      "ambassadorProgram": {
+        "condition": "مستوى 10+ وتقييم 4.8+"
+      },
+      "monthlyAward": {
+        "condition": "10+ مشاريع وتقييم 4.8+"
+      },
+      "annualAward": {
+        "condition": "100+ مشروع وتقييم 4.8+"
+      },
+      "partyKind": "company",
+      "needsReview": true,
+      "reviewNote": "بيانات هذا الفرع (النسب/الرواتب/الشروط) نسخة مبدئية من فرع الفرد المقابل — بانتظار أرقام فعلية خاصة بحسابات الشركات من المالك. لا تُعتمد للإنتاج قبل المراجعة."
+    },
+    {
+      "id": "requester-individual",
+      "label": "طالب خدمة — فرد",
       "icon": "ws-client",
       "levels": [
         {
@@ -698,7 +1040,334 @@
       },
       "annualAward": {
         "condition": "50+ مشروع وإنفاق $10,000+"
-      }
+      },
+      "partyKind": "individual"
+    },
+    {
+      "id": "requester-company",
+      "label": "طالب خدمة — شركة",
+      "icon": "ws-client",
+      "levels": [
+        {
+          "level": 1,
+          "name": "زائر",
+          "requirements": {
+            "pointsMoreThan": 0,
+            "projectsMoreThan": 0,
+            "ratingAbove": 0
+          },
+          "cashback": 0.01,
+          "bonusUSD": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 5,
+          "hexDark": "#97F7C7",
+          "hexLight": "#2FEE8F"
+        },
+        {
+          "level": 2,
+          "name": "مستكشف",
+          "requirements": {
+            "pointsMoreThan": 51,
+            "projectsMoreThan": 2,
+            "ratingAbove": 3.5
+          },
+          "cashback": 0.015,
+          "bonusUSD": 10,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 5,
+          "hexDark": "#97F7C7",
+          "hexLight": "#2FEE8F"
+        },
+        {
+          "level": 3,
+          "name": "باحث",
+          "requirements": {
+            "pointsMoreThan": 151,
+            "projectsMoreThan": 5,
+            "ratingAbove": 3.8
+          },
+          "cashback": 0.02,
+          "bonusUSD": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 10,
+          "hexDark": "#97F7C7",
+          "hexLight": "#2FEE8F"
+        },
+        {
+          "level": 4,
+          "name": "عميل",
+          "requirements": {
+            "pointsMoreThan": 301,
+            "projectsMoreThan": 9,
+            "ratingAbove": 4
+          },
+          "cashback": 0.025,
+          "bonusUSD": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 10,
+          "hexDark": "#55F1C2",
+          "hexLight": "#12E2A4"
+        },
+        {
+          "level": 5,
+          "name": "داعم",
+          "requirements": {
+            "pointsMoreThan": 501,
+            "projectsMoreThan": 13,
+            "ratingAbove": 4.1
+          },
+          "cashback": 0.0275,
+          "bonusUSD": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 15,
+          "hexDark": "#55F1C2",
+          "hexLight": "#12E2A4"
+        },
+        {
+          "level": 6,
+          "name": "ناشط",
+          "requirements": {
+            "pointsMoreThan": 751,
+            "projectsMoreThan": 17,
+            "ratingAbove": 4.2
+          },
+          "cashback": 0.03,
+          "bonusUSD": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 25,
+          "hexDark": "#55F1C2",
+          "hexLight": "#12E2A4"
+        },
+        {
+          "level": 7,
+          "name": "فعال",
+          "requirements": {
+            "pointsMoreThan": 1101,
+            "projectsMoreThan": 23,
+            "ratingAbove": 4.3
+          },
+          "cashback": 0.0325,
+          "bonusUSD": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 25,
+          "hexDark": "#1DEDD1",
+          "hexLight": "#0FBDA6"
+        },
+        {
+          "level": 8,
+          "name": "راعي",
+          "requirements": {
+            "pointsMoreThan": 1501,
+            "projectsMoreThan": 31,
+            "ratingAbove": 4.4
+          },
+          "cashback": 0.035,
+          "bonusUSD": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 35,
+          "hexDark": "#1DEDD1",
+          "hexLight": "#0FBDA6"
+        },
+        {
+          "level": 9,
+          "name": "سفير",
+          "requirements": {
+            "pointsMoreThan": 2001,
+            "projectsMoreThan": 41,
+            "ratingAbove": 4.5
+          },
+          "cashback": 0.0375,
+          "bonusUSD": 0,
+          "profitShare": 0,
+          "loyaltyMonthlyValue": 35,
+          "hexDark": "#1DEDD1",
+          "hexLight": "#0FBDA6"
+        },
+        {
+          "level": 10,
+          "name": "استراتيجي",
+          "requirements": {
+            "pointsMoreThan": 2601,
+            "projectsMoreThan": 51,
+            "ratingAbove": 4.5
+          },
+          "cashback": 0.04,
+          "bonusUSD": 0,
+          "profitShare": 0.0005,
+          "loyaltyMonthlyValue": 35,
+          "hexDark": "#10C0C6",
+          "hexLight": "#0D9BA0"
+        },
+        {
+          "level": 11,
+          "name": "أساسي",
+          "requirements": {
+            "pointsMoreThan": 3301,
+            "projectsMoreThan": 61,
+            "ratingAbove": 4.5
+          },
+          "cashback": 0.042,
+          "bonusUSD": 0,
+          "profitShare": 0.0008,
+          "loyaltyMonthlyValue": 45,
+          "hexDark": "#10C0C6",
+          "hexLight": "#0D9BA0"
+        },
+        {
+          "level": 12,
+          "name": "مالك",
+          "requirements": {
+            "pointsMoreThan": 4101,
+            "projectsMoreThan": 73,
+            "ratingAbove": 4.6
+          },
+          "cashback": 0.044,
+          "bonusUSD": 0,
+          "profitShare": 0.0012,
+          "loyaltyMonthlyValue": 45,
+          "hexDark": "#10C0C6",
+          "hexLight": "#0D9BA0"
+        },
+        {
+          "level": 13,
+          "name": "مؤسس",
+          "requirements": {
+            "pointsMoreThan": 5001,
+            "projectsMoreThan": 86,
+            "ratingAbove": 4.7
+          },
+          "cashback": 0.046,
+          "bonusUSD": 0,
+          "profitShare": 0.0015,
+          "loyaltyMonthlyValue": 45,
+          "hexDark": "#0D83A0",
+          "hexLight": "#0B7089"
+        },
+        {
+          "level": 14,
+          "name": "دائم",
+          "requirements": {
+            "pointsMoreThan": 6001,
+            "projectsMoreThan": 101,
+            "ratingAbove": 4.8
+          },
+          "cashback": 0.048,
+          "bonusUSD": 0,
+          "profitShare": 0.0018,
+          "loyaltyMonthlyValue": 50,
+          "hexDark": "#0D83A0",
+          "hexLight": "#0B7089"
+        },
+        {
+          "level": 15,
+          "name": "مؤسسي",
+          "requirements": {
+            "pointsMoreThan": 7201,
+            "projectsMoreThan": 116,
+            "ratingAbove": 4.9
+          },
+          "cashback": 0.05,
+          "bonusUSD": 0,
+          "profitShare": 0.002,
+          "loyaltyMonthlyValue": 50,
+          "hexDark": "#0D83A0",
+          "hexLight": "#0B7089"
+        }
+      ],
+      "pointsEarn": [
+        {
+          "activity": "إكمال مشروع",
+          "points": 20,
+          "condition": "-",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "سداد فوري",
+          "points": 5,
+          "condition": "خلال 24 ساعة",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "تقييم عالي من المقدم",
+          "points": 15,
+          "condition": "أعلى من 4 نجوم",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "طلب واضح",
+          "points": 10,
+          "condition": "تقييم الذكاء الاصطناعي",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "مشروع عالي القيمة",
+          "points": 1,
+          "condition": "كل 20 بعد 200",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "تقييم مفصل",
+          "points": 10,
+          "condition": "تعليق مفصل",
+          "frequency": "غير محدود"
+        },
+        {
+          "activity": "إحالة ناجحة",
+          "points": 30,
+          "condition": "إحالة مقدم جديد",
+          "frequency": "غير محدود"
+        }
+      ],
+      "pointsLose": [
+        {
+          "violation": "تأخير السداد",
+          "points": 25,
+          "condition": "أكثر من 48 ساعة",
+          "frequency": "غير محدود"
+        },
+        {
+          "violation": "طلب غير واضح",
+          "points": 15,
+          "condition": "بعد التحذير",
+          "frequency": "غير محدود"
+        },
+        {
+          "violation": "تعديل متطلبات متأخر",
+          "points": 20,
+          "condition": "خلال 24 ساعة من التسليم",
+          "frequency": "غير محدود"
+        }
+      ],
+      "cashbackAdjustmentFactors": [
+        {
+          "factor": "معامل التقييم (4.8+ نجوم)",
+          "multiplier": 1.2
+        },
+        {
+          "factor": "معامل التقييم (4-4.79 نجوم)",
+          "multiplier": 1.0
+        },
+        {
+          "factor": "معامل التقييم (أقل من 4)",
+          "multiplier": 0.8
+        },
+        {
+          "factor": "معامل سرعة السداد (80%+ فوري)",
+          "multiplier": 1.1
+        }
+      ],
+      "ambassadorProgram": {
+        "condition": "مستوى 10+ و50+ مشروع"
+      },
+      "monthlyAward": {
+        "condition": "5+ مشاريع وسداد أقل من ساعتين"
+      },
+      "annualAward": {
+        "condition": "50+ مشروع وإنفاق $10,000+"
+      },
+      "partyKind": "company",
+      "needsReview": true,
+      "reviewNote": "بيانات هذا الفرع (النسب/الرواتب/الشروط) نسخة مبدئية من فرع الفرد المقابل — بانتظار أرقام فعلية خاصة بحسابات الشركات من المالك. لا تُعتمد للإنتاج قبل المراجعة."
     },
     {
       "id": "broker",
@@ -1030,7 +1699,9 @@
       },
       "annualAward": {
         "condition": "100+ عميل وإيرادات $50,000+"
-      }
+      },
+      "partyKind": "single"
     }
-  ]
+  ],
+  "updatedAt": "2026-08-18T19:07:58.000Z"
 }
