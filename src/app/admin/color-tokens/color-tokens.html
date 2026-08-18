@@ -14,6 +14,13 @@
       <button class="btn-save" (click)="save()" [disabled]="saving">
         {{ saving ? 'جارٍ الحفظ...' : 'حفظ التغييرات' }}
       </button>
+      <button type="button" class="btn-secondary" (click)="exportJson()">تصدير JSON</button>
+      <label class="btn-secondary import-label">
+        استيراد JSON (الوضع الحالي)
+        <input type="file" accept="application/json" hidden
+          (change)="onImportFile(themeModeService.mode(), $event)" />
+      </label>
+      <button type="button" class="btn-secondary" (click)="resetToSource()">استعادة القيم المصدرية</button>
       @if (savedMsg) {
         <span class="saved-msg">{{ savedMsg }}</span>
       }
@@ -40,10 +47,26 @@
 
               @if (token.type === 'color' || token.type === 'gradient') {
                 @if (isSolidColor(token.value)) {
-                  <input type="color" [value]="toHex(token.value)" (input)="onValueChange(token.var, $event)" />
+                  <input type="color" [value]="toHex(token.value)" (input)="onColorPick(token.var, $event)" />
+                }
+                @if (hasAlphaChannel(token.value)) {
+                  <input type="range" class="alpha-range" min="0" max="1" step="0.01"
+                    [value]="alphaOf(token.value)" (input)="onAlphaChange(token.var, $event)"
+                    title="الشفافية (alpha) — منفصلة عن اللون حتى لا تُفقد عند اختيار لون جديد" />
+                  <span class="unit">{{ alphaOf(token.value) }}</span>
                 }
                 <input type="text" class="value-text" [value]="token.value" (change)="onValueChange(token.var, $event)" />
+                @if (errorFor(token.var); as err) {
+                  <span class="field-error">{{ err }}</span>
+                }
                 <span class="mini-sample" [style.background]="token.value" title="عيّنة حية"></span>
+                @if (contrastAgainstBg(token.value).ratio; as ratio) {
+                  <span class="contrast-badge" [class.pass]="contrastAgainstBg(token.value).level !== 'fail'"
+                    [title]="'تباين مقابل خلفية اللوحة (--pg): ' + ratio.toFixed(2) + ':1'">
+                    {{ contrastAgainstBg(token.value).level === 'fail' ? '⚠ تباين ضعيف' : contrastAgainstBg(token.value).level }}
+                    {{ ratio.toFixed(1) }}:1
+                  </span>
+                }
                 <div class="palette-row">
                   @for (sw of commonPalette(); track sw.value) {
                     <button type="button" class="palette-swatch" [style.background]="sw.value" [title]="sw.label"
