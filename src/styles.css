@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+/* أنماط عامة لكامل التطبيق — كانت غايبة تمامًا قبل 2026-08-18 (ملف بتعليق واحد فقط):
+   لا reset، لا box-sizing عام، لا تطبيق فعلي لخط Tajawal على الجذر، ولا حالة واضحة
+   عند فشل تحميل ملفات التوكنات (لوحة بلا أي لون معرَّف). */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-family, 'Tajawal'), system-ui, -apple-system, sans-serif;
+  background: var(--pg, #070D24);
+  color: var(--txt, #E7ECFF);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; }
+
+/* حالة احتياطية: لو فشل تحميل tokens.json قبل أن يعرض المكوّن رسالة loadError الخاصة به،
+   لا تبقى الصفحة بلا خلفية/نص معرَّفين — قيم افتراضية معقولة بدل الفراغ الكامل. */
+:root {
+  --pg: #070D24;
+  --txt: #E7ECFF;
+  --font-family: 'Tajawal';
+}
