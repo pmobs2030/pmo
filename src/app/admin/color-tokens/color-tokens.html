@@ -20,9 +20,17 @@
     </div>
   </header>
 
+  <div class="group-tabs">
+    @for (group of tokensService.groups(); track group.id) {
+      <button type="button" class="group-tab" [class.active]="activeGroup()?.id === group.id" (click)="selectGroup(group.id)">
+        {{ group.label }}
+      </button>
+    }
+  </div>
+
   <div class="panel-body">
     <div class="form-col">
-      @for (group of tokensService.groups(); track group.id) {
+      @if (activeGroup(); as group) {
         <section class="token-group">
           <h2>{{ group.label }}</h2>
           @for (token of group.tokens; track token.var) {
@@ -35,6 +43,7 @@
                   <input type="color" [value]="toHex(token.value)" (input)="onValueChange(token.var, $event)" />
                 }
                 <input type="text" class="value-text" [value]="token.value" (change)="onValueChange(token.var, $event)" />
+                <span class="mini-sample" [style.background]="token.value" title="عيّنة حية"></span>
                 <div class="palette-row">
                   @for (sw of commonPalette(); track sw.value) {
                     <button type="button" class="palette-swatch" [style.background]="sw.value" [title]="sw.label"
@@ -50,6 +59,7 @@
               @if (token.type === 'size') {
                 <input type="number" class="value-num" step="0.5" [value]="sizeAsNumber(token.value)" (change)="onSizeChange(token.var, $event)" />
                 <span class="unit">px</span>
+                <span class="mini-sample size-sample" [style.width.px]="sizeAsNumber(token.value)" [style.height.px]="sizeAsNumber(token.value)" title="عيّنة حية"></span>
               }
 
               @if (token.type === 'weight') {
@@ -58,19 +68,23 @@
                     <option [value]="w">{{ w }}</option>
                   }
                 </select>
+                <span class="mini-sample text-sample" [style.fontWeight]="token.value">Aa نص</span>
               }
 
               @if (token.type === 'font') {
                 <span class="locked-value">{{ token.value }} (مقفل — خط واحد معتمد)</span>
+                <span class="mini-sample text-sample" [style.fontFamily]="token.value">Aa نص</span>
               }
 
               @if (token.type === 'shadow') {
                 <input type="text" class="value-text" [value]="token.value" (change)="onValueChange(token.var, $event)" />
+                <span class="mini-sample shadow-sample" [style.boxShadow]="token.value" title="عيّنة حية"></span>
               }
 
               @if (token.type === 'opacity') {
                 <input type="range" min="0" max="1" step="0.01" class="value-range" [value]="token.value" (input)="onValueChange(token.var, $event)" />
                 <span class="unit">{{ token.value }}</span>
+                <span class="mini-sample" [style.opacity]="token.value" title="عيّنة حية"></span>
               }
 
               @if (token.type === 'text') {
