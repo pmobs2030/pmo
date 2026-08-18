@@ -8,7 +8,24 @@
 }
 .icons-wrap { max-width: 1240px; margin: 0 auto; padding: 24px; }
 .panel-header h1 { margin: 0 0 4px; font-size: 22px; font-weight: 900; }
-.panel-header .sub { margin: 0 0 24px; color: var(--txt-2); font-size: 13px; }
+.panel-header .sub { margin: 0 0 20px; color: var(--txt-2); font-size: 13px; }
+
+.err-box { background: rgba(255,140,105,.1); border: 1px solid rgba(255,140,105,.3); color: #FF8C69; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; font-size: 12.5px; }
+
+.lib-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+.lib-tab {
+  background: var(--surface); border: 1px solid var(--border); color: var(--txt-2);
+  border-radius: 10px; padding: 9px 18px; font-size: 12.5px; font-weight: 800; cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+}
+.lib-tab.active { background: rgba(43,212,199,.12); border-color: var(--teal, #2BD4C7); color: var(--teal, #2BD4C7); }
+
+.upload-mini-btn {
+  width: 100%; text-align: center; margin-top: 4px; font-size: 9.5px; color: var(--teal, #2BD4C7);
+  background: rgba(43,212,199,.08); border: 1px solid rgba(43,212,199,.25); border-radius: 6px;
+  padding: 4px 6px; cursor: pointer; font-family: 'Tajawal', sans-serif;
+}
+.upload-err { font-size: 9px; color: #FF8C69; text-align: center; }
 
 .lib-section {
   background: var(--surface);
