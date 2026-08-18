@@ -1,0 +1,21 @@
+.admin-nav {
+  display: flex;
+  gap: 4px;
+  background: #070D24;
+  padding: 10px 24px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  font-family: 'Tajawal', system-ui, sans-serif;
+  direction: rtl;
+}
+.admin-nav a {
+  color: #A8B2D1;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.admin-nav a.active {
+  background: linear-gradient(135deg,#2BD4C7,#2B7FFF);
+  color: #070D24;
+}
