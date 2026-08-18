@@ -1,0 +1,44 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--pg);
+  color: var(--txt);
+  font-family: var(--font-family, 'Tajawal'), system-ui, sans-serif;
+  direction: rtl;
+}
+.sg-wrap { max-width: 1240px; margin: 0 auto; padding: 24px; }
+.panel-header h1 { margin: 0 0 4px; font-size: 22px; font-weight: 900; }
+.panel-header .sub { margin: 0 0 14px; color: var(--txt-2); font-size: 13px; }
+.theme-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 22px; }
+.toggle-seg { background: var(--surface); color: var(--txt-2); border: none; padding: 8px 18px; font-size: 12px; font-weight: 800; cursor: pointer; }
+.toggle-seg.active { background: rgba(43,212,199,.15); color: var(--teal, #2BD4C7); }
+
+.sg-section { margin-bottom: 36px; }
+.sg-section > h2 { font-size: 17px; font-weight: 900; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+.color-group { margin-bottom: 18px; }
+.color-group h3 { font-size: 13px; color: var(--txt-2); margin: 0 0 8px; }
+.swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.swatch-item { display: flex; flex-direction: column; gap: 4px; }
+.swatch-box { display: block; width: 100%; height: 44px; border-radius: 8px; border: 1px solid var(--border); }
+.swatch-label { font-size: 11px; color: var(--txt-2); }
+.swatch-var { font-size: 9.5px; color: var(--txt-3); direction: ltr; text-align: left; }
+
+.type-samples { display: flex; flex-direction: column; gap: 10px; }
+.type-sample-row { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.type-meta { display: block; font-size: 10.5px; color: var(--txt-3); margin-bottom: 4px; direction: ltr; text-align: right; }
+.type-sample { margin: 0; }
+
+.icon-group { margin-bottom: 18px; }
+.icon-group h3 { font-size: 13px; color: var(--txt-2); margin: 0 0 8px; }
+.icon-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.icon-box {
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+}
+.icon-box svg { width: 20px; height: 20px; }
+
+.size-grid { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; }
+.size-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.size-box { background: var(--teal, #2BD4C7); border-radius: 4px; }
+.size-label { font-size: 10px; color: var(--txt-3); }
