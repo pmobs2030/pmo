@@ -1,7 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, catchError, of } from 'rxjs';
-import { sanitizeUploadedSvg } from './svg-sanitize';
+import { PersistenceService } from './persistence.service';
 
 export interface IconItem {
   slot: string;
@@ -26,6 +26,8 @@ export class IconsService {
   readonly libraries = signal<IconLibrary[]>([]);
   readonly loadError = signal<string | null>(null);
 
+  private readonly persistence = inject(PersistenceService);
+
   constructor(private http: HttpClient) {}
 
   async load(): Promise<void> {
@@ -36,7 +38,31 @@ export class IconsService {
       this.loadError.set('تعذّر تحميل ملف الأيقونات (icons.json).');
       return;
     }
-    this.libraries.set(data.libraries);
+    // إصلاح 2026-08-18: استخدم نسخة محفوظة محليًا إن وُجدت بدل تجاهلها دائمًا لصالح الملف الأصلي.
+    const saved = this.persistence.load<IconLibrary[]>('icons');
+    this.libraries.set(saved?.data ?? data.libraries);
+  }
+
+  /** حفظ حقيقي محليًا — كان غايبًا كليًا (لا استمرارية إطلاقًا قبل هذا التاريخ) */
+  save(): boolean {
+    return this.persistence.save('icons', this.libraries());
+  }
+
+  exportJson(): void {
+    this.persistence.downloadJson('waseetai-icons.json', {
+      version: 1, updatedAt: new Date().toISOString(), libraries: this.libraries(),
+    });
+  }
+
+  async importJson(file: File): Promise<{ ok: boolean; error?: string }> {
+    const result = await this.persistence.readJsonFile<IconsFile>(file);
+    if (!result.ok) return { ok: false, error: result.error };
+    if (!Array.isArray(result.data.libraries)) {
+      return { ok: false, error: 'بنية الملف غير صالحة — يجب أن يحتوي مصفوفة libraries.' };
+    }
+    this.libraries.set(result.data.libraries);
+    this.persistence.save('icons', result.data.libraries);
+    return { ok: true };
   }
 
   /**
@@ -62,14 +88,29 @@ export class IconsService {
   }
 
   /**
-   * رفع أيقونة SVG من جهاز المستخدم لمكان (slot) معيّن — مصدر ديناميكي فعلي،
-   * لذلك يمر إلزاميًا عبر sanitizeUploadedSvg قبل أي استبدال (راجع التعليق الأمني
-   * أعلى reassignSlot). يعيد true عند النجاح، false إذا رُفض الملف (تعقيم فاشل).
+   * إضافة أيقونة جديدة كليًا لمكتبة (مو استبدال slot موجود) — كانت غايبة تمامًا قبل
+   * 2026-08-18 (كل ما كان موجود هو reassignSlot الذي يستبدل شكل slot قائم فقط، ولا
+   * يزيد عدد الأيقونات عن 168 المقفلة بالبناء). يتحقق أن الـslot فريد عبر كل المكتبات
+   * (لأن accounts.ts يبحث بالـslot عبر كل المكتبات بلا تمييز مكتبة — تكرار slot = سلوك
+   * عشوائي بحسب ترتيب المكتبات).
    */
-  uploadSlotSvg(libraryId: string, slot: string, rawSvg: string): boolean {
-    const clean = sanitizeUploadedSvg(rawSvg);
-    if (!clean) return false;
-    this.reassignSlot(libraryId, slot, clean);
-    return true;
+  addIcon(libraryId: string, item: IconItem): { ok: true } | { ok: false; error: string } {
+    const allSlots = this.libraries().flatMap(l => l.icons.map(i => i.slot));
+    if (allSlots.includes(item.slot)) {
+      return { ok: false, error: `الـslot "${item.slot}" مستخدم مسبقًا بمكتبة أخرى — لازم يكون فريدًا عبر كل المكتبات.` };
+    }
+    const libs = this.libraries().map(lib =>
+      lib.id === libraryId ? { ...lib, icons: [...lib.icons, item] } : lib
+    );
+    this.libraries.set(libs);
+    return { ok: true };
+  }
+
+  /** حذف أيقونة من مكتبة — كانت غايبة أيضًا (لا دالة حذف إطلاقًا قبل 2026-08-18) */
+  removeIcon(libraryId: string, slot: string): void {
+    const libs = this.libraries().map(lib =>
+      lib.id === libraryId ? { ...lib, icons: lib.icons.filter(i => i.slot !== slot) } : lib
+    );
+    this.libraries.set(libs);
   }
 }
