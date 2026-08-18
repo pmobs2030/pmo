@@ -1,0 +1,28 @@
+<div class="icons-wrap">
+  <header class="panel-header">
+    <h1>لوحة تحكم الهوية — الأيقونات</h1>
+    <p class="sub">كل أيقونة تُستبدل فقط بأيقونة ثانية من نفس المكتبة — الفصل بين العامة وAI بنيوي</p>
+  </header>
+
+  @for (lib of iconsService.libraries(); track lib.id) {
+    <section class="lib-section" [class.ai-section]="lib.id === 'ai'" [class.proposed-section]="lib.id === 'ai-proposed'">
+      <h2>{{ lib.label }} @if (lib.id === 'ai-proposed') {<span class="proposed-badge">مقترح</span>}</h2>
+      <div class="icon-grid">
+        @for (icon of lib.icons; track icon.slot) {
+          <div class="icon-card">
+            <span class="icon-box" [style.color]="'var(' + lib.colorVar + ')'">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
+            </span>
+            <span class="icon-label">{{ icon.label }}</span>
+            <code class="icon-slot">{{ icon.slot }}</code>
+            <select class="icon-select" [value]="icon.slot" (change)="onReassign(lib.id, icon.slot, $event)">
+              @for (opt of lib.icons; track opt.slot) {
+                <option [value]="opt.slot">{{ opt.label }}</option>
+              }
+            </select>
+          </div>
+        }
+      </div>
+    </section>
+  }
+</div>
