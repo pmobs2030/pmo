@@ -174,11 +174,11 @@
 /* إضافات 2026-08-18: شريط الشفافية المنفصل + رسالة خطأ الحقل + شارة تباين WCAG */
 .alpha-range { width: 90px; accent-color: var(--teal, #2BD4C7); }
 .field-error {
-  grid-column: 1 / -1; color: var(--red, #ef4444); font-size: 11px; font-weight: 700;
+  grid-column: 1 / -1; color: var(--red, #FF8C69); font-size: 11px; font-weight: 700;
 }
 .contrast-badge {
   display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800;
-  padding: 2px 8px; border-radius: 999px; background: rgba(239,68,68,.12); color: var(--red, #ef4444);
+  padding: 2px 8px; border-radius: 999px; background: rgba(255,140,105,.12); color: var(--red, #FF8C69);
   width: fit-content;
 }
 .contrast-badge.pass { background: rgba(43,212,199,.12); color: var(--teal, #2BD4C7); }
