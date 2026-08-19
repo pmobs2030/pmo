@@ -10,79 +10,165 @@
   <div class="mock-dashboard">
     <aside class="mock-sidebar">
       <div class="mock-logo">وسيط AI</div>
-      <a class="mock-nav-link active">لوحة التحكم</a>
-      <a class="mock-nav-link">الطلبات</a>
-      <a class="mock-nav-link">المحفظة</a>
-      <a class="mock-nav-link">الإعدادات</a>
+      <a class="mock-nav-link" [class.active]="activeSection() === 'dashboard'" (click)="setSection('dashboard')">لوحة التحكم</a>
+      <a class="mock-nav-link" [class.active]="activeSection() === 'requests'" (click)="setSection('requests')">الطلبات</a>
+      <a class="mock-nav-link" [class.active]="activeSection() === 'wallet'" (click)="setSection('wallet')">المحفظة</a>
+      <a class="mock-nav-link" [class.active]="activeSection() === 'settings'" (click)="setSection('settings')">الإعدادات</a>
     </aside>
 
     <main class="mock-main">
-      <h2 class="page-title-sample">نظرة عامة على الحساب</h2>
+      @switch (activeSection()) {
+        @case ('dashboard') {
+          <h2 class="page-title-sample">نظرة عامة على الحساب</h2>
 
-      <div class="kpi-row">
-        <div class="kpi-card">
-          <span class="kpi-number-sample">128</span>
-          <span class="kpi-label">طلب مكتمل</span>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-number-sample">4.8</span>
-          <span class="kpi-label">التقييم</span>
-        </div>
-        <div class="kpi-card ai-card">
-          <span class="kpi-number-sample">92%</span>
-          <span class="kpi-label">دقة التوصية (AI)</span>
-        </div>
-      </div>
+          <div class="kpi-row">
+            <div class="kpi-card">
+              <span class="kpi-number-sample">128</span>
+              <span class="kpi-label">طلب مكتمل</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-number-sample">4.8</span>
+              <span class="kpi-label">التقييم</span>
+            </div>
+            <div class="kpi-card ai-card">
+              <span class="kpi-number-sample">92%</span>
+              <span class="kpi-label">دقة التوصية (AI)</span>
+            </div>
+          </div>
 
-      <section class="mock-section">
-        <h3 class="section-title-sample">آخر الطلبات</h3>
-        <table class="mock-table">
-          <thead>
-            <tr><th>الطلب</th><th>الحالة</th><th>القيمة</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>تصميم واجهة تطبيق</td>
-              <td><span class="badge badge-active">نشط</span></td>
-              <td>3,200 ر.س</td>
-            </tr>
-            <tr>
-              <td>استشارة عقارية</td>
-              <td><span class="badge badge-done">مكتمل</span></td>
-              <td>850 ر.س</td>
-            </tr>
-            <tr>
-              <td>نزاع على التسليم</td>
-              <td><span class="badge badge-dispute">نزاع</span></td>
-              <td>1,400 ر.س</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+          <section class="mock-section">
+            <h3 class="section-title-sample">آخر الطلبات</h3>
+            <table class="mock-table">
+              <thead>
+                <tr><th>الطلب</th><th>الحالة</th><th>القيمة</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>تصميم واجهة تطبيق</td>
+                  <td><span class="badge badge-active">نشط</span></td>
+                  <td>3,200 ر.س</td>
+                </tr>
+                <tr>
+                  <td>استشارة عقارية</td>
+                  <td><span class="badge badge-done">مكتمل</span></td>
+                  <td>850 ر.س</td>
+                </tr>
+                <tr>
+                  <td>نزاع على التسليم</td>
+                  <td><span class="badge badge-dispute">نزاع</span></td>
+                  <td>1,400 ر.س</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
 
-      <section class="mock-section form-section">
-        <h3 class="section-title-sample">نموذج سريع</h3>
-        <div class="mock-form-row">
-          <label>اسم الخدمة</label>
-          <input type="text" class="mock-input" placeholder="مثال: تصميم شعار" />
-        </div>
-        <div class="mock-form-row">
-          <label>الفئة</label>
-          <select class="mock-input">
-            <option>تصميم</option>
-            <option>برمجة</option>
-            <option>استشارات</option>
-          </select>
-        </div>
-        <div class="mock-actions">
-          <button type="button" class="mock-btn-primary">إرسال الطلب</button>
-          <button type="button" class="mock-btn-secondary">حفظ كمسودة</button>
-        </div>
-      </section>
+          <section class="mock-section form-section">
+            <h3 class="section-title-sample">نموذج سريع</h3>
+            <div class="mock-form-row">
+              <label>اسم الخدمة</label>
+              <input type="text" class="mock-input" placeholder="مثال: تصميم شعار" />
+            </div>
+            <div class="mock-form-row">
+              <label>الفئة</label>
+              <select class="mock-input">
+                <option>تصميم</option>
+                <option>برمجة</option>
+                <option>استشارات</option>
+              </select>
+            </div>
+            <div class="mock-actions">
+              <button type="button" class="mock-btn-primary">إرسال الطلب</button>
+              <button type="button" class="mock-btn-secondary">حفظ كمسودة</button>
+            </div>
+          </section>
 
-      <div class="ai-chip-sample">
-        ✨ ميزة مدعومة بالذكاء الاصطناعي — اقتراح أفضل مقدّم خدمة تلقائيًا
-      </div>
+          <div class="ai-chip-sample">
+            @if (aiIconSvg()) {
+              <span class="ai-chip-icon" [innerHTML]="safeSvg(aiIconSvg()!)"></span>
+            }
+            <span>ميزة مدعومة بالذكاء الاصطناعي — اقتراح أفضل مقدّم خدمة تلقائيًا</span>
+          </div>
+        }
+
+        @case ('requests') {
+          <h2 class="page-title-sample">الطلبات</h2>
+          <section class="mock-section">
+            <h3 class="section-title-sample">كل الطلبات (6)</h3>
+            <table class="mock-table">
+              <thead>
+                <tr><th>الطلب</th><th>الحالة</th><th>القيمة</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>تصميم واجهة تطبيق</td><td><span class="badge badge-active">نشط</span></td><td>3,200 ر.س</td></tr>
+                <tr><td>استشارة عقارية</td><td><span class="badge badge-done">مكتمل</span></td><td>850 ر.س</td></tr>
+                <tr><td>نزاع على التسليم</td><td><span class="badge badge-dispute">نزاع</span></td><td>1,400 ر.س</td></tr>
+                <tr><td>ترجمة عقد تجاري</td><td><span class="badge badge-done">مكتمل</span></td><td>600 ر.س</td></tr>
+                <tr><td>تصميم شعار متجر</td><td><span class="badge badge-active">نشط</span></td><td>950 ر.س</td></tr>
+                <tr><td>استشارة تسويقية</td><td><span class="badge badge-done">مكتمل</span></td><td>1,100 ر.س</td></tr>
+              </tbody>
+            </table>
+          </section>
+        }
+
+        @case ('wallet') {
+          <h2 class="page-title-sample">المحفظة</h2>
+          <div class="kpi-row">
+            <div class="kpi-card">
+              <span class="kpi-number-sample">12,450 ر.س</span>
+              <span class="kpi-label">الرصيد المتاح</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-number-sample">1,400 ر.س</span>
+              <span class="kpi-label">قيد التسوية</span>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-number-sample">38,900 ر.س</span>
+              <span class="kpi-label">إجمالي المسحوبات</span>
+            </div>
+          </div>
+          <section class="mock-section">
+            <h3 class="section-title-sample">آخر الحركات المالية</h3>
+            <table class="mock-table">
+              <thead>
+                <tr><th>الحركة</th><th>الحالة</th><th>المبلغ</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>سحب لحساب بنكي</td><td><span class="badge badge-done">مكتمل</span></td><td>5,000 ر.س</td></tr>
+                <tr><td>دفعة طلب #1042</td><td><span class="badge badge-active">نشط</span></td><td>3,200 ر.س</td></tr>
+                <tr><td>عمولة منصة</td><td><span class="badge badge-dispute">خصم</span></td><td>-160 ر.س</td></tr>
+              </tbody>
+            </table>
+          </section>
+        }
+
+        @case ('settings') {
+          <h2 class="page-title-sample">الإعدادات</h2>
+          <section class="mock-section form-section">
+            <h3 class="section-title-sample">إعدادات الحساب</h3>
+            <div class="mock-form-row">
+              <label>الاسم الظاهر للعملاء</label>
+              <input type="text" class="mock-input" value="مقدّم الخدمة" />
+            </div>
+            <div class="mock-form-row">
+              <label>اللغة الافتراضية</label>
+              <select class="mock-input">
+                <option>العربية</option>
+                <option>English</option>
+              </select>
+            </div>
+            <div class="mock-form-row">
+              <label>إشعارات الذكاء الاصطناعي (اقتراحات تلقائية)</label>
+              <select class="mock-input">
+                <option>مفعّلة</option>
+                <option>معطّلة</option>
+              </select>
+            </div>
+            <div class="mock-actions">
+              <button type="button" class="mock-btn-primary">حفظ التغييرات</button>
+            </div>
+          </section>
+        }
+      }
     </main>
   </div>
 </div>
