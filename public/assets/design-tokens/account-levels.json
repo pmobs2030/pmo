@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "note": "بيانات كاملة لكل نوع حساب — مصدر: نظام النقاط و الولاء.xlsx (أوراق: المستويات، النقاط، الأرباح، الولاء)، مطابقة مباشرة من قراءة الملف بتاريخ 2026-08-19 (وليس نسخًا سابقًا تقريبيًا). لا تشمل الأوراق المالية على مستوى المنصة (توزيع الأرباح، التوازن) — خارج نطاق هذا الملف. 2026-08-18: أُعيدت هيكلة الحسابات من 3 إلى 5 أطراف (مقدم/طالب خدمة، كل منهما فرد+شركة بسلّم مستويات مستقل، + وسيط بدون تفريع). فروع الشركة الجديدة (provider-company, requester-company) بيانات مبدئية منسوخة من الفرد بانتظار مراجعة المالك — انظر needsReview/reviewNote لكل حساب. 2026-08-19: تصحيح جذري — عمولة مقدم الخدمة (كل المستويات، فردي+شركة) كانت مُختلقة (5%→1%)؛ صُححت لتطابق Excel فعليًا (12.75%→8.15%). عمولة الوسيط مستوى 7 (سفير) كانت 3.75% خطأً؛ صُححت لـ2.75% مطابقة Excel. بقية الحقول (النقاط، المشاريع/العملاء، التقييم، الولاء الشهري، الرواتب، الحصص) كانت مطابقة فعليًا للExcel من قبل ولم تُغيَّر.",
+  "version": 4,
+  "note": "بيانات كاملة لكل نوع حساب — مصدر: نظام النقاط و الولاء.xlsx (أوراق: المستويات، النقاط، الأرباح، الولاء)، مطابقة مباشرة من قراءة الملف بتاريخ 2026-08-19 (وليس نسخًا سابقًا تقريبيًا). لا تشمل الأوراق المالية على مستوى المنصة (توزيع الأرباح، التوازن) — خارج نطاق هذا الملف. 2026-08-18: أُعيدت هيكلة الحسابات من 3 إلى 5 أطراف (مقدم/طالب خدمة، كل منهما فرد+شركة بسلّم مستويات مستقل، + وسيط بدون تفريع). فروع الشركة الجديدة (provider-company, requester-company) بيانات مبدئية منسوخة من الفرد بانتظار مراجعة المالك — انظر needsReview/reviewNote لكل حساب. 2026-08-19: تصحيح جذري — عمولة مقدم الخدمة (كل المستويات، فردي+شركة) كانت مُختلقة (5%→1%)؛ صُححت لتطابق Excel فعليًا (12.75%→8.15%). عمولة الوسيط مستوى 7 (سفير) كانت 3.75% خطأً؛ صُححت لـ2.75% مطابقة Excel. بقية الحقول (النقاط، المشاريع/العملاء، التقييم، الولاء الشهري، الرواتب، الحصص) كانت مطابقة فعليًا للExcel من قبل ولم تُغيَّر. 2026-08-19 (تحديث ثانٍ): أُضيف حقل isActive لكل مستوى بكل الأطراف الخمسة استنادًا لعمود \"الحالة\" بورقة \"المستويات\" بالإكسل (مقدم خدمة: معطّل من مستوى 14؛ طالب خدمة: معطّل من مستوى 12؛ وسيط: معطّل من مستوى 13). حُسم needsReview لفرعي الشركة (مقدم/طالب) — التطابق مع الفرد قرار مقصود من المالك وليس بيانات ناقصة، مع بقاء بند مفتوح واحد: مزايا الفرد الإضافية غير المحددة بعد.",
   "generalViolations": [
     {
       "violation": "إلغاء مشروع بعد القبول",
@@ -46,6 +46,7 @@
       "levels": [
         {
           "level": 1,
+          "isActive": true,
           "name": "مبتدئ",
           "requirements": {
             "pointsMoreThan": 0,
@@ -62,6 +63,7 @@
         },
         {
           "level": 2,
+          "isActive": true,
           "name": "منجز",
           "requirements": {
             "pointsMoreThan": 101,
@@ -78,6 +80,7 @@
         },
         {
           "level": 3,
+          "isActive": true,
           "name": "منفذ",
           "requirements": {
             "pointsMoreThan": 251,
@@ -94,6 +97,7 @@
         },
         {
           "level": 4,
+          "isActive": true,
           "name": "بارع",
           "requirements": {
             "pointsMoreThan": 451,
@@ -110,6 +114,7 @@
         },
         {
           "level": 5,
+          "isActive": true,
           "name": "متقن",
           "requirements": {
             "pointsMoreThan": 701,
@@ -126,6 +131,7 @@
         },
         {
           "level": 6,
+          "isActive": true,
           "name": "متمكن",
           "requirements": {
             "pointsMoreThan": 1001,
@@ -142,6 +148,7 @@
         },
         {
           "level": 7,
+          "isActive": true,
           "name": "أخصائي",
           "requirements": {
             "pointsMoreThan": 1501,
@@ -158,6 +165,7 @@
         },
         {
           "level": 8,
+          "isActive": true,
           "name": "محترف",
           "requirements": {
             "pointsMoreThan": 2201,
@@ -174,6 +182,7 @@
         },
         {
           "level": 9,
+          "isActive": true,
           "name": "خبير",
           "requirements": {
             "pointsMoreThan": 3001,
@@ -190,6 +199,7 @@
         },
         {
           "level": 10,
+          "isActive": true,
           "name": "رصين",
           "requirements": {
             "pointsMoreThan": 4001,
@@ -206,6 +216,7 @@
         },
         {
           "level": 11,
+          "isActive": true,
           "name": "مستشار",
           "requirements": {
             "pointsMoreThan": 5001,
@@ -222,6 +233,7 @@
         },
         {
           "level": 12,
+          "isActive": true,
           "name": "رائد",
           "requirements": {
             "pointsMoreThan": 6501,
@@ -238,6 +250,7 @@
         },
         {
           "level": 13,
+          "isActive": true,
           "name": "مراجع",
           "requirements": {
             "pointsMoreThan": 8001,
@@ -254,6 +267,7 @@
         },
         {
           "level": 14,
+          "isActive": false,
           "name": "مبتكر",
           "requirements": {
             "pointsMoreThan": 10001,
@@ -270,6 +284,7 @@
         },
         {
           "level": 15,
+          "isActive": false,
           "name": "مرجع",
           "requirements": {
             "pointsMoreThan": 12001,
@@ -385,6 +400,7 @@
       "levels": [
         {
           "level": 1,
+          "isActive": true,
           "name": "مبتدئ",
           "requirements": {
             "pointsMoreThan": 0,
@@ -401,6 +417,7 @@
         },
         {
           "level": 2,
+          "isActive": true,
           "name": "منجز",
           "requirements": {
             "pointsMoreThan": 101,
@@ -417,6 +434,7 @@
         },
         {
           "level": 3,
+          "isActive": true,
           "name": "منفذ",
           "requirements": {
             "pointsMoreThan": 251,
@@ -433,6 +451,7 @@
         },
         {
           "level": 4,
+          "isActive": true,
           "name": "بارع",
           "requirements": {
             "pointsMoreThan": 451,
@@ -449,6 +468,7 @@
         },
         {
           "level": 5,
+          "isActive": true,
           "name": "متقن",
           "requirements": {
             "pointsMoreThan": 701,
@@ -465,6 +485,7 @@
         },
         {
           "level": 6,
+          "isActive": true,
           "name": "متمكن",
           "requirements": {
             "pointsMoreThan": 1001,
@@ -481,6 +502,7 @@
         },
         {
           "level": 7,
+          "isActive": true,
           "name": "أخصائي",
           "requirements": {
             "pointsMoreThan": 1501,
@@ -497,6 +519,7 @@
         },
         {
           "level": 8,
+          "isActive": true,
           "name": "محترف",
           "requirements": {
             "pointsMoreThan": 2201,
@@ -513,6 +536,7 @@
         },
         {
           "level": 9,
+          "isActive": true,
           "name": "خبير",
           "requirements": {
             "pointsMoreThan": 3001,
@@ -529,6 +553,7 @@
         },
         {
           "level": 10,
+          "isActive": true,
           "name": "رصين",
           "requirements": {
             "pointsMoreThan": 4001,
@@ -545,6 +570,7 @@
         },
         {
           "level": 11,
+          "isActive": true,
           "name": "مستشار",
           "requirements": {
             "pointsMoreThan": 5001,
@@ -561,6 +587,7 @@
         },
         {
           "level": 12,
+          "isActive": true,
           "name": "رائد",
           "requirements": {
             "pointsMoreThan": 6501,
@@ -577,6 +604,7 @@
         },
         {
           "level": 13,
+          "isActive": true,
           "name": "مراجع",
           "requirements": {
             "pointsMoreThan": 8001,
@@ -593,6 +621,7 @@
         },
         {
           "level": 14,
+          "isActive": false,
           "name": "مبتكر",
           "requirements": {
             "pointsMoreThan": 10001,
@@ -609,6 +638,7 @@
         },
         {
           "level": 15,
+          "isActive": false,
           "name": "مرجع",
           "requirements": {
             "pointsMoreThan": 12001,
@@ -716,8 +746,8 @@
         "condition": "100+ مشروع وتقييم 4.8+"
       },
       "partyKind": "company",
-      "needsReview": true,
-      "reviewNote": "بيانات هذا الفرع (النسب/الرواتب/الشروط) نسخة مبدئية من فرع الفرد المقابل — بانتظار أرقام فعلية خاصة بحسابات الشركات من المالك. لا تُعتمد للإنتاج قبل المراجعة."
+      "needsReview": false,
+      "reviewNote": "قرار المالك 2026-08-19: بيانات هذا الفرع (النسب/الرواتب/الشروط) مطابقة عمدًا لفرع الفرد المقابل — هذا ليس نسخًا مؤقتًا بانتظار مراجعة، بل قرار تصميم مقصود: نفس سلّم المستويات ونفس النسب للفرد والشركة. الفرق الوحيد بينهما: حساب الفرد يحصل على مزايا إضافية غير متاحة لحساب الشركة (محتوى هذه المزايا لم يُحدَّد بعد من المالك — بند مفتوح)."
     },
     {
       "id": "requester-individual",
@@ -726,6 +756,7 @@
       "levels": [
         {
           "level": 1,
+          "isActive": true,
           "name": "زائر",
           "requirements": {
             "pointsMoreThan": 0,
@@ -741,6 +772,7 @@
         },
         {
           "level": 2,
+          "isActive": true,
           "name": "مستكشف",
           "requirements": {
             "pointsMoreThan": 51,
@@ -756,6 +788,7 @@
         },
         {
           "level": 3,
+          "isActive": true,
           "name": "باحث",
           "requirements": {
             "pointsMoreThan": 151,
@@ -771,6 +804,7 @@
         },
         {
           "level": 4,
+          "isActive": true,
           "name": "عميل",
           "requirements": {
             "pointsMoreThan": 301,
@@ -786,6 +820,7 @@
         },
         {
           "level": 5,
+          "isActive": true,
           "name": "داعم",
           "requirements": {
             "pointsMoreThan": 501,
@@ -801,6 +836,7 @@
         },
         {
           "level": 6,
+          "isActive": true,
           "name": "ناشط",
           "requirements": {
             "pointsMoreThan": 751,
@@ -816,6 +852,7 @@
         },
         {
           "level": 7,
+          "isActive": true,
           "name": "فعال",
           "requirements": {
             "pointsMoreThan": 1101,
@@ -831,6 +868,7 @@
         },
         {
           "level": 8,
+          "isActive": true,
           "name": "راعي",
           "requirements": {
             "pointsMoreThan": 1501,
@@ -846,6 +884,7 @@
         },
         {
           "level": 9,
+          "isActive": true,
           "name": "سفير",
           "requirements": {
             "pointsMoreThan": 2001,
@@ -861,6 +900,7 @@
         },
         {
           "level": 10,
+          "isActive": true,
           "name": "استراتيجي",
           "requirements": {
             "pointsMoreThan": 2601,
@@ -876,6 +916,7 @@
         },
         {
           "level": 11,
+          "isActive": true,
           "name": "أساسي",
           "requirements": {
             "pointsMoreThan": 3301,
@@ -891,6 +932,7 @@
         },
         {
           "level": 12,
+          "isActive": false,
           "name": "مالك",
           "requirements": {
             "pointsMoreThan": 4101,
@@ -906,6 +948,7 @@
         },
         {
           "level": 13,
+          "isActive": false,
           "name": "مؤسس",
           "requirements": {
             "pointsMoreThan": 5001,
@@ -921,6 +964,7 @@
         },
         {
           "level": 14,
+          "isActive": false,
           "name": "دائم",
           "requirements": {
             "pointsMoreThan": 6001,
@@ -936,6 +980,7 @@
         },
         {
           "level": 15,
+          "isActive": false,
           "name": "مؤسسي",
           "requirements": {
             "pointsMoreThan": 7201,
@@ -1050,6 +1095,7 @@
       "levels": [
         {
           "level": 1,
+          "isActive": true,
           "name": "زائر",
           "requirements": {
             "pointsMoreThan": 0,
@@ -1065,6 +1111,7 @@
         },
         {
           "level": 2,
+          "isActive": true,
           "name": "مستكشف",
           "requirements": {
             "pointsMoreThan": 51,
@@ -1080,6 +1127,7 @@
         },
         {
           "level": 3,
+          "isActive": true,
           "name": "باحث",
           "requirements": {
             "pointsMoreThan": 151,
@@ -1095,6 +1143,7 @@
         },
         {
           "level": 4,
+          "isActive": true,
           "name": "عميل",
           "requirements": {
             "pointsMoreThan": 301,
@@ -1110,6 +1159,7 @@
         },
         {
           "level": 5,
+          "isActive": true,
           "name": "داعم",
           "requirements": {
             "pointsMoreThan": 501,
@@ -1125,6 +1175,7 @@
         },
         {
           "level": 6,
+          "isActive": true,
           "name": "ناشط",
           "requirements": {
             "pointsMoreThan": 751,
@@ -1140,6 +1191,7 @@
         },
         {
           "level": 7,
+          "isActive": true,
           "name": "فعال",
           "requirements": {
             "pointsMoreThan": 1101,
@@ -1155,6 +1207,7 @@
         },
         {
           "level": 8,
+          "isActive": true,
           "name": "راعي",
           "requirements": {
             "pointsMoreThan": 1501,
@@ -1170,6 +1223,7 @@
         },
         {
           "level": 9,
+          "isActive": true,
           "name": "سفير",
           "requirements": {
             "pointsMoreThan": 2001,
@@ -1185,6 +1239,7 @@
         },
         {
           "level": 10,
+          "isActive": true,
           "name": "استراتيجي",
           "requirements": {
             "pointsMoreThan": 2601,
@@ -1200,6 +1255,7 @@
         },
         {
           "level": 11,
+          "isActive": true,
           "name": "أساسي",
           "requirements": {
             "pointsMoreThan": 3301,
@@ -1215,6 +1271,7 @@
         },
         {
           "level": 12,
+          "isActive": false,
           "name": "مالك",
           "requirements": {
             "pointsMoreThan": 4101,
@@ -1230,6 +1287,7 @@
         },
         {
           "level": 13,
+          "isActive": false,
           "name": "مؤسس",
           "requirements": {
             "pointsMoreThan": 5001,
@@ -1245,6 +1303,7 @@
         },
         {
           "level": 14,
+          "isActive": false,
           "name": "دائم",
           "requirements": {
             "pointsMoreThan": 6001,
@@ -1260,6 +1319,7 @@
         },
         {
           "level": 15,
+          "isActive": false,
           "name": "مؤسسي",
           "requirements": {
             "pointsMoreThan": 7201,
@@ -1366,8 +1426,8 @@
         "condition": "50+ مشروع وإنفاق $10,000+"
       },
       "partyKind": "company",
-      "needsReview": true,
-      "reviewNote": "بيانات هذا الفرع (النسب/الرواتب/الشروط) نسخة مبدئية من فرع الفرد المقابل — بانتظار أرقام فعلية خاصة بحسابات الشركات من المالك. لا تُعتمد للإنتاج قبل المراجعة."
+      "needsReview": false,
+      "reviewNote": "قرار المالك 2026-08-19: بيانات هذا الفرع (النسب/الرواتب/الشروط) مطابقة عمدًا لفرع الفرد المقابل — هذا ليس نسخًا مؤقتًا بانتظار مراجعة، بل قرار تصميم مقصود: نفس سلّم المستويات ونفس النسب للفرد والشركة. الفرق الوحيد بينهما: حساب الفرد يحصل على مزايا إضافية غير متاحة لحساب الشركة (محتوى هذه المزايا لم يُحدَّد بعد من المالك — بند مفتوح)."
     },
     {
       "id": "broker",
@@ -1376,6 +1436,7 @@
       "levels": [
         {
           "level": 1,
+          "isActive": true,
           "name": "مسوق",
           "requirements": {
             "pointsMoreThan": 0,
@@ -1392,6 +1453,7 @@
         },
         {
           "level": 2,
+          "isActive": true,
           "name": "مساعد",
           "requirements": {
             "pointsMoreThan": 101,
@@ -1408,6 +1470,7 @@
         },
         {
           "level": 3,
+          "isActive": true,
           "name": "موصل",
           "requirements": {
             "pointsMoreThan": 251,
@@ -1424,6 +1487,7 @@
         },
         {
           "level": 4,
+          "isActive": true,
           "name": "منسق",
           "requirements": {
             "pointsMoreThan": 451,
@@ -1440,6 +1504,7 @@
         },
         {
           "level": 5,
+          "isActive": true,
           "name": "وسيط",
           "requirements": {
             "pointsMoreThan": 701,
@@ -1456,6 +1521,7 @@
         },
         {
           "level": 6,
+          "isActive": true,
           "name": "ممثل",
           "requirements": {
             "pointsMoreThan": 1001,
@@ -1472,6 +1538,7 @@
         },
         {
           "level": 7,
+          "isActive": true,
           "name": "سفير",
           "requirements": {
             "pointsMoreThan": 1501,
@@ -1488,6 +1555,7 @@
         },
         {
           "level": 8,
+          "isActive": true,
           "name": "موجه",
           "requirements": {
             "pointsMoreThan": 2201,
@@ -1504,6 +1572,7 @@
         },
         {
           "level": 9,
+          "isActive": true,
           "name": "حلقة وصل",
           "requirements": {
             "pointsMoreThan": 3001,
@@ -1520,6 +1589,7 @@
         },
         {
           "level": 10,
+          "isActive": true,
           "name": "جسر الوصل",
           "requirements": {
             "pointsMoreThan": 4001,
@@ -1536,6 +1606,7 @@
         },
         {
           "level": 11,
+          "isActive": true,
           "name": "ناقل حيوي",
           "requirements": {
             "pointsMoreThan": 5001,
@@ -1552,6 +1623,7 @@
         },
         {
           "level": 12,
+          "isActive": true,
           "name": "موصل استراتيجي",
           "requirements": {
             "pointsMoreThan": 6501,
@@ -1568,6 +1640,7 @@
         },
         {
           "level": 13,
+          "isActive": false,
           "name": "رابط استشاري",
           "requirements": {
             "pointsMoreThan": 8001,
@@ -1584,6 +1657,7 @@
         },
         {
           "level": 14,
+          "isActive": false,
           "name": "شريك تنفيذي",
           "requirements": {
             "pointsMoreThan": 10001,
@@ -1600,6 +1674,7 @@
         },
         {
           "level": 15,
+          "isActive": false,
           "name": "رابط مؤسسي",
           "requirements": {
             "pointsMoreThan": 12001,
@@ -1703,5 +1778,5 @@
       "partyKind": "single"
     }
   ],
-  "updatedAt": "2026-08-19T11:41:07.000Z"
+  "updatedAt": "2026-08-19T00:00:00+03:00"
 }
