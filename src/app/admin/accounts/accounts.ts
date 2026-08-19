@@ -104,10 +104,22 @@ export class Accounts implements OnInit {
     return (v * 100).toFixed(2).replace(/\.00$/, '') + '%';
   }
 
+  /** إصلاح 2026-08-19 (ملاحظة مباشرة من المالك): أيقونة كل مستوى (levelN >= 0) كانت تعرض
+   * نفس أيقونة "نوع الحساب" (مثلاً حقيبة ws-provider) لكل المستويات — بلا أي فرق شكلي بينها
+   * غير اللون. هذا يخالف قالب "بطاقة تدرّج المستوى (tier-banner)" الموثّق بملف الهوية
+   * (08_هوية_وسيط_AI_الوثيقة_المصدر_v2_الصحيح.html، بند 7): "أيقونة نجمة بلون المستوى".
+   * الافتراضي الآن = 'ws-star' (نجمة مؤكدة بـicons.json، نفس شكل ic-star بوثيقة الهوية) —
+   * يبقى قابلاً للاستبدال بأيقونة مرفوعة يدويًا لكل مستوى (levelIconFor) كما كان. أيقونة
+   * "نوع الحساب" نفسها (levelN === -1، تظهر مرة واحدة أعلى المجموعة) تبقى بلا تغيير — هي
+   * تمثيل الدور (مقدم/طالب/وسيط) لا المستوى، فليست معنية بهذا الإصلاح. */
+  private static readonly DEFAULT_LEVEL_ICON_SLOT = 'ws-star';
+
   iconSvg(accountId: string, levelN: number): SafeHtml | null {
     const svg = this.service.levelIconFor(accountId, levelN);
     if (svg) return this.sanitizer.bypassSecurityTrustHtml(svg);
-    const defaultSlot = this.currentAccount()?.icon;
+    const defaultSlot = levelN === -1
+      ? this.currentAccount()?.icon
+      : Accounts.DEFAULT_LEVEL_ICON_SLOT;
     if (!defaultSlot) return null;
     for (const lib of this.iconsService.libraries()) {
       const found = lib.icons.find(i => i.slot === defaultSlot);
