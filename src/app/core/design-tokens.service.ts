@@ -92,12 +92,18 @@ export class DesignTokensService {
         document.documentElement.style.setProperty(token.var, token.value);
       }
     }
+    // إصلاح 2026-08-19 (ملاحظة مباشرة من المالك): عناصر الفورم الأصلية (select/scrollbar...)
+    // كانت تُرسَم دائمًا بمظهر المتصفح الفاتح الافتراضي بصرف النظر عن وضع اللوحة — أوضح مثال:
+    // قائمة <select> المنسدلة (خلفية بيضاء) وسط لوحة داكنة بالكامل. `color-scheme` هو الخاصية
+    // القياسية التي يفهمها المتصفح لرسم عناصر النموذج الأصلية بمظهر داكن/فاتح متسق مع الوضع
+    // الحالي — بلا حاجة لأي لون مخترَع، فقط تعليمة للمتصفح تتبع نفس `themeMode.mode()`.
+    document.documentElement.style.setProperty('color-scheme', this.themeMode.mode());
   }
 
   /** يتحقق أن قيمة التوكن لا تحتوي رموزًا قد تكسر سياق تعريف CSS (حماية من CSS injection عبر التصدير) */
   private assertSafeCssValue(value: string): string {
     if (UNSAFE_CSS_VALUE_PATTERN.test(value)) {
-      throw new Error(`قيمة توكن غير صالحة (تحتوي رمز CSS محظورة قد تكسر سياق التعريف): ${value}`);
+      throw new Error(`قيمة توكن غير صالحة (تحتوي رموز CSS محظورة قد تكسر سياق التعريف): ${value}`);
     }
     return value;
   }
@@ -217,7 +223,7 @@ export class DesignTokensService {
     // إصلاح 2026-08-18: توكنات موجودة بالفاتح فقط (بلا مقابل موثّق بالداكن) كانت تُكتب بـ:root
     // فقط ولا تُعاد داخل html.dark، فتبقى بقيمتها الفاتحة حتى تحت الوضع الداكن (تسريب صامت غير موثّق).
     // الحل بلا اختراع قيمة داكنة جديدة (ممنوع الاجتهاد على الألوان): نُصرّح بها صراحة داخل html.dark
-    // بنفس قيمة الفاتحة + تعليق تحذيري، بدل الاعتماد على تسرّب cascade ضمني غير موثّق.
+    // بنفس قيمة الفاتح + تعليق تحذيري، بدل الاعتماد على تسرّب cascade ضمني غير موثّق.
     const darkVarNames = new Set(this.darkGroups().flatMap(g => g.tokens.map(t => t.var)));
     const lightOnlyTokens = this.lightGroups()
       .flatMap(g => g.tokens)
