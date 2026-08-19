@@ -66,7 +66,9 @@ export class IconTokens implements OnInit {
     input.value = '';
     if (!file) return;
     const res = await this.iconsService.importJson(file);
-    this.savedMsg.set(res.ok ? 'تم الاستيراد' : (res.error ?? 'فشل الاستيراد'));
+    // إصلاح 2026-08-19: res.error قد يُرفَق مع ok:true الآن (تحذير عدد الأيقونات المرفوضة
+    // أمنيًا أثناء التعقيم) — يجب عرضه دائمًا إن وُجد، وليس فقط عند ok:false.
+    this.savedMsg.set(res.error ?? (res.ok ? 'تم الاستيراد' : 'فشل الاستيراد'));
     setTimeout(() => this.savedMsg.set(''), 4000);
   }
 
