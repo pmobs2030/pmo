@@ -35,6 +35,27 @@ export interface TypographyFile {
   roles: TypeRole[];
 }
 
+/** عنصر مكتبة الخطوط — أُضيف 2026-08-19 (طلب مباشر من المالك: مكتبة خطوط كبيرة حقيقية،
+ * مو خطين/ثلاثة). مصدر البيانات: public/assets/design-tokens/fonts-library.json */
+export interface FontLibraryEntry {
+  id: string;
+  label: string;
+  googleFamily: string;
+  weights: number[];
+  latinPartner: string;
+  latinPartnerWeights: number[];
+  category: string;
+  isCurrentIdentityDefault: boolean;
+  notePairing?: string;
+}
+
+interface FontsLibraryFile {
+  version: number;
+  updatedAt: string;
+  note?: string;
+  fonts: FontLibraryEntry[];
+}
+
 const VALID_WEIGHTS = [400, 500, 600, 700, 800, 900];
 const SIZE_PATTERN = /^\d+(\.\d+)?(px|rem|em)$/;
 const LETTER_SPACING_PATTERN = /^(normal|-?\d+(\.\d+)?(em|px))$/;
@@ -56,18 +77,67 @@ export class TypographyService {
   readonly roles = signal<TypeRole[]>([]);
   readonly loadError = signal<string | null>(null);
   readonly lastFieldError = signal<{ roleId: string; field: string; message: string } | null>(null);
+  readonly fontLibrary = signal<FontLibraryEntry[]>([]);
+  /** الخطوط المُحمَّلة فعليًا بالمتصفح بهذي الجلسة — لمنع تكرار حقن نفس رابط Google Fonts */
+  private readonly loadedGoogleFonts = new Set<string>();
 
   async load(): Promise<void> {
-    const data = await firstValueFrom(
-      this.http.get<TypographyFile>('assets/design-tokens/typography.json').pipe(catchError(() => of(null)))
-    );
+    const [data, library] = await Promise.all([
+      firstValueFrom(this.http.get<TypographyFile>('assets/design-tokens/typography.json').pipe(catchError(() => of(null)))),
+      firstValueFrom(this.http.get<FontsLibraryFile>('assets/design-tokens/fonts-library.json').pipe(catchError(() => of(null))))
+    ]);
     if (!data) {
       this.loadError.set('تعذّر تحميل ملف الخطوط (typography.json).');
       return;
     }
+    this.fontLibrary.set(library?.fonts ?? []);
     const saved = this.persistence.load<{ families: FontFamily[]; roles: TypeRole[] }>('typography');
     this.families.set(saved?.data.families ?? data.families);
     this.roles.set(saved?.data.roles ?? data.roles);
+    this.applyAll();
+    // تحميل الخط الفعلي فورًا لأي عائلة محفوظة سابقًا لا تطابق الافتراضي (Tajawal) —
+    // بدون هذا، عائلة مختارة من جلسة سابقة تُطبَّق كاسم CSS بدون أن يكون ملف الخط محمَّلاً.
+    for (const fam of this.families()) {
+      const entry = this.fontLibrary().find(f => f.googleFamily === fam.value);
+      if (entry) this.loadGoogleFont(entry);
+    }
+  }
+
+  /** إصلاح 2026-08-19 (طلب مباشر من المالك): يحقن رابط Google Fonts فعليًا لخط من المكتبة —
+   * بدون هذا، تغيير اسم الخط بالإعدادات لا يغيّر أي شيء بصريًا (المتصفح يتراجع لخط النظام).
+   * يحقن للعربي واللاتيني معًا (family شريكها latinPartner) بطلب واحد لتوفير عدد الطلبات. */
+  loadGoogleFont(entry: FontLibraryEntry): void {
+    if (!this.isBrowser) return;
+    const key = entry.googleFamily;
+    if (this.loadedGoogleFonts.has(key)) return;
+    const families = new Set([entry.googleFamily, entry.latinPartner]);
+    const familyParams = Array.from(families).map(fam => {
+      const weights = fam === entry.googleFamily ? entry.weights : entry.latinPartnerWeights;
+      const wStr = Array.from(new Set(weights)).sort((a, b) => a - b).join(';');
+      return `family=${encodeURIComponent(fam)}:wght@${wStr}`;
+    }).join('&');
+    const href = `https://fonts.googleapis.com/css2?${familyParams}&display=swap`;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    link.dataset['fontLibId'] = entry.id;
+    document.head.appendChild(link);
+    this.loadedGoogleFonts.add(key);
+  }
+
+  /** يطبّق خطًا من المكتبة على عائلة معيّنة (heading/body/numeric) — يحمّل الخط فعليًا
+   * ويبني stack يضم الخط العربي + شريكه اللاتيني، فتُعرَض النصوص المختلطة (أرقام/إنجليزي
+   * لاحقًا) بخط لاتيني منسَّق بدل الاعتماد على خط النظام الافتراضي فقط. */
+  selectFamilyFromLibrary(familyId: string, fontLibId: string): void {
+    const entry = this.fontLibrary().find(f => f.id === fontLibId);
+    if (!entry) return;
+    this.loadGoogleFont(entry);
+    const stack = entry.googleFamily === entry.latinPartner
+      ? `'${entry.googleFamily}', system-ui, sans-serif`
+      : `'${entry.googleFamily}', '${entry.latinPartner}', system-ui, sans-serif`;
+    this.families.set(this.families().map(f => (f.id === familyId
+      ? { ...f, value: entry.googleFamily, stack, source: `Google Fonts — ${entry.googleFamily} (+ ${entry.latinPartner} للاتينية)` }
+      : f)));
     this.applyAll();
   }
 
