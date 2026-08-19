@@ -13,7 +13,7 @@ html, body {
 body {
   font-family: var(--font-family, 'Tajawal'), system-ui, -apple-system, sans-serif;
   background: var(--pg, #070D24);
-  color: var(--txt, #E7ECFF);
+  color: var(--txt, #FFFFFF);
   direction: rtl;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -30,14 +30,14 @@ a { color: inherit; }
    --navy موسوم أصلاً بـ"نوافذ" بـtokens.json، وهو أقرب توكن دلالي لسطح نافذة منبثقة كهذي. */
 select, select option {
   background: var(--navy, #0B1437);
-  color: var(--txt, #E7ECFF);
+  color: var(--txt, #FFFFFF);
 }
 
 /* حالة احتياطية: لو فشل تحميل tokens.json قبل أن يعرض المكوّن رسالة loadError الخاصة به،
    لا تبقى الصفحة بلا خلفية/نص معرَّفين — قيم افتراضية معقولة بدل الفراغ الكامل. */
 :root {
   --pg: #070D24;
-  --txt: #E7ECFF;
+  --txt: #FFFFFF;
   --font-family: 'Tajawal';
   /* إصلاح 2026-08-19: قيمة احتياطية قبل تشغيل DesignTokensService.applyAll() — بدونها
      تُرسم عناصر <select> الأصلية بخلفية بيضاء افتراضية للحظة قبل تطبيق وضع اللوحة الفعلي. */
