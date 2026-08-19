@@ -48,8 +48,19 @@ export class Typography implements OnInit {
     return dupes;
   }
 
-  onFamilyChange(familyId: string, event: Event) {
-    this.service.updateFamilyValue(familyId, (event.target as HTMLInputElement).value);
+  /** إصلاح 2026-08-19 (طلب مباشر من المالك: "أبي مجموعة خطوط كبيرة، مو خطين أو ثلاثة" +
+   * "هل أقدر أتحكم بكل الخطوط؟") — الحقل النصي الحر السابق كان يغيّر اسم CSS بدون تحميل ملف
+   * الخط فعليًا (تحكم شكلي بلا أثر بصري حقيقي). الآن: اختيار من مكتبة حقيقية (10 خطوط Google
+   * Fonts مؤكَّدة تدعم العربية) يحمّل الخط ديناميكيًا فعليًا عند الاختيار. */
+  onFamilyLibrarySelect(familyId: string, event: Event) {
+    const fontLibId = (event.target as HTMLSelectElement).value;
+    if (!fontLibId) return;
+    this.service.selectFamilyFromLibrary(familyId, fontLibId);
+  }
+
+  /** يحدّد أي عنصر بالمكتبة يطابق القيمة الحالية للعائلة (لتحديد الخيار المُفعَّل بالقائمة) */
+  currentLibraryId(fam: { value: string }): string {
+    return this.service.fontLibrary().find(f => f.googleFamily === fam.value)?.id ?? '';
   }
 
   onRoleFamilyRef(roleId: string, event: Event) {
