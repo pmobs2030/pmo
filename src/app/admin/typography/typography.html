@@ -28,14 +28,20 @@
 
   @if (activeTab() === 'families') {
     <section class="families-section">
+      <p class="scale-hint">اختر خطًا من مكتبة {{ service.fontLibrary().length }} خطوط حقيقية (Google Fonts، تدعم العربية) — الاختيار يحمّل الخط فعليًا بالمتصفح، مو مجرد تغيير اسم. كل خط مرفق بخط لاتيني شريك لعرض جيد للأرقام/أي نص إنجليزي لاحقًا.</p>
       @for (fam of service.families(); track fam.id) {
         <div class="family-row">
           <div class="family-info">
             <strong>{{ fam.label }}</strong>
             <code>{{ fam.var }}</code>
           </div>
-          <input type="text" class="value-text" [value]="fam.value" (change)="onFamilyChange(fam.id, $event)" />
-          <span class="family-preview" [style.fontFamily]="fam.stack">Aa — نص تجريبي</span>
+          <select class="value-text" [value]="currentLibraryId(fam)" (change)="onFamilyLibrarySelect(fam.id, $event)">
+            <option value="" disabled>اختر خطًا من المكتبة...</option>
+            @for (f of service.fontLibrary(); track f.id) {
+              <option [value]="f.id">{{ f.label }}</option>
+            }
+          </select>
+          <span class="family-preview" [style.fontFamily]="fam.stack">Aa — نص تجريبي Abc 123</span>
           <span class="family-source">{{ fam.source }}</span>
         </div>
       }
