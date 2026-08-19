@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "note": "بيانات كاملة لكل نوع حساب — مصدر: نظام النقاط و الولاء.xlsx (أوراق: المستويات، النقاط، الأرباح، الولاء). لا تشمل الأوراق المالية على مستوى المنصة (توزيع الأرباح، التوازن) — خارج نطاق هذا الملف. | 2026-08-18: أُعيدت هيكلة الحسابات من 3 إلى 5 أطراف (مقدم/طالب خدمة، كل منهما فرد+شركة بسلّم مستويات مستقل، + وسيط بدون تفريع). فروع الشركة الجديدة (provider-company, requester-company) بيانات مبدئية منسوخة من الفرد بانتظار مراجعة المالك — انظر needsReview/reviewNote لكل حساب.",
+  "version": 3,
+  "note": "بيانات كاملة لكل نوع حساب — مصدر: نظام النقاط و الولاء.xlsx (أوراق: المستويات، النقاط، الأرباح، الولاء)، مطابقة مباشرة من قراءة الملف بتاريخ 2026-08-19 (وليس نسخًا سابقًا تقريبيًا). لا تشمل الأوراق المالية على مستوى المنصة (توزيع الأرباح، التوازن) — خارج نطاق هذا الملف. 2026-08-18: أُعيدت هيكلة الحسابات من 3 إلى 5 أطراف (مقدم/طالب خدمة، كل منهما فرد+شركة بسلّم مستويات مستقل، + وسيط بدون تفريع). فروع الشركة الجديدة (provider-company, requester-company) بيانات مبدئية منسوخة من الفرد بانتظار مراجعة المالك — انظر needsReview/reviewNote لكل حساب. 2026-08-19: تصحيح جذري — عمولة مقدم الخدمة (كل المستويات، فردي+شركة) كانت مُختلقة (5%→1%)؛ صُححت لتطابق Excel فعليًا (12.75%→8.15%). عمولة الوسيط مستوى 7 (سفير) كانت 3.75% خطأً؛ صُححت لـ2.75% مطابقة Excel. بقية الحقول (النقاط، المشاريع/العملاء، التقييم، الولاء الشهري، الرواتب، الحصص) كانت مطابقة فعليًا للExcel من قبل ولم تُغيَّر.",
   "generalViolations": [
     {
       "violation": "إلغاء مشروع بعد القبول",
@@ -52,8 +52,8 @@
             "projectsMoreThan": 0,
             "ratingAbove": 0
           },
-          "commission": 0.05,
-          "netIncomeShare": 0.95,
+          "commission": 0.1275,
+          "netIncomeShare": 0.8725,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 10,
@@ -68,8 +68,8 @@
             "projectsMoreThan": 3,
             "ratingAbove": 3.5
           },
-          "commission": 0.048,
-          "netIncomeShare": 0.952,
+          "commission": 0.1242,
+          "netIncomeShare": 0.8758,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 15,
@@ -84,8 +84,8 @@
             "projectsMoreThan": 6,
             "ratingAbove": 3.8
           },
-          "commission": 0.046,
-          "netIncomeShare": 0.954,
+          "commission": 0.121,
+          "netIncomeShare": 0.879,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 25,
@@ -100,8 +100,8 @@
             "projectsMoreThan": 11,
             "ratingAbove": 4
           },
-          "commission": 0.044,
-          "netIncomeShare": 0.956,
+          "commission": 0.1177,
+          "netIncomeShare": 0.8823,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 35,
@@ -116,8 +116,8 @@
             "projectsMoreThan": 16,
             "ratingAbove": 4.1
           },
-          "commission": 0.042,
-          "netIncomeShare": 0.958,
+          "commission": 0.1145,
+          "netIncomeShare": 0.8855,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 50,
@@ -132,8 +132,8 @@
             "projectsMoreThan": 21,
             "ratingAbove": 4.2
           },
-          "commission": 0.04,
-          "netIncomeShare": 0.96,
+          "commission": 0.1112,
+          "netIncomeShare": 0.8888,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 70,
@@ -148,8 +148,8 @@
             "projectsMoreThan": 30,
             "ratingAbove": 4.3
           },
-          "commission": 0.0375,
-          "netIncomeShare": 0.9625,
+          "commission": 0.108,
+          "netIncomeShare": 0.892,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 100,
@@ -164,8 +164,8 @@
             "projectsMoreThan": 46,
             "ratingAbove": 4.4
           },
-          "commission": 0.035,
-          "netIncomeShare": 0.965,
+          "commission": 0.1047,
+          "netIncomeShare": 0.8953,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 125,
@@ -180,8 +180,8 @@
             "projectsMoreThan": 61,
             "ratingAbove": 4.5
           },
-          "commission": 0.0325,
-          "netIncomeShare": 0.9675,
+          "commission": 0.1015,
+          "netIncomeShare": 0.8985,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 150,
@@ -196,8 +196,8 @@
             "projectsMoreThan": 81,
             "ratingAbove": 4.5
           },
-          "commission": 0.03,
-          "netIncomeShare": 0.97,
+          "commission": 0.0982,
+          "netIncomeShare": 0.9018,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 175,
@@ -212,8 +212,8 @@
             "projectsMoreThan": 101,
             "ratingAbove": 4.5
           },
-          "commission": 0.0275,
-          "netIncomeShare": 0.9725,
+          "commission": 0.095,
+          "netIncomeShare": 0.905,
           "monthlySalary": 50,
           "profitShare": 0.0005,
           "loyaltyMonthlyValue": 200,
@@ -228,8 +228,8 @@
             "projectsMoreThan": 126,
             "ratingAbove": 4.6
           },
-          "commission": 0.025,
-          "netIncomeShare": 0.975,
+          "commission": 0.0917,
+          "netIncomeShare": 0.9083,
           "monthlySalary": 75,
           "profitShare": 0.0008,
           "loyaltyMonthlyValue": 250,
@@ -244,8 +244,8 @@
             "projectsMoreThan": 151,
             "ratingAbove": 4.7
           },
-          "commission": 0.02,
-          "netIncomeShare": 0.98,
+          "commission": 0.0885,
+          "netIncomeShare": 0.9115,
           "monthlySalary": 100,
           "profitShare": 0.0012,
           "loyaltyMonthlyValue": 300,
@@ -260,8 +260,8 @@
             "projectsMoreThan": 181,
             "ratingAbove": 4.8
           },
-          "commission": 0.015,
-          "netIncomeShare": 0.985,
+          "commission": 0.0852,
+          "netIncomeShare": 0.9148,
           "monthlySalary": 150,
           "profitShare": 0.0015,
           "loyaltyMonthlyValue": 350,
@@ -276,8 +276,8 @@
             "projectsMoreThan": 211,
             "ratingAbove": 4.9
           },
-          "commission": 0.01,
-          "netIncomeShare": 0.99,
+          "commission": 0.0815,
+          "netIncomeShare": 0.9185,
           "monthlySalary": 200,
           "profitShare": 0.002,
           "loyaltyMonthlyValue": 400,
@@ -391,8 +391,8 @@
             "projectsMoreThan": 0,
             "ratingAbove": 0
           },
-          "commission": 0.05,
-          "netIncomeShare": 0.95,
+          "commission": 0.1275,
+          "netIncomeShare": 0.8725,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 10,
@@ -407,8 +407,8 @@
             "projectsMoreThan": 3,
             "ratingAbove": 3.5
           },
-          "commission": 0.048,
-          "netIncomeShare": 0.952,
+          "commission": 0.1242,
+          "netIncomeShare": 0.8758,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 15,
@@ -423,8 +423,8 @@
             "projectsMoreThan": 6,
             "ratingAbove": 3.8
           },
-          "commission": 0.046,
-          "netIncomeShare": 0.954,
+          "commission": 0.121,
+          "netIncomeShare": 0.879,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 25,
@@ -439,8 +439,8 @@
             "projectsMoreThan": 11,
             "ratingAbove": 4
           },
-          "commission": 0.044,
-          "netIncomeShare": 0.956,
+          "commission": 0.1177,
+          "netIncomeShare": 0.8823,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 35,
@@ -455,8 +455,8 @@
             "projectsMoreThan": 16,
             "ratingAbove": 4.1
           },
-          "commission": 0.042,
-          "netIncomeShare": 0.958,
+          "commission": 0.1145,
+          "netIncomeShare": 0.8855,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 50,
@@ -471,8 +471,8 @@
             "projectsMoreThan": 21,
             "ratingAbove": 4.2
           },
-          "commission": 0.04,
-          "netIncomeShare": 0.96,
+          "commission": 0.1112,
+          "netIncomeShare": 0.8888,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 70,
@@ -487,8 +487,8 @@
             "projectsMoreThan": 30,
             "ratingAbove": 4.3
           },
-          "commission": 0.0375,
-          "netIncomeShare": 0.9625,
+          "commission": 0.108,
+          "netIncomeShare": 0.892,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 100,
@@ -503,8 +503,8 @@
             "projectsMoreThan": 46,
             "ratingAbove": 4.4
           },
-          "commission": 0.035,
-          "netIncomeShare": 0.965,
+          "commission": 0.1047,
+          "netIncomeShare": 0.8953,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 125,
@@ -519,8 +519,8 @@
             "projectsMoreThan": 61,
             "ratingAbove": 4.5
           },
-          "commission": 0.0325,
-          "netIncomeShare": 0.9675,
+          "commission": 0.1015,
+          "netIncomeShare": 0.8985,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 150,
@@ -535,8 +535,8 @@
             "projectsMoreThan": 81,
             "ratingAbove": 4.5
           },
-          "commission": 0.03,
-          "netIncomeShare": 0.97,
+          "commission": 0.0982,
+          "netIncomeShare": 0.9018,
           "monthlySalary": 0,
           "profitShare": 0,
           "loyaltyMonthlyValue": 175,
@@ -551,8 +551,8 @@
             "projectsMoreThan": 101,
             "ratingAbove": 4.5
           },
-          "commission": 0.0275,
-          "netIncomeShare": 0.9725,
+          "commission": 0.095,
+          "netIncomeShare": 0.905,
           "monthlySalary": 50,
           "profitShare": 0.0005,
           "loyaltyMonthlyValue": 200,
@@ -567,8 +567,8 @@
             "projectsMoreThan": 126,
             "ratingAbove": 4.6
           },
-          "commission": 0.025,
-          "netIncomeShare": 0.975,
+          "commission": 0.0917,
+          "netIncomeShare": 0.9083,
           "monthlySalary": 75,
           "profitShare": 0.0008,
           "loyaltyMonthlyValue": 250,
@@ -583,8 +583,8 @@
             "projectsMoreThan": 151,
             "ratingAbove": 4.7
           },
-          "commission": 0.02,
-          "netIncomeShare": 0.98,
+          "commission": 0.0885,
+          "netIncomeShare": 0.9115,
           "monthlySalary": 100,
           "profitShare": 0.0012,
           "loyaltyMonthlyValue": 300,
@@ -599,8 +599,8 @@
             "projectsMoreThan": 181,
             "ratingAbove": 4.8
           },
-          "commission": 0.015,
-          "netIncomeShare": 0.985,
+          "commission": 0.0852,
+          "netIncomeShare": 0.9148,
           "monthlySalary": 150,
           "profitShare": 0.0015,
           "loyaltyMonthlyValue": 350,
@@ -615,8 +615,8 @@
             "projectsMoreThan": 211,
             "ratingAbove": 4.9
           },
-          "commission": 0.01,
-          "netIncomeShare": 0.99,
+          "commission": 0.0815,
+          "netIncomeShare": 0.9185,
           "monthlySalary": 200,
           "profitShare": 0.002,
           "loyaltyMonthlyValue": 400,
@@ -1478,7 +1478,7 @@
             "clientsMoreThan": 36,
             "revenueAbove": 12001
           },
-          "commission": 0.0375,
+          "commission": 0.0275,
           "baseSalary": 0,
           "bonusUSD": 0,
           "profitShare": 0,
@@ -1703,5 +1703,5 @@
       "partyKind": "single"
     }
   ],
-  "updatedAt": "2026-08-18T19:07:58.000Z"
+  "updatedAt": "2026-08-19T11:41:07.000Z"
 }
