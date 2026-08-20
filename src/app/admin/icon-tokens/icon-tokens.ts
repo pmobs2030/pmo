@@ -1,6 +1,6 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { IconsService } from '../../core/icons.service';
+import { IconItem, IconsService } from '../../core/icons.service';
 import { readAndSanitizeSvgFile } from '../../core/svg-sanitize';
 
 @Component({
@@ -22,6 +22,29 @@ export class IconTokens implements OnInit {
     const libs = this.iconsService.libraries();
     const id = this.activeLibId();
     return libs.find(l => l.id === id) ?? libs[0] ?? null;
+  });
+
+  /**
+   * تقسيم أيقونات المكتبة النشطة لمجموعات فرعية داخل نفس القسم — بنفس أسلوب عرض ملف
+   * الهوية (عنوان قسم واحد، ثم عنوان صغير لكل مجموعة فوق شبكتها). أُضيف 2026-08-20 مع
+   * دمج مكتبتي أيقونات الذكاء (معتمدة نهائياً / مقترحة جديدة) بمكتبة واحدة بدل تبويبين.
+   * أي مكتبة بلا حقل group (المكتبة العامة i-*) تُعاد كمجموعة واحدة بعنوان فارغ، فتُعرض
+   * شبكة واحدة كما كانت بالضبط — بلا أي تغيير على سلوك العرض السابق.
+   */
+  readonly groupedIcons = computed<{ key: string; label: string; icons: IconItem[] }[]>(() => {
+    const lib = this.activeLib();
+    if (!lib) return [];
+    const order: string[] = [];
+    const map = new Map<string, { key: string; label: string; icons: IconItem[] }>();
+    for (const icon of lib.icons) {
+      const key = icon.group ?? '';
+      if (!map.has(key)) {
+        map.set(key, { key, label: icon.groupLabel ?? '', icons: [] });
+        order.push(key);
+      }
+      map.get(key)!.icons.push(icon);
+    }
+    return order.map(k => map.get(k)!);
   });
 
   async ngOnInit() {
