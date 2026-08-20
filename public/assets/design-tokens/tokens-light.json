@@ -759,7 +759,7 @@
         {
           "var": "--ai-card-bg",
           "label": "خلفية بطاقة AI (تدرّج مختلف عن --ai-bg)",
-          "value": "linear-gradient(135deg,rgba(107,39,165,.06),rgba(43,127,255,.04))",
+          "value": "linear-gradient(135deg,rgba(107,39,165,.06),rgba(29,111,224,.04))",
           "type": "gradient"
         },
         {
