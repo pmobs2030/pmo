@@ -163,10 +163,22 @@
           "type": "color"
         },
         {
+          "var": "--teal-rgb",
+          "label": "فيروزي أساسي — قنوات RGB (لخلفيات rgba الشفافة)",
+          "value": "15,138,127",
+          "type": "text"
+        },
+        {
           "var": "--blue",
           "label": "أزرق ثانوي",
           "value": "#1D6FE0",
           "type": "color"
+        },
+        {
+          "var": "--blue-rgb",
+          "label": "أزرق ثانوي — قنوات RGB (لخلفيات rgba الشفافة)",
+          "value": "29,111,224",
+          "type": "text"
         },
         {
           "var": "--blue-txt",
@@ -191,6 +203,12 @@
           "label": "بنفسجي AI",
           "value": "#6B27A5",
           "type": "color"
+        },
+        {
+          "var": "--ai-rgb",
+          "label": "بنفسجي AI — قنوات RGB (لخلفيات rgba الشفافة)",
+          "value": "107,39,165",
+          "type": "text"
         },
         {
           "var": "--ai-txt",
@@ -223,16 +241,34 @@
           "type": "color"
         },
         {
+          "var": "--green-rgb",
+          "label": "أخضر نجاح — قنوات RGB (لخلفيات rgba الشفافة)",
+          "value": "10,111,100",
+          "type": "text"
+        },
+        {
           "var": "--kahr",
           "label": "كهرماني تحذير",
           "value": "#9A6700",
           "type": "color"
         },
         {
+          "var": "--kahr-rgb",
+          "label": "كهرماني تحذير — قنوات RGB (لخلفيات rgba الشفافة)",
+          "value": "154,103,0",
+          "type": "text"
+        },
+        {
           "var": "--red",
           "label": "أحمر خطأ",
           "value": "#B42318",
           "type": "color"
+        },
+        {
+          "var": "--red-rgb",
+          "label": "أحمر خطأ — قنوات RGB (لخلفيات rgba الشفافة)",
+          "value": "180,35,24",
+          "type": "text"
         }
       ]
     },
