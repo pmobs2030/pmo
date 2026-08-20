@@ -157,7 +157,7 @@
   border-radius: 10px; padding: 9px 18px; font-size: 12.5px; font-weight: 800; cursor: pointer;
   font-family: var(--font-family, 'Tajawal'), system-ui, sans-serif;
 }
-.group-tab.active { background: rgba(43,212,199,.12); border-color: var(--teal, #2BD4C7); color: var(--teal, #2BD4C7); }
+.group-tab.active { background: rgba(var(--teal-rgb),.12); border-color: var(--teal, #2BD4C7); color: var(--teal, #2BD4C7); }
 
 .mini-sample {
   display: inline-block; width: 22px; height: 22px; border-radius: 6px;
@@ -178,7 +178,7 @@
 }
 .contrast-badge {
   display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800;
-  padding: 2px 8px; border-radius: 999px; background: rgba(255,140,105,.12); color: var(--red, #FF8C69);
+  padding: 2px 8px; border-radius: 999px; background: rgba(var(--red-rgb),.12); color: var(--red, #FF8C69);
   width: fit-content;
 }
-.contrast-badge.pass { background: rgba(43,212,199,.12); color: var(--teal, #2BD4C7); }
+.contrast-badge.pass { background: rgba(var(--teal-rgb),.12); color: var(--teal, #2BD4C7); }
