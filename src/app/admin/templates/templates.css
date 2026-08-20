@@ -303,6 +303,39 @@
 .pt-group-heading { font-size: 12px; font-weight: 800; color: var(--txt-2); margin: 18px 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
 .pt-group-heading:first-of-type { margin-top: 0; }
 .bc-sep { display: inline-flex; align-items: center; margin: 0 2px; }
-.bc-ico { width: 12px; height: 12px; color: var(--txt-3); vertical-align: middle; }
-.pg-ico { width: 12px; height: 12px; vertical-align: middle; margin: 0 2px; }
+.bc-ico { color: var(--txt-3); vertical-align: middle; }
+.pg-ico { vertical-align: middle; margin: 0 2px; }
 .pg-ico.prev { transform: scaleX(-1); }
+
+/* ==================================================================
+   محرر خانات القالب (أيقونة/حجم/عدد لكل عنصر) — أُضيف 2026-08-20 وفق
+   طلب المالك: كل خانة معروضة بالمعاينة يجب أن تكون قابلة للتحكم فعليًا،
+   لا مجرّد "مشهد" بلا تحكم.
+   ================================================================== */
+.pt-edit-toggle {
+  margin-top: 10px; width: 100%; text-align: center; background: transparent;
+  border: 1px dashed var(--border-strong); color: var(--teal); border-radius: var(--radius-sm,8px);
+  padding: 7px 10px; font-size: 10.5px; font-weight: 800; cursor: pointer;
+  font-family: var(--font-family,'Tajawal'),system-ui,sans-serif;
+}
+.pt-edit-toggle:hover { background: rgba(var(--teal-rgb),.08); }
+.pt-editor {
+  margin-top: 8px; padding: 10px 12px; background: var(--pg); border: 1px solid var(--border);
+  border-radius: var(--radius-md,10px); display: flex; flex-direction: column; gap: 2px;
+}
+.pt-editor-row {
+  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 8px;
+  padding: 6px 0; border-bottom: 1px solid var(--divider);
+}
+.pt-editor-row:last-child { border-bottom: none; }
+.pt-editor-row label { font-size: 10.5px; color: var(--txt-2); }
+.pt-editor-select {
+  background: var(--surface); border: 1px solid var(--border); color: var(--txt);
+  border-radius: 6px; padding: 4px 8px; font-size: 10.5px; max-width: 160px;
+  font-family: var(--font-family,'Tajawal'),system-ui,sans-serif;
+}
+.pt-editor-num {
+  width: 60px; background: var(--surface); border: 1px solid var(--border); color: var(--txt);
+  border-radius: 6px; padding: 4px 6px; font-size: 10.5px; direction: ltr; text-align: center;
+}
+.pt-editor-unit { font-size: 9.5px; color: var(--txt-3); }
