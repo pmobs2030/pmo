@@ -70,4 +70,39 @@
       }
     </div>
   </section>
+
+  <section class="sg-section">
+    <h2>المكوّنات</h2>
+    <h3>مكتبة المكوّنات العامة</h3>
+    <div class="comp-grid">
+      <div class="comp-card">
+        @if (briefIcon(); as icon) {
+          <span class="comp-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
+          </span>
+        }
+        <div class="comp-card-title">بطاقة قياسية</div>
+        <p class="comp-card-sub">radius:16px</p>
+      </div>
+
+      <div class="field-demo">
+        <h4>حالات الحقول</h4>
+        <input placeholder="Default" class="field-demo-input" disabled />
+        <input placeholder="Focus" class="field-demo-input field-demo-focus" disabled />
+        <input placeholder="Error" class="field-demo-input field-demo-error" disabled />
+      </div>
+    </div>
+
+    <h3 class="ai-comp-title">مكتبة مكوّنات الذكاء الاصطناعي</h3>
+    <div class="ai-comp-card">
+      @if (aiSparkIcon(); as icon) {
+        <span class="ai-comp-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
+        </span>
+      }
+      <div class="ai-comp-card-title">بطاقة AI</div>
+      <p class="ai-comp-card-sub">حصراً لمحتوى AI</p>
+    </div>
+    <p class="comp-note">بانر إفصاح الذكاء (ai-disclosure) وشارة الذكاء بالتوب-بار — موثّقة بتبويب القوالب</p>
+  </section>
 </div>
