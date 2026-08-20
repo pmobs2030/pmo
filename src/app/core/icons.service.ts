@@ -8,6 +8,14 @@ export interface IconItem {
   slot: string;
   label: string;
   svg: string;
+  /** مجموعة فرعية داخل نفس المكتبة (confirmed/proposed لمكتبة الذكاء، وgeneral/future/roles/categories لمكتبة ws-*) */
+  group?: string;
+  /** عنوان المجموعة الفرعية حرفيًا من ملف الهوية — يُعرض كترويسة صغيرة فوق شبكة أيقونات المجموعة */
+  groupLabel?: string;
+  /** وصف الشكل حرفيًا من ملف الهوية */
+  shape?: string;
+  /** ملاحظة الاستخدام حرفيًا من ملف الهوية */
+  note?: string;
 }
 
 export interface IconLibrary {
@@ -44,7 +52,16 @@ export class IconsService {
     // إصلاح أمني جذري 2026-08-19: أي نسخة محفوظة بـlocalStorage قد تكون أُنشئت قبل تفعيل
     // التعقيم بـimportJson (أو عُدِّلت يدويًا بأدوات المطوّر) — تُعقَّم دائمًا عند التحميل أيضًا،
     // وليس فقط عند الاستيراد، كخط دفاع ثانٍ يمنع أي XSS مخزّن من التفعّل عند فتح الجلسة.
-    this.libraries.set(saved?.data ? this.sanitizeLibraries(saved.data) : data.libraries);
+    // إصلاح 2026-08-20 (حارس هجرة): النسخة المحفوظة محليًا قد تكون أُنشئت قبل دمج مكتبتي
+    // أيقونات الذكاء (كانت 4 مكتبات: general / ai / ai-proposed / ws-site). لو بنية المكتبات
+    // المحفوظة ما عادت تطابق بنية الملف المصدري، تُتجاهل ويُستخدم الملف — وإلا يظل المستخدم
+    // يشوف البنية القديمة للأبد بعد أي تحديث بنيوي، بلا سبب ظاهر له.
+    const savedLibs = saved?.data;
+    const sameShape =
+      Array.isArray(savedLibs) &&
+      savedLibs.length === data.libraries.length &&
+      data.libraries.every(lib => savedLibs.some(s => s?.id === lib.id));
+    this.libraries.set(sameShape ? this.sanitizeLibraries(savedLibs!) : data.libraries);
   }
 
   /** يعقّم svg كل أيقونة بكل مكتبة — مصدر واحد يُستدعى من load() وimportJson() معًا. */
