@@ -121,7 +121,7 @@ const PAGE_TEMPLATES: PageTemplate[] = [
   readonly view = signal<'tokens' | 'templates'>('tokens');
 
   /** العشرون قالبًا كاملة كما بملف الهوية — بلا حذف ولا تبسيط لأي واحد منها. */
-  readonly pageTemplates = PAGE_TEMPLATES;
+  readonly pageTemplates = [...PAGE_TEMPLATES].sort((a, b) => (a.hasIcon === b.hasIcon ? 0 : a.hasIcon ? -1 : 1));
 
   /**
      * الأيقونات المستخدمة داخل معاينات القوالب — تُقرأ حيًّا من IconsService (نفس نمط
