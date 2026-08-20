@@ -23,36 +23,44 @@
     @for (lib of iconsService.libraries(); track lib.id) {
       <button type="button" class="lib-tab" [class.active]="activeLib()?.id === lib.id" (click)="selectLib(lib.id)">
         {{ lib.label }}
-        @if (lib.id === 'ai-proposed') {<span class="proposed-badge">مقترح</span>}
       </button>
     }
   </div>
 
   @if (activeLib(); as lib) {
-    <section class="lib-section" [class.ai-section]="lib.id === 'ai'" [class.proposed-section]="lib.id === 'ai-proposed'">
-      <div class="icon-grid">
-        @for (icon of lib.icons; track icon.slot) {
-          <div class="icon-card">
-            <span class="icon-box" [style.color]="'var(' + lib.colorVar + ')'">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
-            </span>
-            <span class="icon-label">{{ icon.label }}</span>
-            <code class="icon-slot">{{ icon.slot }}</code>
-            <select class="icon-select" [value]="icon.slot" (change)="onReassign(lib.id, icon.slot, $event)">
-              @for (opt of lib.icons; track opt.slot) {
-                <option [value]="opt.slot">{{ opt.label }}</option>
-              }
-            </select>
-            <label class="upload-mini-btn">
-              رفع من الجهاز
-              <input type="file" accept=".svg,image/svg+xml" (change)="onUploadIcon(lib.id, icon.slot, $event)" hidden />
-            </label>
-            @if (uploadError()[lib.id + ':' + icon.slot]; as err) {
-              <span class="upload-err">{{ err }}</span>
-            }
-          </div>
+    <section class="lib-section" [class.ai-section]="lib.id === 'ai'">
+      @for (grp of groupedIcons(); track grp.key) {
+        @if (grp.label) {
+          <h4 class="icon-group-title" [class.proposed-group]="grp.key === 'proposed'">
+            {{ grp.label }}
+            @if (grp.key === 'proposed') {<span class="proposed-badge">مقترح</span>}
+          </h4>
         }
-      </div>
+        <div class="icon-grid">
+          @for (icon of grp.icons; track icon.slot) {
+            <div class="icon-card">
+              <span class="icon-box" [attr.title]="icon.shape || null" [style.color]="'var(' + lib.colorVar + ')'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
+              </span>
+              <span class="icon-label">{{ icon.label }}</span>
+              <code class="icon-slot">{{ icon.slot }}</code>
+              @if (icon.note) {<span class="icon-note">{{ icon.note }}</span>}
+              <select class="icon-select" [value]="icon.slot" (change)="onReassign(lib.id, icon.slot, $event)">
+                @for (opt of lib.icons; track opt.slot) {
+                  <option [value]="opt.slot">{{ opt.label }}</option>
+                }
+              </select>
+              <label class="upload-mini-btn">
+                رفع من الجهاز
+                <input type="file" accept=".svg,image/svg+xml" (change)="onUploadIcon(lib.id, icon.slot, $event)" hidden />
+              </label>
+              @if (uploadError()[lib.id + ':' + icon.slot]; as err) {
+                <span class="upload-err">{{ err }}</span>
+              }
+            </div>
+          }
+        </div>
+      }
     </section>
   }
 </div>
