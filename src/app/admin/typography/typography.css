@@ -23,7 +23,7 @@
 .import-label { display: inline-flex; align-items: center; }
 .saved-msg { color: var(--green, #0FA99A); font-size: 13px; }
 
-.err-box { background: rgba(255,140,105,.1); border: 1px solid rgba(255,140,105,.3); color: var(--red, #FF8C69); padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; font-size: 12.5px; }
+.err-box { background: rgba(var(--red-rgb),.1); border: 1px solid rgba(var(--red-rgb),.3); color: var(--red, #FF8C69); padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; font-size: 12.5px; }
 
 .sub-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
 .sub-tab {
@@ -31,7 +31,7 @@
   border-radius: 10px; padding: 9px 18px; font-size: 12.5px; font-weight: 800; cursor: pointer;
   font-family: var(--font-family, 'Tajawal'), system-ui, sans-serif;
 }
-.sub-tab.active { background: rgba(43,212,199,.12); border-color: var(--teal, #2BD4C7); color: var(--teal, #2BD4C7); }
+.sub-tab.active { background: rgba(var(--teal-rgb),.12); border-color: var(--teal, #2BD4C7); color: var(--teal, #2BD4C7); }
 
 .families-section { display: flex; flex-direction: column; gap: 10px; }
 .family-row {
@@ -52,15 +52,15 @@
 .role-card {
   background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px;
 }
-.role-card.dupe { border-color: rgba(217,138,11,.4); }
+.role-card.dupe { border-color: rgba(var(--kahr-rgb),.4); }
 .role-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
 .role-head strong { font-size: 13.5px; }
 .role-usage { display: block; font-size: 11px; color: var(--txt-3); margin-top: 2px; }
 .interp-badge, .dupe-badge {
   font-size: 10.5px; font-weight: 800; padding: 3px 10px; border-radius: 999px;
-  background: rgba(43,212,199,.12); color: var(--teal, #2BD4C7);
+  background: rgba(var(--teal-rgb),.12); color: var(--teal, #2BD4C7);
 }
-.dupe-badge { background: rgba(217,138,11,.15); color: var(--kahr, #D98A0B); }
+.dupe-badge { background: rgba(var(--kahr-rgb),.15); color: var(--kahr, #D98A0B); }
 
 .role-fields { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 8px; }
 .role-fields label { display: flex; flex-direction: column; gap: 4px; font-size: 10.5px; color: var(--txt-3); }
@@ -82,7 +82,7 @@
   display: flex; align-items: baseline; gap: 16px; padding: 10px 16px;
   background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
 }
-.scale-row.dupe { border-color: rgba(217,138,11,.4); }
+.scale-row.dupe { border-color: rgba(var(--kahr-rgb),.4); }
 .scale-label { min-width: 220px; font-size: 12px; color: var(--txt-2); }
 .scale-label code { color: var(--txt-3); font-size: 10.5px; }
 .scale-sample { color: var(--txt); }
