@@ -136,9 +136,11 @@
     <p class="pt-lead">أنماط هيكلية تتكرر عبر عشرات الصفحات — أي صفحة جديدة تُبنى من أحد هذه القوالب لا من الصفر</p>
 
     <div class="pt-list">
-      @for (tpl of pageTemplates; track tpl.id) {
-      <article class="pt-card">
-        <div class="pt-name">{{ tpl.name }}</div>
+      @for (tpl of pageTemplates; track tpl.id; let i = $index) {
+            @if (i === 0 || tpl.hasIcon !== pageTemplates[i - 1].hasIcon) {
+            <div class="pt-group-heading">{{ tpl.hasIcon ? 'قوالب بأيقونة' : 'قوالب بدون أيقونة' }}</div>
+            }
+            <article class="pt-card"><div class="pt-name">{{ tpl.name }}</div>
         <div class="pt-desc">{{ tpl.desc }}</div>
         <div class="pt-usage">يُستخدم في: {{ tpl.usage }}</div>
 
