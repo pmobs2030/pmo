@@ -256,12 +256,12 @@
           }
 
           @case ('breadcrumb') {
-            <nav class="bc-row"><a class="bc-link">الرئيسية</a><span>›</span><a class="bc-link">السوق</a><span>›</span><span class="bc-cur">تفاصيل الخدمة</span></nav>
+            <nav class="bc-row"><a class="bc-link">الرئيسية</a><span class="bc-sep">@if (icons()['chevron']) { <svg class="bc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="icons()['chevron']"></svg> }</span><a class="bc-link">السوق</a><span class="bc-sep">@if (icons()['chevron']) { <svg class="bc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="icons()['chevron']"></svg> }</span><span class="bc-cur">تفاصيل الخدمة</span></nav>
             <p class="pt-hint">آخر عنصر نص عادي غير قابل للنقر.</p>
           }
 
           @case ('pagination') {
-            <div class="pg-row"><span class="pg-btn">‹ السابق</span><span class="pg-num cur">1</span><span class="pg-num">2</span><span class="pg-num">3</span><span class="pg-btn">التالي ›</span></div>
+            <div class="pg-row"><span class="pg-btn">@if (icons()['chevron']) { <svg class="pg-ico prev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="icons()['chevron']"></svg> }السابق</span><span class="pg-num cur">1</span><span class="pg-num">2</span><span class="pg-num">3</span><span class="pg-btn">التالي@if (icons()['chevron']) { <svg class="pg-ico next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="icons()['chevron']"></svg> }</span></div>
           }
 
           @case ('toast') {
