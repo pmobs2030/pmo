@@ -15,8 +15,8 @@
   background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
   padding: 18px; display: flex; flex-direction: column; gap: 6px;
 }
-.stat-card.error { border-color: rgba(255,140,105,.4); }
-.stat-card.warn { border-color: rgba(217,138,11,.4); }
+.stat-card.error { border-color: rgba(var(--red-rgb),.4); }
+.stat-card.warn { border-color: rgba(var(--kahr-rgb),.4); }
 .stat-num { font-size: 28px; font-weight: 900; color: var(--teal, #2BD4C7); }
 .stat-card.error .stat-num { color: var(--red, #FF8C69); }
 .stat-card.warn .stat-num { color: var(--kahr, #D98A0B); }
@@ -28,9 +28,9 @@ section h2 { font-size: 15px; font-weight: 900; margin: 0 0 12px; }
 .issues-list { display: flex; flex-direction: column; gap: 6px; }
 .issue-row {
   display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px;
-  background: rgba(217,138,11,.08); border: 1px solid rgba(217,138,11,.25); font-size: 12.5px;
+  background: rgba(var(--kahr-rgb),.08); border: 1px solid rgba(var(--kahr-rgb),.25); font-size: 12.5px;
 }
-.issue-row.error { background: rgba(255,140,105,.08); border-color: rgba(255,140,105,.3); }
+.issue-row.error { background: rgba(var(--red-rgb),.08); border-color: rgba(var(--red-rgb),.3); }
 .issue-severity { font-weight: 900; }
 .issue-area { font-weight: 800; color: var(--txt-2); min-width: 70px; }
 .issue-msg { color: var(--txt); }
