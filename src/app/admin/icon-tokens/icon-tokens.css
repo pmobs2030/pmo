@@ -22,7 +22,7 @@
 .import-label { display: inline-flex; align-items: center; }
 .saved-msg { color: var(--green, #0FA99A); font-size: 13px; }
 
-.err-box { background: rgba(255,140,105,.1); border: 1px solid rgba(255,140,105,.3); color: var(--red, #FF8C69); padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; font-size: 12.5px; }
+.err-box { background: rgba(var(--red-rgb),.1); border: 1px solid rgba(var(--red-rgb),.3); color: var(--red, #FF8C69); padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; font-size: 12.5px; }
 
 .lib-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
 .lib-tab {
@@ -30,11 +30,11 @@
   border-radius: 10px; padding: 9px 18px; font-size: 12.5px; font-weight: 800; cursor: pointer;
   font-family: var(--font-family, 'Tajawal'), system-ui, sans-serif;
 }
-.lib-tab.active { background: rgba(43,212,199,.12); border-color: var(--teal, #2BD4C7); color: var(--teal, #2BD4C7); }
+.lib-tab.active { background: rgba(var(--teal-rgb),.12); border-color: var(--teal, #2BD4C7); color: var(--teal, #2BD4C7); }
 
 .upload-mini-btn {
   width: 100%; text-align: center; margin-top: 4px; font-size: 9.5px; color: var(--teal, #2BD4C7);
-  background: rgba(43,212,199,.08); border: 1px solid rgba(43,212,199,.25); border-radius: 6px;
+  background: rgba(var(--teal-rgb),.08); border: 1px solid rgba(var(--teal-rgb),.25); border-radius: 6px;
   padding: 4px 6px; cursor: pointer; font-family: var(--font-family, 'Tajawal'), system-ui, sans-serif;
 }
 .upload-err { font-size: 9px; color: var(--red, #FF8C69); text-align: center; }
@@ -82,8 +82,8 @@
   font-size: 10px;
   margin-top: 4px;
 }
-.proposed-section { opacity: .85; border: 1px dashed rgba(217,138,11,.4); border-radius: 12px; padding: 10px; }
-.proposed-badge { display: inline-block; font-size: 10px; font-weight: 800; color: var(--kahr, #D98A0B); background: rgba(217,138,11,.12); padding: 2px 8px; border-radius: 999px; margin-inline-start: 8px; vertical-align: middle; }
+.proposed-section { opacity: .85; border: 1px dashed rgba(var(--kahr-rgb),.4); border-radius: 12px; padding: 10px; }
+.proposed-badge { display: inline-block; font-size: 10px; font-weight: 800; color: var(--kahr, #D98A0B); background: rgba(var(--kahr-rgb),.12); padding: 2px 8px; border-radius: 999px; margin-inline-start: 8px; vertical-align: middle; }
 
 /* ترويسات المجموعات الفرعية داخل نفس القسم — أُضيفت 2026-08-20 مع دمج مكتبتي أيقونات الذكاء
    (معتمدة نهائياً / مقترحة جديدة) بمكتبة واحدة، بنفس أسلوب عرض ملف الهوية: عنوان مجموعة
@@ -93,7 +93,7 @@
   margin: 4px 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
 }
 .ai-section .icon-group-title { color: var(--ai-txt); border-bottom-color: var(--ai-border); }
-.icon-group-title.proposed-group { color: var(--kahr, #D98A0B); border-bottom-style: dashed; border-bottom-color: rgba(217,138,11,.4); }
-.ai-section .icon-group-title.proposed-group { color: var(--kahr, #D98A0B); border-bottom-color: rgba(217,138,11,.4); }
+.icon-group-title.proposed-group { color: var(--kahr, #D98A0B); border-bottom-style: dashed; border-bottom-color: rgba(var(--kahr-rgb),.4); }
+.ai-section .icon-group-title.proposed-group { color: var(--kahr, #D98A0B); border-bottom-color: rgba(var(--kahr-rgb),.4); }
 .icon-grid + .icon-group-title { margin-top: 20px; }
 .icon-note { font-size: 9px; color: var(--txt-3); text-align: center; line-height: 1.5; }
