@@ -97,3 +97,16 @@
 .ai-section .icon-group-title.proposed-group { color: var(--kahr, #D98A0B); border-bottom-color: rgba(var(--kahr-rgb),.4); }
 .icon-grid + .icon-group-title { margin-top: 20px; }
 .icon-note { font-size: 9px; color: var(--txt-3); text-align: center; line-height: 1.5; }
+
+/* الفصل بين نمطي عرض i-* في الهوية: بدون إطار / بإطار (مربع زجاجي) — وعنوان مكتبة ws-* */
+.display-style-heading { margin-top: 18px; }
+.icon-grid-framed { margin-top: 10px; }
+.icon-card-framed { gap: 6px; }
+.icon-box-framed {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: var(--icon-bg);
+  border: 1px solid var(--icon-border);
+  display: flex; align-items: center; justify-content: center;
+}
+.icon-box-framed svg { width: 18px; height: 18px; }
