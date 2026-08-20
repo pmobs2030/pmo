@@ -299,3 +299,10 @@
 .fr-count { font-size:10px; font-weight:900; color:var(--teal); }
 .fr-clear { font-size:10px; font-weight:800; color:var(--txt-3); text-decoration:underline; }
 .fr-adv { display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:900; color:var(--pg); background:var(--grad); border-radius:var(--radius-pill,999px); padding:5px 12px; }
+
+.pt-group-heading { font-size: 12px; font-weight: 800; color: var(--txt-2); margin: 18px 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.pt-group-heading:first-of-type { margin-top: 0; }
+.bc-sep { display: inline-flex; align-items: center; margin: 0 2px; }
+.bc-ico { width: 12px; height: 12px; color: var(--txt-3); vertical-align: middle; }
+.pg-ico { width: 12px; height: 12px; vertical-align: middle; margin: 0 2px; }
+.pg-ico.prev { transform: scaleX(-1); }
