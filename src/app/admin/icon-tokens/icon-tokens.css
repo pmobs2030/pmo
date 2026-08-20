@@ -84,3 +84,16 @@
 }
 .proposed-section { opacity: .85; border: 1px dashed rgba(217,138,11,.4); border-radius: 12px; padding: 10px; }
 .proposed-badge { display: inline-block; font-size: 10px; font-weight: 800; color: var(--kahr, #D98A0B); background: rgba(217,138,11,.12); padding: 2px 8px; border-radius: 999px; margin-inline-start: 8px; vertical-align: middle; }
+
+/* ترويسات المجموعات الفرعية داخل نفس القسم — أُضيفت 2026-08-20 مع دمج مكتبتي أيقونات الذكاء
+   (معتمدة نهائياً / مقترحة جديدة) بمكتبة واحدة، بنفس أسلوب عرض ملف الهوية: عنوان مجموعة
+   صغير فوق شبكة عناصرها. تُطبَّق كذلك على مجموعات مكتبة الموقع ws-* الأربع. */
+.icon-group-title {
+  font-size: 11px; font-weight: 800; color: var(--txt-2);
+  margin: 4px 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
+}
+.ai-section .icon-group-title { color: var(--ai-txt); border-bottom-color: var(--ai-border); }
+.icon-group-title.proposed-group { color: var(--kahr, #D98A0B); border-bottom-style: dashed; border-bottom-color: rgba(217,138,11,.4); }
+.ai-section .icon-group-title.proposed-group { color: var(--kahr, #D98A0B); border-bottom-color: rgba(217,138,11,.4); }
+.icon-grid + .icon-group-title { margin-top: 20px; }
+.icon-note { font-size: 9px; color: var(--txt-3); text-align: center; line-height: 1.5; }
