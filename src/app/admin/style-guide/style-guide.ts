@@ -30,6 +30,18 @@ export class StyleGuide implements OnInit {
     if (this.typographyService.roles().length === 0) await this.typographyService.load();
   }
 
+  /** بطاقة "قياسية" — عيّنة من قسم 5 (المكوّنات → مكتبة المكوّنات العامة) بملف الهوية. */
+  readonly briefIcon = computed(() => {
+    const lib = this.iconsService.libraries().find(l => l.id === 'general');
+    return lib?.icons.find(ic => ic.slot === 'i-brief') ?? null;
+  });
+
+  /** بطاقة "AI" — عيّنة من قسم 5 (المكوّنات → مكتبة مكوّنات الذكاء الاصطناعي) بملف الهوية. */
+  readonly aiSparkIcon = computed(() => {
+    const lib = this.iconsService.libraries().find(l => l.id === 'ai');
+    return lib?.icons.find(ic => ic.slot === 'ws-ai-spark') ?? null;
+  });
+
   readonly colorGroups = computed(() =>
     this.tokensService.groups().filter(g => g.tokens.some(t => t.type === 'color' || t.type === 'gradient'))
   );
