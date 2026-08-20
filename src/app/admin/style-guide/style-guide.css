@@ -42,3 +42,59 @@
 .size-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .size-box { background: var(--teal, #2BD4C7); border-radius: 4px; }
 .size-label { font-size: 10px; color: var(--txt-3); }
+
+/* قسم المكوّنات — بطاقة قياسية/بطاقة AI/حالات الحقول (قسم 5 بملف الهوية) */
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.comp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+}
+.comp-icon-box {
+  width: 30px; height: 30px;
+  border-radius: 9px;
+  background: var(--icon-bg);
+  border: 1px solid var(--icon-border);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--txt-2);
+  margin-bottom: 10px;
+}
+.comp-icon-box svg { width: 15px; height: 15px; }
+.comp-card-title { font-weight: 800; font-size: 13px; margin-bottom: 4px; }
+.comp-card-sub { font-size: 11px; color: var(--txt-3); margin: 0; }
+
+.field-demo h4 { font-size: 11.5px; font-weight: 800; color: var(--txt); margin: 0 0 6px; }
+.field-demo-input {
+  width: 100%; box-sizing: border-box;
+  background: rgba(127,127,127,.05);
+  border: 1px solid var(--border);
+  color: var(--txt);
+  font-family: var(--font-family, 'Tajawal'), sans-serif;
+  font-size: 12px; padding: 8px 12px; border-radius: 9px; margin-bottom: 6px;
+}
+.field-demo-focus { border-color: var(--teal, #2BD4C7); box-shadow: 0 0 0 3px var(--icon-bg); }
+.field-demo-error { border-color: var(--red, #FF8C69); }
+
+.ai-comp-title { color: var(--ai-txt); margin: 22px 0 10px; }
+.ai-comp-card {
+  background: var(--ai-card-bg);
+  border: 1px solid var(--ai-border);
+  border-radius: 14px;
+  padding: 16px;
+  max-width: 260px;
+  margin-bottom: 12px;
+}
+.ai-comp-icon-box {
+  width: 30px; height: 30px;
+  border-radius: 9px;
+  background: var(--ai-bg);
+  border: 1px solid var(--ai-border);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ai-txt);
+  margin-bottom: 10px;
+}
+.ai-comp-icon-box svg { width: 15px; height: 15px; }
+.ai-comp-card-title { font-weight: 800; font-size: 13px; margin-bottom: 4px; color: var(--ai-txt); }
+.ai-comp-card-sub { font-size: 11px; color: var(--txt-2); margin: 0; }
+.comp-note { font-size: 11px; color: var(--txt-3); margin: 0; }
