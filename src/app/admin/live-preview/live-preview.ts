@@ -69,6 +69,13 @@ export class LivePreview implements OnInit {
     return typeof v === 'number' ? v : parseFloat(String(v)) || 0;
   }
 
+  /** إصلاح 2026-08-21: نفس منطق templates.ts isAiColor — مربع أيقونة KPI هنا كان يبقى
+   * فيروزيًا حتى لو اختار المالك اللون البنفسجي المعتمد للذكاء لهذه الخانة. */
+  private readonly AI_PURPLE = '#a56be0';
+  isAiColor(hex: string | number): boolean {
+    return String(hex).trim().toLowerCase() === this.AI_PURPLE;
+  }
+
   private resolveIconSvg(ref: string): SafeHtml | null {
     const [libId, slot] = String(ref).split(':');
     const svg = this.iconsService.libraries().find(l => l.id === libId)?.icons.find(i => i.slot === slot)?.svg;
