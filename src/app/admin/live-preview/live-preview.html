@@ -23,16 +23,31 @@
 
           <div class="kpi-row">
             <div class="kpi-card">
-              <span class="kpi-number-sample">128</span>
-              <span class="kpi-label">طلب مكتمل</span>
+              @if (slotIconSvg('kpi','icon0','general:i-list'); as svg) {
+                <span class="kpi-ico" [style.color]="ov('kpi','color0')" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
+                </span>
+              }
+              <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">128</span>
+              <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">طلب مكتمل</span>
             </div>
             <div class="kpi-card">
-              <span class="kpi-number-sample">4.8</span>
-              <span class="kpi-label">التقييم</span>
+              @if (slotIconSvg('kpi','icon1','general:i-star'); as svg) {
+                <span class="kpi-ico" [style.color]="ov('kpi','color1')" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
+                </span>
+              }
+              <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">4.8</span>
+              <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">التقييم</span>
             </div>
             <div class="kpi-card ai-card">
-              <span class="kpi-number-sample">92%</span>
-              <span class="kpi-label">دقة التوصية (AI)</span>
+              @if (slotIconSvg('kpi','icon3','ai:ws-ai-spark'); as svg) {
+                <span class="kpi-ico" [style.color]="ov('kpi','color3')" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
+                </span>
+              }
+              <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">92%</span>
+              <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">دقة التوصية (AI)</span>
             </div>
           </div>
 
@@ -82,11 +97,13 @@
             </div>
           </section>
 
-          <div class="ai-chip-sample">
-            @if (aiIconSvg()) {
-              <span class="ai-chip-icon" [innerHTML]="safeSvg(aiIconSvg()!)"></span>
+          <div class="ai-chip-sample" [style.color]="ov('aidisc','tagColor','#A56BE0')">
+            @if (slotIconSvg('aidisc','icon','ai:ws-ai-spark'); as svg) {
+              <span class="ai-chip-icon" [style.width.px]="ovNum('aidisc','iconSize',22)" [style.height.px]="ovNum('aidisc','iconSize',22)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" [innerHTML]="svg"></svg>
+              </span>
             }
-            <span>ميزة مدعومة بالذكاء الاصطناعي — اقتراح أفضل مقدّم خدمة تلقائيًا</span>
+            <span [style.fontWeight]="ovNum('aidisc','tagWeight',900)">ميزة مدعومة بالذكاء الاصطناعي — اقتراح أفضل مقدّم خدمة تلقائيًا</span>
           </div>
         }
 
