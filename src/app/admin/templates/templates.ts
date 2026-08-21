@@ -308,6 +308,20 @@ const ICON_PICKER_LIBS = ['general', 'ai', 'ws-site'];
     return typeof v === 'number' ? v : parseFloat(String(v)) || 0;
   }
 
+  /**
+   * إصلاح 2026-08-21 (ملاحظة مباشرة من المالك): مربع أيقونة KPI/الخطأ الزجاجي كان يستخدم
+   * دائمًا خلفية/حدود فيروزي عامة (--icon-bg/--icon-border) بصرف النظر عن لون الأيقونة
+   * الفعلي المختار — فلو اختار المالك اللون البنفسجي المعتمد للذكاء (--ai-txt، #A56BE0)
+   * لأي خانة (مثل kpi.color3)، كان المربع الزجاجي يظهر فيروزيًا لا بنفسجيًا، رغم أن قاعدة
+   * الهوية تفرض أن أي عنصر بنفسجي يمثّل الذكاء يجب أن يكون زجاجه بنفس درجته. الحل: مقارنة
+   * القيمة المختارة فعليًا بقيمة --ai-txt الموثّقة (لا قيمة أخرى مخترَعة)، وتبديل الزجاج
+   * لـ--ai-bg/--ai-border فقط عند التطابق؛ غير ذلك يبقى السلوك الافتراضي الفيروزي كما كان.
+   */
+  private readonly AI_PURPLE = '#a56be0';
+  isAiColor(hex: string | number): boolean {
+    return String(hex).trim().toLowerCase() === this.AI_PURPLE;
+  }
+
   onSlotInput(templateId: string, slot: TemplateSlotDef, event: Event): void {
     const raw = (event.target as HTMLInputElement | HTMLSelectElement).value;
     const isNumeric = slot.kind === 'size' || slot.kind === 'count' || slot.kind === 'weight';
