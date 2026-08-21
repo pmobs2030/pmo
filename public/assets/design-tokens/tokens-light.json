@@ -219,13 +219,13 @@
         {
           "var": "--ai-bg",
           "label": "خلفية أيقونة/شارة AI",
-          "value": "rgba(107,39,165,.1)",
+          "value": "rgba(123,47,190,.1)",
           "type": "color"
         },
         {
           "var": "--ai-border",
           "label": "حدود بطاقة/شارة AI",
-          "value": "rgba(107,39,165,.28)",
+          "value": "rgba(123,47,190,.28)",
           "type": "color"
         }
       ]
@@ -759,7 +759,7 @@
         {
           "var": "--ai-card-bg",
           "label": "خلفية بطاقة AI (تدرّج مختلف عن --ai-bg)",
-          "value": "linear-gradient(135deg,rgba(107,39,165,.06),rgba(29,111,224,.04))",
+          "value": "linear-gradient(135deg,rgba(123,47,190,.06),rgba(43,127,255,.04))",
           "type": "gradient"
         },
         {
@@ -777,7 +777,7 @@
         {
           "var": "--badge-active-bg",
           "label": "نشط/مقبول — خلفية",
-          "value": "rgba(10,111,100,.12)",
+          "value": "rgba(15,169,154,.12)",
           "type": "color"
         },
         {
@@ -801,7 +801,7 @@
         {
           "var": "--badge-done-bg",
           "label": "مكتمل — خلفية",
-          "value": "rgba(29,111,224,.10)",
+          "value": "rgba(43,127,255,.10)",
           "type": "color"
         },
         {
@@ -813,19 +813,19 @@
         {
           "var": "--badge-cancel-bg",
           "label": "ملغى — خلفية",
-          "value": "rgba(255,180,0,.12)",
+          "value": "rgba(127,127,127,.06)",
           "type": "color"
         },
         {
           "var": "--badge-cancel-text",
           "label": "ملغى — نص",
-          "value": "#8A5A00",
+          "value": "#475569",
           "type": "color"
         },
         {
           "var": "--badge-dispute-bg",
           "label": "نزاع — خلفية",
-          "value": "rgba(180,35,24,.10)",
+          "value": "rgba(255,140,105,.10)",
           "type": "color"
         },
         {
