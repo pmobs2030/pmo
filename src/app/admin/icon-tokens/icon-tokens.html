@@ -72,7 +72,27 @@
         <div class="icon-grid icon-grid-framed">
           @for (icon of lib.icons; track icon.slot) {
             <div class="icon-card icon-card-framed">
-              <span class="icon-box icon-box-framed" [style.color]="'var(' + lib.colorVar + ')'">
+              <span class="icon-box icon-box-framed" [style.color]="'var(' + lib.colorVar + ')'" [style.background]="'var(--icon-bg)'" [style.borderColor]="'var(--icon-border)'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
+              </span>
+              <span class="icon-label">{{ icon.label }}</span>
+            </div>
+          }
+        </div>
+      }
+      @if (lib.id === 'ai') {
+        <!-- إصلاح 2026-08-21 (ملاحظة مباشرة من المالك): أيقونات الذكاء لم يكن لها قسم "بإطار
+             (مربع زجاجي)" إطلاقًا مقابل مكتبة i-* — أُضيف هنا بنفس الفكرة تمامًا. الفرق الإلزامي:
+             زجاج/حدود المربع هنا مثبّتان على --ai-bg/--ai-border (بنفسجي AI) حصرًا، وليس
+             --icon-bg/--icon-border (فيروزي عام) — لأن أي عنصر يخص الذكاء يجب أن يكون الزجاج
+             بنفس درجة الأيقونة (بنفسجي)، لا لونًا آخر. هذا هو الخلل الذي أبلغ عنه المالك حين
+             استُخدم مربع زجاجي عام بلون غير بنفسجي لعنصر ذكاء (انظر أيضًا إصلاح kp-ico/kpi-ico
+             بتبويبي القوالب والمعاينة الحية لنفس السبب). -->
+        <h4 class="icon-group-title display-style-heading framed-heading">أيقونات الذكاء الاصطناعي — بإطار (مربع زجاجي بنفسجي)</h4>
+        <div class="icon-grid icon-grid-framed">
+          @for (icon of lib.icons; track icon.slot) {
+            <div class="icon-card icon-card-framed">
+              <span class="icon-box icon-box-framed" [style.color]="'var(' + lib.colorVar + ')'" [style.background]="'var(--ai-bg)'" [style.borderColor]="'var(--ai-border)'">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
               </span>
               <span class="icon-label">{{ icon.label }}</span>
