@@ -228,7 +228,7 @@
             <div class="kp-grid">
               @for (n of range(ovNum(tpl.id,'cardCount')); track n) {
                 <div class="kp-card">
-                  @if (slotIconSvg(tpl.id,'icon'+(n%6)); as svg) { <span class="kp-ico" [style.color]="ov(tpl.id,'color'+(n%6))" [style.width.px]="ovNum(tpl.id,'iconBoxSize')" [style.height.px]="ovNum(tpl.id,'iconBoxSize')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum(tpl.id,'iconSize')" [style.height.px]="ovNum(tpl.id,'iconSize')" [innerHTML]="svg"></svg></span> }
+                  @if (slotIconSvg(tpl.id,'icon'+(n%6)); as svg) { <span class="kp-ico" [style.color]="ov(tpl.id,'color'+(n%6))" [style.background]="isAiColor(ov(tpl.id,'color'+(n%6))) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov(tpl.id,'color'+(n%6))) ? 'var(--ai-border)' : null" [style.width.px]="ovNum(tpl.id,'iconBoxSize')" [style.height.px]="ovNum(tpl.id,'iconBoxSize')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum(tpl.id,'iconSize')" [style.height.px]="ovNum(tpl.id,'iconSize')" [innerHTML]="svg"></svg></span> }
                   @switch (n % 4) {
                     @case (0) { <span class="kp-num" [style.fontWeight]="ovNum(tpl.id,'numWeight')">128</span><span class="kp-lbl" [style.fontWeight]="ovNum(tpl.id,'lblWeight')">طلب مكتمل</span> }
                     @case (1) { <span class="kp-num" [style.fontWeight]="ovNum(tpl.id,'numWeight')">4.8</span><span class="kp-lbl" [style.fontWeight]="ovNum(tpl.id,'lblWeight')">التقييم</span> }
