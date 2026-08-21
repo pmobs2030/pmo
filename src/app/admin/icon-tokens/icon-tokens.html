@@ -35,20 +35,27 @@
       @if (lib.id === 'ws-site') {
         <h4 class="icon-group-title display-style-heading">الموقع العام (ws-*)</h4>
       }
-      @for (grp of groupedIcons(); track grp.key) {
-        @if (grp.label) {
-          <h4 class="icon-group-title" [class.proposed-group]="grp.key === 'proposed'">
-            {{ grp.label }}
-            @if (grp.key === 'proposed') {<span class="proposed-badge">مقترح</span>}
-          </h4>
-        }
+      @if (lib.id === 'ai') {
+        <h4 class="icon-group-title display-style-heading">أيقونات الذكاء الاصطناعي — بدون إطار</h4>
+      }
+      @if (lib.id === 'ai') {
+        <!-- إصلاح 2026-08-21 (ملاحظة ثانية مباشرة من المالك): كانت "معتمدة نهائياً" و"مقترحة
+             جديدة" تُعرَضان كقسمين منفصلين بعنوانين مستقلين (عبر groupedIcons()) — هذا يخالف
+             طلب المالك الصريح "قسمين فقط بكامل التبويب": (1) الأيقونات كلها بمربع واحد، (2) نفس
+             الأيقونات بإطار زجاجي أسفلها. الآن تُعرض كل أيقونات الذكاء الـ22 بشبكة واحدة بلا
+             فصل بعنوان قسم؛ التمييز بين معتمدة/مقترحة أصبح شارة صغيرة على كل بطاقة على حِدة
+             (مثل نمط proposed-badge نفسه) بدل عنوان قسم كامل — المعلومة لم تُحذف، فقط انتقلت
+             من مستوى القسم لمستوى البطاقة. -->
         <div class="icon-grid">
-          @for (icon of grp.icons; track icon.slot) {
+          @for (icon of lib.icons; track icon.slot) {
             <div class="icon-card">
               <span class="icon-box" [attr.title]="icon.shape || null" [style.color]="'var(' + lib.colorVar + ')'">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
               </span>
-              <span class="icon-label">{{ icon.label }}</span>
+              <span class="icon-label">
+                {{ icon.label }}
+                @if (icon.group === 'proposed') {<span class="proposed-badge proposed-badge-inline">مقترح</span>}
+              </span>
               <code class="icon-slot">{{ icon.slot }}</code>
               @if (icon.note) {<span class="icon-note">{{ icon.note }}</span>}
               <select class="icon-select" [value]="icon.slot" (change)="onReassign(lib.id, icon.slot, $event)">
@@ -66,6 +73,39 @@
             </div>
           }
         </div>
+      } @else {
+        @for (grp of groupedIcons(); track grp.key) {
+          @if (grp.label) {
+            <h4 class="icon-group-title" [class.proposed-group]="grp.key === 'proposed'">
+              {{ grp.label }}
+              @if (grp.key === 'proposed') {<span class="proposed-badge">مقترح</span>}
+            </h4>
+          }
+          <div class="icon-grid">
+            @for (icon of grp.icons; track icon.slot) {
+              <div class="icon-card">
+                <span class="icon-box" [attr.title]="icon.shape || null" [style.color]="'var(' + lib.colorVar + ')'">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
+                </span>
+                <span class="icon-label">{{ icon.label }}</span>
+                <code class="icon-slot">{{ icon.slot }}</code>
+                @if (icon.note) {<span class="icon-note">{{ icon.note }}</span>}
+                <select class="icon-select" [value]="icon.slot" (change)="onReassign(lib.id, icon.slot, $event)">
+                  @for (opt of lib.icons; track opt.slot) {
+                    <option [value]="opt.slot">{{ opt.label }}</option>
+                  }
+                </select>
+                <label class="upload-mini-btn">
+                  رفع من الجهاز
+                  <input type="file" accept=".svg,image/svg+xml" (change)="onUploadIcon(lib.id, icon.slot, $event)" hidden />
+                </label>
+                @if (uploadError()[lib.id + ':' + icon.slot]; as err) {
+                  <span class="upload-err">{{ err }}</span>
+                }
+              </div>
+            }
+          </div>
+        }
       }
       @if (lib.id === 'general') {
         <h4 class="icon-group-title display-style-heading framed-heading">اللوحات (i-*) — بإطار (مربع زجاجي)</h4>
