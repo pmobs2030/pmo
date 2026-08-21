@@ -24,7 +24,7 @@
           <div class="kpi-row">
             <div class="kpi-card">
               @if (slotIconSvg('kpi','icon0','general:i-list'); as svg) {
-                <span class="kpi-ico" [style.color]="ov('kpi','color0')" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                <span class="kpi-ico" [style.color]="ov('kpi','color0')" [style.background]="isAiColor(ov('kpi','color0')) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color0')) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
                 </span>
               }
@@ -33,7 +33,7 @@
             </div>
             <div class="kpi-card">
               @if (slotIconSvg('kpi','icon1','general:i-star'); as svg) {
-                <span class="kpi-ico" [style.color]="ov('kpi','color1')" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                <span class="kpi-ico" [style.color]="ov('kpi','color1')" [style.background]="isAiColor(ov('kpi','color1')) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color1')) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
                 </span>
               }
@@ -42,7 +42,7 @@
             </div>
             <div class="kpi-card ai-card">
               @if (slotIconSvg('kpi','icon3','ai:ws-ai-spark'); as svg) {
-                <span class="kpi-ico" [style.color]="ov('kpi','color3')" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                <span class="kpi-ico" [style.color]="ov('kpi','color3')" [style.background]="isAiColor(ov('kpi','color3')) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color3')) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
                 </span>
               }
