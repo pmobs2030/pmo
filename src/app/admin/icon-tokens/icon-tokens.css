@@ -102,6 +102,9 @@
 .display-style-heading { margin-top: 18px; }
 .icon-grid-framed { margin-top: 10px; }
 .icon-card-framed { gap: 6px; }
+/* الخلفية/الحدود تُضبَط الآن حيًّا من القالب ([style.background]/[style.borderColor]) حسب
+   المكتبة — إصلاح 2026-08-21: أيقونات AI يجب أن تُظهِر زجاجًا بنفسجيًا (--ai-bg/--ai-border)،
+   لا الفيروزي العام (--icon-bg/--icon-border) المستخدَم لمكتبة i-*. القيم أدناه fallback فقط. */
 .icon-box-framed {
   width: 32px; height: 32px;
   border-radius: 9px;
