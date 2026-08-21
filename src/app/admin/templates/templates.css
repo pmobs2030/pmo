@@ -338,4 +338,8 @@
   width: 60px; background: var(--surface); border: 1px solid var(--border); color: var(--txt);
   border-radius: 6px; padding: 4px 6px; font-size: 10.5px; direction: ltr; text-align: center;
 }
-.pt-editor-unit { font-size: 9.5px; color: var(--txt-3); }
+.pt-editor-color {
+  width: 34px; height: 26px; padding: 2px; border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface); cursor: pointer;
+}
+.pt-editor-unit { font-size: 9.5px; color: var(--txt-3); direction: ltr; }
