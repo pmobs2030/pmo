@@ -36,9 +36,6 @@
         <h4 class="icon-group-title display-style-heading">الموقع العام (ws-*)</h4>
       }
       @if (lib.id === 'ai') {
-        <h4 class="icon-group-title display-style-heading">أيقونات الذكاء الاصطناعي — بدون إطار</h4>
-      }
-      @if (lib.id === 'ai') {
         <!-- إصلاح 2026-08-21 (ملاحظة ثانية مباشرة من المالك): كانت "معتمدة نهائياً" و"مقترحة
              جديدة" تُعرَضان كقسمين منفصلين بعنوانين مستقلين (عبر groupedIcons()) — هذا يخالف
              طلب المالك الصريح "قسمين فقط بكامل التبويب": (1) الأيقونات كلها بمربع واحد، (2) نفس
@@ -112,7 +109,7 @@
         <div class="icon-grid icon-grid-framed">
           @for (icon of lib.icons; track icon.slot) {
             <div class="icon-card icon-card-framed">
-              <span class="icon-box icon-box-framed" [style.color]="'var(' + lib.colorVar + ')'" [style.background]="'var(--icon-bg)'" [style.borderColor]="'var(--icon-border)'">
+              <span class="icon-box icon-box-framed" [style.color]="'var(--teal)'" [style.background]="'var(--icon-bg)'" [style.borderColor]="'var(--icon-border)'">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" [innerHTML]="safeSvg(icon.svg)"></svg>
               </span>
               <span class="icon-label">{{ icon.label }}</span>
