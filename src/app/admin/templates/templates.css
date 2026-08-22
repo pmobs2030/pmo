@@ -144,8 +144,8 @@
 .st5-card.empty .st5-ico, .st5-card.empty .st5-msg { color:var(--txt-3); }
 .st5-card.err { border-color:var(--warn-border); background:var(--warn-bg); }
 .st5-card.err .st5-ico, .st5-card.err .st5-msg { color:var(--warn-text); }
-.st5-card.ok { border-color:var(--green); }
-.st5-card.ok .st5-ico, .st5-card.ok .st5-msg { color:var(--green); }
+.st5-card.ok { border-color:var(--teal); }
+.st5-card.ok .st5-ico, .st5-card.ok .st5-msg { color:var(--teal); }
 /* 4) بانر إفصاح الذكاء (ai-disclosure) — بأيقونة AI */
 .aid-banner { display:flex; align-items:center; gap:10px; background:var(--ai-card-bg); border:1px solid var(--ai-border); border-radius:var(--radius-lg,12px); padding:12px 14px; flex-wrap:wrap; }
 .aid-ico { width:22px; height:22px; color:var(--ai-txt); flex:none; }
@@ -175,14 +175,14 @@
 .kp-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--card-gap,10px); }
 @media (max-width:640px) { .kp-grid { grid-template-columns:repeat(2,1fr); } }
 .kp-card { background:var(--pg); border:1px solid var(--border); border-radius:var(--radius-lg,12px); padding:12px; display:flex; flex-direction:column; gap:6px; }
-.kp-ico { width:30px; height:30px; border-radius:var(--radius-sm,8px); display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--icon-border); background:var(--icon-bg); }
-.kp-ico svg { width:16px; height:16px; display:block; }
+.kp-ico { width:24px; height:24px; border-radius:7px; display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--icon-border); background:var(--icon-bg); }
+.kp-ico svg { width:12px; height:12px; display:block; }
 .kp-ico.teal { color:var(--teal); }
 .kp-ico.blue { color:var(--blue-txt); }
 .kp-ico.kahr { color:var(--kahr); }
 .kp-ico.ai { color:var(--ai-txt); background:var(--ai-bg); border-color:var(--ai-border); }
-.kp-num { font-size:20px; font-weight:900; color:var(--txt); }
-.kp-lbl { font-size:10.5px; color:var(--txt-3); }
+.kp-num { font-size:17px; font-weight:900; color:var(--txt); }
+.kp-lbl { font-size:9.5px; color:var(--txt-3); }
 
 /* 8) جدول بيانات (ord-tbl/rep-tbl) — بلا أيقونة */
 .dt-tbl { width:100%; border-collapse:collapse; font-size:11.5px; }
@@ -202,14 +202,14 @@
 
 /* 10) نافذة منبثقة (modal-box) — خلفية زجاجية داكنة دومًا */
 .mb-scrim { background:var(--pg); border:1px solid var(--border); border-radius:var(--radius-md,10px); padding:16px; display:flex; justify-content:center; }
-.mb-box { background:var(--navy); border:1px solid var(--border-strong); border-radius:var(--radius-lg,12px); padding:14px 16px; max-width:270px; width:100%; backdrop-filter:blur(var(--card-blur,14px)); box-shadow:var(--shadow-4); }
-.mb-title { font-size:12.5px; font-weight:900; color:var(--txt); margin-bottom:6px; }
+.mb-box { background:#0B1437; border:1px solid var(--border-strong); border-radius:var(--radius-lg,12px); padding:14px 16px; max-width:270px; width:100%; backdrop-filter:blur(var(--card-blur,14px)); box-shadow:var(--shadow-4); }
+.mb-title { font-size:12.5px; font-weight:900; color:#fff; margin-bottom:6px; }
 .mb-txt { margin:0 0 10px; font-size:10.5px; color:var(--txt-2); line-height:1.8; }
 .mb-field { width:100%; background:var(--pg); border:1px solid var(--border); color:var(--txt); border-radius:var(--radius-sm,8px); padding:7px 10px; font-size:11px; font-family:var(--font-family,'Tajawal'),system-ui,sans-serif; margin-bottom:10px; }
 .mb-actions { display:flex; gap:8px; }
 .mb-btn { border:none; border-radius:var(--radius-sm,8px); padding:7px 16px; font-size:11px; font-weight:900; cursor:pointer; font-family:var(--font-family,'Tajawal'),system-ui,sans-serif; }
 .mb-btn.primary { background:var(--grad); color:var(--pg); }
-.mb-btn.ghost { background:transparent; border:1px solid var(--border-strong); color:var(--txt-2); }
+.mb-btn.ghost { background:transparent; border:1px solid var(--border-strong); color:#A8B2D1; }
 
 /* 11) بطاقة تدرّج المستوى (tier-banner) — بأيقونة نجمة */
 .tr-banner { max-width:270px; }
@@ -233,7 +233,7 @@
 
 /* 14) إشعار عابر (toast) — قد يحمل أيقونة حالة */
 .ts-bar { display:inline-flex; align-items:center; gap:8px; background:var(--navy); border:1px solid var(--border-strong); border-radius:var(--radius-md,10px); padding:9px 14px; font-size:11px; color:var(--txt); box-shadow:var(--shadow-3); }
-.ts-ico { width:15px; height:15px; color:var(--green); }
+.ts-ico { width:15px; height:15px; color:var(--teal); }
 
 /* 15) تلميح (tooltip-ico) — بأيقونة علامة استفهام */
 .tt-row { display:inline-flex; align-items:center; gap:5px; }
@@ -248,8 +248,9 @@
 /* 17) صفحات النظام والأخطاء (err-card) — أيقونة ولون حسب نوع الخطأ */
 .er-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); gap:8px; }
 .er-card { text-align:center; background:var(--pg); border:1px solid var(--border); border-radius:var(--radius-lg,12px); padding:14px 12px; display:flex; flex-direction:column; align-items:center; gap:5px; }
-.er-ico { width:20px; height:20px; }
-.er-code { font-size:17px; font-weight:900; }
+.er-ico { width:34px; height:34px; border-radius:9px; background:var(--warn-bg); display:inline-flex; align-items:center; justify-content:center; }
+.er-ico svg { width:17px; height:17px; }
+.er-code { font-size:9.5px; font-weight:800; }
 .er-title { font-size:11.5px; font-weight:900; color:var(--txt); }
 .er-desc { margin:0; font-size:10px; color:var(--txt-3); line-height:1.7; }
 .er-acts { display:flex; gap:6px; margin-top:4px; }
@@ -272,8 +273,8 @@
 .pf-sub { font-size:10px; color:var(--txt-3); line-height:1.7; }
 .pf-sw { width:38px; height:21px; border-radius:var(--radius-pill,999px); background:var(--toggle-track); position:relative; flex:none; }
 .pf-sw i { content:''; position:absolute; top:3px; inset-inline-end:3px; width:15px; height:15px; border-radius:var(--radius-full,50%); background:var(--txt-3); }
-.pf-sw.on { background:var(--toggle-active-bg); }
-.pf-sw.on i { inset-inline-end:auto; inset-inline-start:3px; background:var(--toggle-active-text); }
+.pf-sw.on { background:var(--grad); }
+.pf-sw.on i { inset-inline-end:auto; inset-inline-start:3px; background:#fff; }
 
 /* 19) زر اختيار (radio-opt) — دائرة + نقطة داخل بطاقة كاملة قابلة للنقر */
 .rd-col { display:flex; flex-direction:column; gap:8px; max-width:320px; }
@@ -287,7 +288,7 @@
 .rd-sub { font-size:10px; color:var(--txt-3); line-height:1.7; }
 
 /* 20) شريط الفلترة (filter-rail) — شريط زجاجي أفقي موحّد */
-.fr-rail { display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:var(--navy); border:1px solid var(--teal); border-radius:var(--radius-lg,12px); padding:10px 12px; backdrop-filter:blur(var(--glass-blur,12px)); }
+.fr-rail { display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:var(--navy); border:1px solid rgba(43,212,199,.35); border-radius:var(--radius-lg,12px); padding:10px 12px; backdrop-filter:blur(var(--glass-blur,12px)); }
 .fr-lbl { font-size:10px; font-weight:900; color:var(--txt-3); }
 .fr-pill { display:inline-flex; align-items:center; gap:4px; font-size:10.5px; font-weight:800; color:var(--txt-2); background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-pill,999px); padding:4px 12px; }
 .fr-pill.on { color:var(--teal); border-color:var(--teal); }
