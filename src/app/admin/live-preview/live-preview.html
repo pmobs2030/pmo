@@ -16,6 +16,8 @@
       <a class="mock-nav-link" [class.active]="activeSection() === 'settings'" (click)="setSection('settings')">الإعدادات</a>
     </aside>
 
+    <div class="mock-topbar"></div>
+
     <main class="mock-main">
       @switch (activeSection()) {
         @case ('dashboard') {
@@ -39,6 +41,15 @@
               }
               <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">4.8</span>
               <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">التقييم</span>
+            </div>
+            <div class="kpi-card">
+              @if (slotIconSvg('kpi','icon2','general:i-clock'); as svg) {
+                <span class="kpi-ico" [style.color]="ov('kpi','color2')" [style.background]="isAiColor(ov('kpi','color2')) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color2')) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
+                </span>
+              }
+              <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">12</span>
+              <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">قيد التنفيذ</span>
             </div>
             <div class="kpi-card ai-card">
               @if (slotIconSvg('kpi','icon3','ai:ws-ai-spark'); as svg) {
