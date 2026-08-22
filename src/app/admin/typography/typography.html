@@ -81,7 +81,7 @@
             <label>
               الوزن
               <select [value]="role.fontWeight" (change)="onRoleField(role.id, 'fontWeight', $event)">
-                @for (w of [400,500,600,700,800,900]; track w) {
+                @for (w of [400,500,700,800,900]; track w) {
                   <option [value]="w">{{ w }}</option>
                 }
               </select>
