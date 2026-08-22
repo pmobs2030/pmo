@@ -52,9 +52,10 @@
 
 .icon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 8px;
 }
+.ai-section .icon-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
 .icon-card {
   display: flex;
   flex-direction: column;
@@ -63,13 +64,14 @@
   background: rgba(255,255,255,.03);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 12px 8px;
+  padding: 12px 6px;
 }
+.ai-section .icon-card { background: linear-gradient(135deg, rgba(123,47,190,.09), rgba(43,127,255,.06)); }
 .icon-box {
   width: 32px; height: 32px;
   display: flex; align-items: center; justify-content: center;
 }
-.icon-box svg { width: 18px; height: 18px; }
+.icon-box svg { width: 16px; height: 16px; }
 .icon-label { font-size: 11px; color: var(--txt-2); text-align: center; }
 .icon-slot { font-size: 9px; color: var(--txt-3); direction: ltr; }
 .icon-select {
@@ -115,4 +117,4 @@
   border: 1px solid var(--icon-border);
   display: flex; align-items: center; justify-content: center;
 }
-.icon-box-framed svg { width: 18px; height: 18px; }
+.icon-box-framed svg { width: 16px; height: 16px; }
