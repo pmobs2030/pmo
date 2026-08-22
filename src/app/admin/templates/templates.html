@@ -183,10 +183,10 @@
 
           @case ('states5') {
             <div class="st5-grid">
-              <div class="st5-card"><span class="st5-tag">Default</span><span class="st5-line"></span><span class="st5-line short"></span></div>
+              <div class="st5-card"><span class="st5-tag">Default</span><span class="st5-msg">12 طلباً نشطاً</span></div>
               <div class="st5-card"><span class="st5-tag">Loading</span><span class="st5-skel"></span><span class="st5-skel short"></span></div>
-              <div class="st5-card empty"><span class="st5-tag">Empty</span>@if (slotIconSvg(tpl.id,'emptyIcon'); as svg) { <span class="st5-ico" [style.width.px]="ovNum(tpl.id,'iconSize')" [style.height.px]="ovNum(tpl.id,'iconSize')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="svg"></svg></span> }<span class="st5-msg">لا توجد بيانات بعد</span></div>
-              <div class="st5-card err"><span class="st5-tag">Error</span>@if (slotIconSvg(tpl.id,'errorIcon'); as svg) { <span class="st5-ico" [style.width.px]="ovNum(tpl.id,'iconSize')" [style.height.px]="ovNum(tpl.id,'iconSize')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="svg"></svg></span> }<span class="st5-msg">تعذّر جلب البيانات</span></div>
+              <div class="st5-card empty"><span class="st5-tag">Empty</span>@if (slotIconSvg(tpl.id,'emptyIcon'); as svg) { <span class="st5-ico" [style.width.px]="ovNum(tpl.id,'iconSize')" [style.height.px]="ovNum(tpl.id,'iconSize')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="svg"></svg></span> }<span class="st5-msg">لا توجد بيانات</span></div>
+              <div class="st5-card err"><span class="st5-tag">Error</span>@if (slotIconSvg(tpl.id,'errorIcon'); as svg) { <span class="st5-ico" [style.width.px]="ovNum(tpl.id,'iconSize')" [style.height.px]="ovNum(tpl.id,'iconSize')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="svg"></svg></span> }<span class="st5-msg">تعذّر تحميل البيانات</span></div>
               <div class="st5-card ok"><span class="st5-tag">Success</span>@if (slotIconSvg(tpl.id,'successIcon'); as svg) { <span class="st5-ico" [style.width.px]="ovNum(tpl.id,'iconSize')" [style.height.px]="ovNum(tpl.id,'iconSize')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [innerHTML]="svg"></svg></span> }<span class="st5-msg">تم الحفظ بنجاح</span></div>
             </div>
           }
@@ -219,7 +219,7 @@
           @case ('tabs') {
             <div class="tb-row">
               @if (ovNum(tpl.id,'tabCount') > 0) { <span class="tb-item active">البيانات الأساسية<span class="tb-badge inst">فوري</span></span> }
-              @if (ovNum(tpl.id,'tabCount') > 1) { <span class="tb-item">بيانات التوثيق<span class="tb-badge rev">بمراجعة</span></span> }
+              @if (ovNum(tpl.id,'tabCount') > 1) { <span class="tb-item">الإعدادات<span class="tb-badge rev">بمراجعة</span></span> }
               @if (ovNum(tpl.id,'tabCount') > 2) { <span class="tb-item">الأمان</span> }
             </div>
           }
@@ -242,7 +242,7 @@
 
           @case ('table') {
             <table class="dt-tbl">
-              <thead><tr><th>الطلب</th><th>الحالة</th><th>القيمة</th></tr></thead>
+              <thead><tr><th>الطلب</th><th>الحالة</th><th>التاريخ</th></tr></thead>
               <tbody>
                 @if (ovNum(tpl.id,'rowCount') > 0) { <tr><td>تصميم واجهة تطبيق</td><td><span class="dt-badge active">نشط</span></td><td>3,200 ر.س</td></tr> }
                 @if (ovNum(tpl.id,'rowCount') > 1) { <tr><td>استشارة عقارية</td><td><span class="dt-badge done">مكتمل</span></td><td>850 ر.س</td></tr> }
@@ -337,10 +337,6 @@
           }
 
           @case ('radioref') {
-            <div class="rd-col">
-              @if (ovNum(tpl.id,'optionCount') > 0) { <label class="rd-card sel"><span class="rd-dot"><i></i></span><span class="rd-body"><span class="rd-title">اتفاقية مشروع محدد</span><span class="rd-sub">نطاق ومدة وسعر ثابت لكل مشروع</span></span></label> }
-              @if (ovNum(tpl.id,'optionCount') > 1) { <label class="rd-card"><span class="rd-dot"></span><span class="rd-body"><span class="rd-title">اتفاقية إطارية مفتوحة</span><span class="rd-sub">تسعير بالساعة مع سقف شهري متفق عليه</span></span></label> }
-            </div>
           }
 
           @case ('filterrail') {
