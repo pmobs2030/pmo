@@ -13,7 +13,7 @@
       "cardCount": 4,
       "icon0": "general:i-list", "icon1": "general:i-star", "icon2": "general:i-clock", "icon3": "ai:ws-ai-spark",
       "icon4": "general:i-list", "icon5": "general:i-star",
-      "color0": "#2BD4C7", "color1": "#5DA0FF", "color2": "#D98A0B", "color3": "#A56BE0", "color4": "#2BD4C7", "color5": "#5DA0FF",
+      "color0": "#2BD4C7", "color1": "#2BD4C7", "color2": "#2BD4C7", "color3": "#A56BE0", "color4": "#2BD4C7", "color5": "#5DA0FF",
       "iconSize": 16, "iconBoxSize": 30, "numWeight": 900, "lblWeight": 400
     },
     "table": { "rowCount": 3 },
