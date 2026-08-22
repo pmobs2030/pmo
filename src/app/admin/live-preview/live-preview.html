@@ -9,11 +9,12 @@
 
   <div class="mock-dashboard">
     <aside class="mock-sidebar">
-      <div class="mock-logo">وسيط AI</div>
-      <a class="mock-nav-link" [class.active]="activeSection() === 'dashboard'" (click)="setSection('dashboard')">لوحة التحكم</a>
-      <a class="mock-nav-link" [class.active]="activeSection() === 'requests'" (click)="setSection('requests')">الطلبات</a>
-      <a class="mock-nav-link" [class.active]="activeSection() === 'wallet'" (click)="setSection('wallet')">المحفظة</a>
-      <a class="mock-nav-link" [class.active]="activeSection() === 'settings'" (click)="setSection('settings')">الإعدادات</a>
+      <div class="mock-logo" [style.background]="ov('dash','brandColor','#2BD4C7')" [style.fontWeight]="ovNum('dash','brandWeight',900)">وسيط AI</div>
+      @for (n of range(ovNum('dash','navCount',4)); track n) {
+        @if (navItems[n % navItems.length]; as item) {
+          <a class="mock-nav-link" [class.active]="activeSection() === item.id" (click)="setSection(item.id)">{{ item.label }}</a>
+        }
+      }
     </aside>
 
     <div class="mock-topbar"></div>
@@ -24,44 +25,20 @@
           <h2 class="page-title-sample">نظرة عامة على الحساب</h2>
 
           <div class="kpi-row">
-            <div class="kpi-card">
-              @if (slotIconSvg('kpi','icon0','general:i-list'); as svg) {
-                <span class="kpi-ico" [style.color]="ov('kpi','color0')" [style.background]="isAiColor(ov('kpi','color0')) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color0')) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
-                </span>
+            @for (n of range(ovNum('kpi','cardCount',4)); track n) {
+              @if (kpiSamples[n % kpiSamples.length]; as s) {
+                <div class="kpi-card" [class.ai-card]="s.ai">
+                  @if (slotIconSvg('kpi','icon'+(n%6), kpiIconDefaults[n%6]); as svg) {
+                    <span class="kpi-ico" [style.color]="ov('kpi','color'+(n%6), kpiColorDefaults[n%6])" [style.background]="isAiColor(ov('kpi','color'+(n%6), kpiColorDefaults[n%6])) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color'+(n%6), kpiColorDefaults[n%6])) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
+                    </span>
+                  }
+                  <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">{{ s.number }}</span>
+                  <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">{{ s.label }}</span>
+                </div>
               }
-              <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">128</span>
-              <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">طلب مكتمل</span>
-            </div>
-            <div class="kpi-card">
-              @if (slotIconSvg('kpi','icon1','general:i-star'); as svg) {
-                <span class="kpi-ico" [style.color]="ov('kpi','color1')" [style.background]="isAiColor(ov('kpi','color1')) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color1')) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
-                </span>
-              }
-              <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">4.8</span>
-              <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">التقييم</span>
-            </div>
-            <div class="kpi-card">
-              @if (slotIconSvg('kpi','icon2','general:i-clock'); as svg) {
-                <span class="kpi-ico" [style.color]="ov('kpi','color2')" [style.background]="isAiColor(ov('kpi','color2')) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color2')) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
-                </span>
-              }
-              <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">12</span>
-              <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">قيد التنفيذ</span>
-            </div>
-            <div class="kpi-card ai-card">
-              @if (slotIconSvg('kpi','icon3','ai:ws-ai-spark'); as svg) {
-                <span class="kpi-ico" [style.color]="ov('kpi','color3')" [style.background]="isAiColor(ov('kpi','color3')) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color3')) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
-                </span>
-              }
-              <span class="kpi-number-sample" [style.fontWeight]="ovNum('kpi','numWeight',900)">92%</span>
-              <span class="kpi-label" [style.fontWeight]="ovNum('kpi','lblWeight',400)">دقة التوصية (AI)</span>
-            </div>
+            }
           </div>
-
           <section class="mock-section">
             <h3 class="section-title-sample">آخر الطلبات</h3>
             <table class="mock-table">
@@ -69,21 +46,15 @@
                 <tr><th>الطلب</th><th>الحالة</th><th>القيمة</th></tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>تصميم واجهة تطبيق</td>
-                  <td><span class="badge badge-active">نشط</span></td>
-                  <td>3,200 ر.س</td>
-                </tr>
-                <tr>
-                  <td>استشارة عقارية</td>
-                  <td><span class="badge badge-done">مكتمل</span></td>
-                  <td>850 ر.س</td>
-                </tr>
-                <tr>
-                  <td>نزاع على التسليم</td>
-                  <td><span class="badge badge-dispute">نزاع</span></td>
-                  <td>1,400 ر.س</td>
-                </tr>
+                @for (n of range(ovNum('table','rowCount',3)); track n) {
+                  @if (dashboardRows[n % dashboardRows.length]; as r) {
+                    <tr>
+                      <td>{{ r.name }}</td>
+                      <td><span class="badge" [class]="'badge ' + r.statusCls">{{ r.statusLabel }}</span></td>
+                      <td>{{ r.value }}</td>
+                    </tr>
+                  }
+                }
               </tbody>
             </table>
           </section>
@@ -142,10 +113,20 @@
           <h2 class="page-title-sample">المحفظة</h2>
           <div class="kpi-row">
             <div class="kpi-card">
+              @if (slotIconSvg('kpi','icon4', kpiIconDefaults[4]); as svg) {
+                <span class="kpi-ico" [style.color]="ov('kpi','color4', kpiColorDefaults[4])" [style.background]="isAiColor(ov('kpi','color4', kpiColorDefaults[4])) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color4', kpiColorDefaults[4])) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
+                </span>
+              }
               <span class="kpi-number-sample">12,450 ر.س</span>
               <span class="kpi-label">الرصيد المتاح</span>
             </div>
             <div class="kpi-card">
+              @if (slotIconSvg('kpi','icon5', kpiIconDefaults[5]); as svg) {
+                <span class="kpi-ico" [style.color]="ov('kpi','color5', kpiColorDefaults[5])" [style.background]="isAiColor(ov('kpi','color5', kpiColorDefaults[5])) ? 'var(--ai-bg)' : null" [style.borderColor]="isAiColor(ov('kpi','color5', kpiColorDefaults[5])) ? 'var(--ai-border)' : null" [style.width.px]="ovNum('kpi','iconBoxSize',30)" [style.height.px]="ovNum('kpi','iconBoxSize',30)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" [style.width.px]="ovNum('kpi','iconSize',16)" [style.height.px]="ovNum('kpi','iconSize',16)" [innerHTML]="svg"></svg>
+                </span>
+              }
               <span class="kpi-number-sample">1,400 ر.س</span>
               <span class="kpi-label">قيد التسوية</span>
             </div>
