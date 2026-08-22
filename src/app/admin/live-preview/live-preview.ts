@@ -60,6 +60,39 @@ export class LivePreview implements OnInit {
     this.activeSection.set(section);
   }
 
+  /** مصفوفة 0..n-1 — لاستخدام @for بعدد ديناميكي، بنفس منطق templates.ts range() */
+  range(n: number): number[] {
+    return Array.from({ length: Math.max(0, n) }, (_, i) => i);
+  }
+
+  /** إصلاح: ربط سايدبار لوحة (dash) بـovNum('dash','navCount') بدل 4 روابط ثابتة — نفس منطق templates.html (range+track n) */
+  readonly navItems: { id: 'dashboard' | 'requests' | 'wallet' | 'settings'; label: string }[] = [
+    { id: 'dashboard', label: 'لوحة التحكم' },
+    { id: 'requests', label: 'الطلبات' },
+    { id: 'wallet', label: 'المحفظة' },
+    { id: 'settings', label: 'الإعدادات' },
+  ];
+
+  /** إصلاح: ربط بطاقات KPI بقسم "نظرة عامة على الحساب" بـovNum('kpi','cardCount') — المحتوى النصي (رقم/تسمية) لكل بطاقة يبقى كما كان حرفيًا، فقط الحلقة أصبحت ديناميكية */
+  readonly kpiSamples: { number: string; label: string; ai?: boolean }[] = [
+    { number: '128', label: 'طلب مكتمل' },
+    { number: '4.8', label: 'التقييم' },
+    { number: '12', label: 'قيد التنفيذ' },
+    { number: '92%', label: 'دقة التوصية (AI)', ai: true },
+  ];
+
+  /** نفس قيم fallback الافتراضية الموثّقة بـTEMPLATE_SLOT_SCHEMAS.kpi (templates.ts) لخانات icon0..icon5/color0..color5 — بلا قيمة مخترَعة */
+  readonly kpiIconDefaults = ['general:i-list', 'general:i-star', 'general:i-clock', 'ai:ws-ai-spark', 'general:i-list', 'general:i-star'];
+  readonly kpiColorDefaults = ['#2BD4C7', '#5DA0FF', '#D98A0B', '#A56BE0', '#2BD4C7', '#5DA0FF'];
+
+  /** إصلاح: ربط عدد صفوف جدول "آخر الطلبات" (لوحة التحكم) بـovNum('table','rowCount') — جدولا الطلبات/المحفظة يبقيان كما هما (محتوى تطبيقي مختلف) */
+  readonly dashboardRows: { name: string; statusCls: string; statusLabel: string; value: string }[] = [
+    { name: 'تصميم واجهة تطبيق', statusCls: 'badge-active', statusLabel: 'نشط', value: '3,200 ر.س' },
+    { name: 'استشارة عقارية', statusCls: 'badge-done', statusLabel: 'مكتمل', value: '850 ر.س' },
+    { name: 'نزاع على التسليم', statusCls: 'badge-dispute', statusLabel: 'نزاع', value: '1,400 ر.س' },
+  ];
+
+
   /** قيمة خانة حيّة من overrides القوالب — نفس القيم المُحرَّرة بتبويب "القوالب" بالضبط. */
   ov(templateId: string, slotKey: string, fallback: string | number = ''): string | number {
     return this.overridesService.valueOf(templateId, slotKey, fallback);
